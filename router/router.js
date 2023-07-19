@@ -32,17 +32,22 @@ const cpUpload = upload.fields([
   { name: "selfieIDImage" },
 ]);
 //----------------POST_API---------------------------------------------------------
-router.post("/apt_post", cpUpload,FATSDB.apt_post)
+router.post("/apt_post", cpUpload, FATSDB.apt_post)
+router.post("/aptbckgrd_post",FATSDB.aptbckgrd_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
 router.get("/apt_GET_LIST", FATSDB.apt_GET_LIST)
-router.get("/apt_GET_BYID/:APTID",FATSDB.apt_GET_BYID)
+router.get("/apt_GET_BYID/:APTID", FATSDB.apt_GET_BYID)
+router.get("/aptbckgrd_GET_LIST", FATSDB.aptbckgrd_GET_LIST)
+router.get("/aptbckgrd_GET_BYID/:APTBckgrdID",FATSDB.aptbckgrd_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
+router.put("/aptbckgrd_Put/:APTBckgrdID",FATSDB.aptbckgrd_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
-router.delete("/apt_DELETE_BYID/:APTID",FATSDB.apt_DELETE_BYID)
+router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
+router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID",FATSDB.aptbckgrd_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;

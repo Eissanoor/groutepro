@@ -102,6 +102,38 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async aptbckgrd_post(req, res, next) {
+    try {
+     
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("BackgroundColor", sql.VarChar, req.body.Title)
+       
+   
+        .query(
+          ` 
+            INSERT INTO [dbo].[aptbckgrd]
+                      
+                      ( [BackgroundColor]
+                       
+            
+                        )
+                 VALUES
+                       (
+                       @BackgroundColor
+                     
+                         
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -160,6 +192,31 @@ WHERE APTID='${APTID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async aptbckgrd_Put(req, res, next) {
+    try {
+        
+      const APTBckgrdID = req.params.APTBckgrdID;
+      let data = await pool
+        .request()
+
+        .input("BackgroundColor", sql.VarChar, req.body.BackgroundColor)
+       
+        .query(
+          ` 
+          UPDATE [dbo].[aptbckgrd]
+SET
+
+[BackgroundColor] =@BackgroundColor
+
+
+WHERE APTBckgrdID='${APTBckgrdID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -190,6 +247,32 @@ WHERE APTID='${APTID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async aptbckgrd_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from aptbckgrd`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async aptbckgrd_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const APTBckgrdID = req.params.APTBckgrdID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from aptbckgrd where APTBckgrdID='${APTBckgrdID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -202,6 +285,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from apt where APTID='${APTID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async aptbckgrd_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const APTBckgrdID = req.params.APTBckgrdID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from aptbckgrd where APTBckgrdID='${APTBckgrdID}'`
         );
       console.log(data);
       res.status(200).json(data);
