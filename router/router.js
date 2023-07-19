@@ -36,7 +36,8 @@ router.post("/apt_post", cpUpload,FATSDB.apt_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
-
+router.get("/apt_GET_LIST", FATSDB.apt_GET_LIST)
+router.get("/apt_GET_BYID/:APTID",FATSDB.apt_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)

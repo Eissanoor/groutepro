@@ -164,25 +164,25 @@ WHERE APTID='${APTID}'`
 
   //---------------------------GET--------------------------------------------------------
  
-  async MaritalStatus_GET_LIST(req, res, next) {
+  async apt_GET_LIST(req, res, next) {
     try {
       let pool = await sql.connect(config);
-      let data = await pool.request().query(`select * from prmMaritalStatus`);
+      let data = await pool.request().query(`select * from apt`);
       res.status(200).json(data);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
     }
   },
-  async MaritalStatus_GET_BYID(req, res, next) {
+  async apt_GET_BYID(req, res, next) {
     try {
       let pool = await sql.connect(config);
-      const MaritalCode = req.params.MaritalCode;
+      const APTID = req.params.APTID;
       let data = await pool
         .request()
 
         .query(
-          `select * from prmMaritalStatus where MaritalCode='${MaritalCode}'`
+          `select * from apt where APTID='${APTID}'`
         );
       res.status(200).json(data);
     } catch (error) {
