@@ -43,6 +43,6 @@ router.get("/apt_GET_BYID/:APTID",FATSDB.apt_GET_BYID)
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
-
+router.delete("/apt_DELETE_BYID/:APTID",FATSDB.apt_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
