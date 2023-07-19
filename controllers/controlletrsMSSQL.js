@@ -196,6 +196,7 @@ WHERE APTID='${APTID}'`
     try {
         
       const APTBckgrdID = req.params.APTBckgrdID;
+      let pool = await sql.connect(config);
       let data = await pool
         .request()
 
