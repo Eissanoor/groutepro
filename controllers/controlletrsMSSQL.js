@@ -111,19 +111,45 @@ const FATSDB = {
   async WarrantyPeriod_Put(req, res, next) {
     try {
       let pool = await sql.connect(config);
-      const WarrantyPeriodCode = req.params.WarrantyPeriodCode;
+      const APTID = req.params.APTID;
       let data = await pool
         .request()
 
-        .input("WarrantyPeriodDesc", sql.VarChar, req.body.WarrantyPeriodDesc)
-
+        .input("Title", sql.VarChar, req.body.Title)
+        .input("Category", sql.VarChar, req.body.Category)
+        .input("Content", sql.VarChar, req.body.Content)
+        .input("StartDate", sql.DateTime, req.body.StartDate)
+        .input("EndDate", sql.DateTime, req.body.EndDate)
+        .input("WithRepetition", sql.TinyInt, req.body.WithRepetition)
+        .input("RepetitionType", sql.Numeric, req.body.RepetitionType)
+        .input("RepetitionOccurrence", sql.Numeric, req.body.RepetitionOccurrence)
+        .input("RepetitionEndDate", sql.DateTime, req.body.RepetitionEndDate)
+        .input("RepetitionEndType", sql.Numeric, req.body.RepetitionEndType)
+        .input("Importance", sql.Numeric, req.body.Importance)
+        .input("Image", sql.VarChar, url)
+        .input("Note", sql.VarChar, req.body.Note)
+        .input("APTBckgrdID", sql.Numeric, req.body.APTBckgrdID)
         .query(
           ` 
-          UPDATE [dbo].[prmWarrantyPeriod]
+          UPDATE [dbo].[apt]
 SET
 
-[WarrantyPeriodDesc] =@WarrantyPeriodDesc
-WHERE WarrantyPeriodCode='${WarrantyPeriodCode}'`
+[Title] =@Title
+,[Category] =@Category
+,[Content] =@Content
+,[StartDate] =@StartDate
+,[EndDate] =@EndDate
+,[WithRepetition] =@WithRepetition
+,[RepetitionType] =@RepetitionType
+,[RepetitionOccurrence] =@RepetitionOccurrence
+,[RepetitionEndDate] =@RepetitionEndDate
+,[RepetitionEndType] =@RepetitionEndType
+,[Importance] =@Importance
+,[Image] =@Image
+,[Note] =@Note
+,[APTBckgrdID] =@APTBckgrdID
+
+WHERE APTID='${APTID}'`
         );
       res.status(201).json(data);
     } catch (error) {
