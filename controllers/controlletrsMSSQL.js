@@ -110,7 +110,7 @@ const FATSDB = {
       let data = await pool
         .request()
       
-        .input("BackgroundColor", sql.VarChar, req.body.Title)
+        .input("BackgroundColor", sql.VarChar, req.body.BackgroundColor)
        
    
         .query(
