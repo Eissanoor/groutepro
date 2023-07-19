@@ -110,6 +110,9 @@ const FATSDB = {
  
   async WarrantyPeriod_Put(req, res, next) {
     try {
+        const file = req.files["Image"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
       let pool = await sql.connect(config);
       const APTID = req.params.APTID;
       let data = await pool
