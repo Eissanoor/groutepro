@@ -28,11 +28,11 @@ var uploadee = multer({
 });
 router.use("/profile", express.static("uploads"));
 const cpUpload = upload.fields([
-  { name: "EmployeeImage" },
+  { name: "Image" },
   { name: "selfieIDImage" },
 ]);
 //----------------POST_API---------------------------------------------------------
-router.post("/apt_post",FATSDB.apt_post)
+router.post("/apt_post", cpUpload,FATSDB.apt_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------

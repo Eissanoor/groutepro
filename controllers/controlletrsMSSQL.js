@@ -26,6 +26,9 @@ const FATSDB = {
 
   async apt_post(req, res, next) {
     try {
+     const file = req.files["Image"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
       let pool = await sql.connect(config);
 
       let data = await pool
@@ -42,7 +45,7 @@ const FATSDB = {
         .input("RepetitionEndDate", sql.DateTime, req.body.RepetitionEndDate)
         .input("RepetitionEndType", sql.Numeric, req.body.RepetitionEndType)
         .input("Importance", sql.Numeric, req.body.Importance)
-        .input("Image", sql.VarChar, req.body.Image)
+        .input("Image", sql.VarChar, url)
         .input("Note", sql.VarChar, req.body.Note)
         .input("APTBckgrdID", sql.Numeric, req.body.APTBckgrdID)
        
