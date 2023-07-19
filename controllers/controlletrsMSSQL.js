@@ -108,7 +108,7 @@ const FATSDB = {
   //---------------------------PUT--------------------------------------------------------
 
  
-  async WarrantyPeriod_Put(req, res, next) {
+  async apt_Put(req, res, next) {
     try {
         const file = req.files["Image"];
 
