@@ -53,6 +53,6 @@ router.put("/contact_Put/:ContactID", cpUpload, FATSDB.contact_Put)
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
 router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID", FATSDB.aptbckgrd_DELETE_BYID)
-router.delete("/contact_DELETE_BYID/ContactID",FATSDB.contact_DELETE_BYID)
+router.delete("/contact_DELETE_BYID/:ContactID",FATSDB.contact_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
