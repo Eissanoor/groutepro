@@ -305,6 +305,67 @@ WHERE APTBckgrdID='${APTBckgrdID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+
+  async contact_Put(req, res, next) {
+    try {
+        const file = req.files["Photo"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+      const ContactID = req.params.ContactID;
+      let data = await pool
+        .request()
+
+         .input("Address", sql.VarChar, req.body.Address)
+        .input("Lastname", sql.VarChar, req.body.Lastname)
+        .input("FirstName", sql.VarChar, req.body.FirstName)
+        .input("Spouse", sql.VarChar, req.body.Spouse)
+        .input("ChildrenNames", sql.VarChar, req.body.ChildrenNames)
+        .input("Notes", sql.VarChar, req.body.Notes)
+        .input("ZipCode", sql.VarChar, req.body.ZipCode)
+        .input("DateOfBirth", sql.Date, req.body.DateOfBirth)
+        .input("SaintsDay", sql.Date, req.body.SaintsDay)
+        .input("Email", sql.VarChar, req.body.Email)
+        .input("Phone", sql.VarChar, req.body.Phone)
+        .input("CellPhone", sql.VarChar, req.body.CellPhone)
+        .input("City", sql.VarChar, req.body.City)
+        .input("Photo", sql.VarChar, url)
+        .input("Country", sql.VarChar, req.body.Country)
+        .input("Rpt_State_dep", sql.VarChar, req.body.Rpt_State_dep)
+        .input("FirstName2", sql.VarChar, req.body.FirstName2)
+        .input("TransferredToOutlook", sql.TinyInt, req.body.TransferredToOutlook)
+        .query(
+          ` 
+          UPDATE [dbo].[contact]
+SET
+
+[Address] =@Address
+,[Lastname] =@Lastname
+,[FirstName] =@FirstName
+,[Spouse] =@Spouse
+,[ChildrenNames] =@ChildrenNames
+,[Notes] =@Notes
+,[ZipCode] =@ZipCode
+,[DateOfBirth] =@DateOfBirth
+,[SaintsDay] =@SaintsDay
+,[Email] =@Email
+,[Phone] =@Phone
+,[CellPhone] =@CellPhone
+,[City] =@City
+,[Photo] =@Photo
+,[Country] =@Country
+,[Rpt_State_dep] =@Rpt_State_dep
+,[FirstName2] =@FirstName2
+,[TransferredToOutlook] =@TransferredToOutlook
+
+WHERE ContactID='${ContactID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -361,6 +422,32 @@ WHERE APTBckgrdID='${APTBckgrdID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async contact_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const ContactID = req.params.ContactID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from contact where ContactID='${ContactID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async contact_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from contact`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -398,7 +485,23 @@ async apt_DELETE_BYID(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
- 
+  async contact_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const ContactID = req.params.ContactID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from contact where ContactID='${ContactID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   
 };
 export default FATSDB;

@@ -41,14 +41,18 @@ router.post("/contact_post", cpUpload, FATSDB.contact_post)
 router.get("/apt_GET_LIST", FATSDB.apt_GET_LIST)
 router.get("/apt_GET_BYID/:APTID", FATSDB.apt_GET_BYID)
 router.get("/aptbckgrd_GET_LIST", FATSDB.aptbckgrd_GET_LIST)
-router.get("/aptbckgrd_GET_BYID/:APTBckgrdID",FATSDB.aptbckgrd_GET_BYID)
+router.get("/aptbckgrd_GET_BYID/:APTBckgrdID", FATSDB.aptbckgrd_GET_BYID)
+router.get("/contact_GET_BYID/:ContactID", FATSDB.contact_GET_BYID)
+router.get("/contact_GET_LIST",FATSDB.contact_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
-router.put("/aptbckgrd_Put/:APTBckgrdID",FATSDB.aptbckgrd_Put)
+router.put("/aptbckgrd_Put/:APTBckgrdID", FATSDB.aptbckgrd_Put)
+router.put("/contact_Put/:ContactID", cpUpload, FATSDB.contact_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
-router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID",FATSDB.aptbckgrd_DELETE_BYID)
+router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID", FATSDB.aptbckgrd_DELETE_BYID)
+router.delete("/contact_DELETE_BYID/ContactID",FATSDB.contact_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
