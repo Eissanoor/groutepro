@@ -134,6 +134,93 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async contact_post(req, res, next) {
+    try {
+     const file = req.files["Photo"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("Address", sql.VarChar, req.body.Address)
+        .input("Lastname", sql.VarChar, req.body.Lastname)
+        .input("FirstName", sql.VarChar, req.body.FirstName)
+        .input("Spouse", sql.VarChar, req.body.Spouse)
+        .input("ChildrenNames", sql.VarChar, req.body.ChildrenNames)
+        .input("Notes", sql.VarChar, req.body.Notes)
+        .input("ZipCode", sql.VarChar, req.body.ZipCode)
+        .input("DateOfBirth", sql.Date, req.body.DateOfBirth)
+        .input("SaintsDay", sql.Date, req.body.SaintsDay)
+        .input("Email", sql.VarChar, req.body.Email)
+        .input("Phone", sql.VarChar, req.body.Phone)
+        .input("CellPhone", sql.VarChar, req.body.CellPhone)
+        .input("City", sql.VarChar, req.body.City)
+        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("Country", sql.VarChar, req.body.Country)
+        .input("Rpt_State_dep", sql.VarChar, req.body.Rpt_State_dep)
+        .input("FirstName2", sql.VarChar, req.body.FirstName2)
+        .input("TransferredToOutlook", sql.TinyInt, req.body.TransferredToOutlook)
+       
+        
+
+
+        .query(
+          ` 
+            INSERT INTO [dbo].[contact]
+                      
+                      ( [Address]
+                         ,[Lastname]
+                        ,[FirstName]
+                         ,[Spouse]
+                         ,[ChildrenNames]
+                        ,[Notes]
+                         ,[ZipCode]
+                        ,[DateOfBirth]
+                         ,[SaintsDay]
+                         ,[Email]
+                        ,[Phone]
+                         ,[CellPhone]
+                         ,[City]
+                         ,[Photo]
+                         ,[Country]
+                         ,[Rpt_State_dep]
+                         ,[FirstName2]
+                         ,[TransferredToOutlook]
+                        
+                                                             
+      
+                        )
+                 VALUES
+                       (
+                       @Address
+                       ,@Lastname
+                       ,@FirstName
+                       ,@Spouse
+                       ,@ChildrenNames
+                       ,@Notes
+                       ,@ZipCode
+                       ,@DateOfBirth
+                       ,@SaintsDay
+                       ,@Email
+                       ,@Phone
+                       ,@CellPhone
+                       ,@City
+                       ,@Photo
+                       ,@Country
+                       ,@Rpt_State_dep
+                       ,@FirstName2
+                       ,@TransferredToOutlook
+                   
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
