@@ -157,7 +157,7 @@ const FATSDB = {
         .input("Phone", sql.VarChar, req.body.Phone)
         .input("CellPhone", sql.VarChar, req.body.CellPhone)
         .input("City", sql.VarChar, req.body.City)
-        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("Photo", sql.VarChar, url)
         .input("Country", sql.VarChar, req.body.Country)
         .input("Rpt_State_dep", sql.VarChar, req.body.Rpt_State_dep)
         .input("FirstName2", sql.VarChar, req.body.FirstName2)
