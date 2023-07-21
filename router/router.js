@@ -63,7 +63,8 @@ router.get("/CardTypes_GET_BYID/:tblItemBarcodesID", FATSDB.CardTypes_GET_BYID)
 router.get("/CardTypes_GET_LIST", FATSDB.CardTypes_GET_LIST)
 router.get("/Companies_GET_LIST", FATSDB.Companies_GET_LIST)
 router.get("/Companies_GET_BYID/:tblCompaniesID", FATSDB.Companies_GET_BYID)
-router.get("/Customers_GET_BYID/:TblCustomersID",FATSDB.Customers_GET_BYID)
+router.get("/Customers_GET_BYID/:TblCustomersID", FATSDB.Customers_GET_BYID)
+router.get("/Customers_GET_LIST",FATSDB.Customers_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
