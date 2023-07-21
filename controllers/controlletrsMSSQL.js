@@ -438,6 +438,65 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async Companies_post(req, res, next) {
+    try {
+     
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("CompanyCRNo", sql.VarChar, req.body.CompanyCRNo)
+        .input("CompanyNameE", sql.VarChar, req.body.CompanyNameE)
+        .input("CompanyNameA", sql.VarChar, req.body.CompanyNameA)
+        .input("CompanyCity", sql.VarChar, req.body.CompanyCity)
+        .input("CompanyType", sql.VarChar, req.body.CompanyType)
+        .input("CompanyCREntityNo", sql.VarChar, req.body.CompanyCREntityNo)
+        .input("CompanyCRIssueDate", sql.VarChar, req.body.CompanyCRIssueDate)
+        .input("CompanyCRExpiryDate", sql.VarChar, req.body.CompanyCRExpiryDate)
+        .input("CompanyStatus", sql.VarChar, req.body.CompanyStatus)
+        .input("CompanyActivities", sql.VarChar, req.body.CompanyActivities)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblCompanies]
+                      
+                      ( [MemberID]
+                         ,[CompanyCRNo]
+                        ,[CompanyNameE]
+                         ,[CompanyNameA]
+                         ,[CompanyCity]
+                        ,[CompanyType]
+                         ,[CompanyCREntityNo]
+                        ,[CompanyCRIssueDate]
+                         ,[CompanyCRExpiryDate]
+                         ,[CompanyStatus]
+                        ,[CompanyActivities]
+                        
+                        )
+                 VALUES
+                       (
+                       @MemberID
+                       ,@CompanyCRNo
+                       ,@CompanyNameE
+                       ,@CompanyNameA
+                       ,@CompanyCity
+                       ,@CompanyCREntityNo
+                       ,@CompanyType
+                       ,@CompanyCRIssueDate
+                       ,@CompanyCRExpiryDate
+                       ,@CompanyStatus
+                       ,@CompanyActivities
+                     
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -753,6 +812,50 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async Companies_Put(req, res, next) {
+    try {
+        
+      let pool = await sql.connect(config);
+      const tblCompaniesID = req.params.tblCompaniesID;
+      let data = await pool
+        .request()
+
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("CompanyCRNo", sql.VarChar, req.body.CompanyCRNo)
+        .input("CompanyNameE", sql.VarChar, req.body.CompanyNameE)
+        .input("CompanyNameA", sql.VarChar, req.body.CompanyNameA)
+        .input("CompanyCity", sql.VarChar, req.body.CompanyCity)
+        .input("CompanyType", sql.VarChar, req.body.CompanyType)
+        .input("CompanyCREntityNo", sql.VarChar, req.body.CompanyCREntityNo)
+        .input("CompanyCRIssueDate", sql.VarChar, req.body.CompanyCRIssueDate)
+        .input("CompanyCRExpiryDate", sql.VarChar, req.body.CompanyCRExpiryDate)
+        .input("CompanyStatus", sql.VarChar, req.body.CompanyStatus)
+        .input("CompanyActivities", sql.VarChar, req.body.CompanyActivities)
+        .query(
+          ` 
+          UPDATE [dbo].[tblCompanies]
+SET
+
+[MemberID] =@MemberID
+,[CompanyCRNo] =@CompanyCRNo
+,[CompanyNameE] =@CompanyNameE
+,[CompanyNameA] =@CompanyNameA
+,[CompanyCity] =@CompanyCity
+,[CompanyType] =@CompanyType
+,[CompanyCREntityNo] =@CompanyCREntityNo
+,[CompanyCRIssueDate] =@CompanyCRIssueDate
+,[CompanyCRExpiryDate] =@CompanyCRExpiryDate
+,[CompanyStatus] =@CompanyStatus
+,[CompanyActivities] =@CompanyActivities
+
+WHERE tblCompaniesID='${tblCompaniesID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -966,6 +1069,32 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },  
+      async Companies_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblCompanies`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  }, 
+      async Companies_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblCompaniesID = req.params.tblCompaniesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblCompanies where tblCompaniesID='${tblCompaniesID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  }, 
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -1097,6 +1226,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblCardTypes where tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+      async Companies_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblCompaniesID = req.params.tblCompaniesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblCompanies where tblCompaniesID='${tblCompaniesID}'`
         );
       console.log(data);
       res.status(200).json(data);

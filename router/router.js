@@ -39,7 +39,8 @@ router.post("/TransactionSummary_post", FATSDB.TransactionSummary_post)
 router.post("/TransactionSummaryList_post", FATSDB.TransactionSummaryList_post)
 router.post("/TransactionSummaryPrint_post", FATSDB.TransactionSummaryPrint_post)
 router.post("/TransactionSummarytmp_post", FATSDB.TransactionSummarytmp_post)
-router.post("/CardTypes_post",FATSDB.CardTypes_post)
+router.post("/CardTypes_post", FATSDB.CardTypes_post)
+router.post("/Companies_post",FATSDB.Companies_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -58,7 +59,9 @@ router.get("/TransactionSummaryPrint_GET_LIST", FATSDB.TransactionSummaryPrint_G
 router.get("/TransactionSummarytmp_GET_LIST", FATSDB.TransactionSummarytmp_GET_LIST)
 router.get("/TransactionSummarytmp_GET_BYID/:TblSysNoCounterID", FATSDB.TransactionSummarytmp_GET_BYID)
 router.get("/CardTypes_GET_BYID/:tblItemBarcodesID", FATSDB.CardTypes_GET_BYID)
-router.get("/CardTypes_GET_LIST",FATSDB.CardTypes_GET_LIST)
+router.get("/CardTypes_GET_LIST", FATSDB.CardTypes_GET_LIST)
+router.get("/Companies_GET_LIST", FATSDB.Companies_GET_LIST)
+router.get("/Companies_GET_BYID/:tblCompaniesID",FATSDB.Companies_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -68,7 +71,8 @@ router.put("/TransactionSummary_Put/:TblSysNoCounterID", FATSDB.TransactionSumma
 router.put("/TransactionSummaryList_Put/:TblSysNoCounterID", FATSDB.TransactionSummaryList_Put)
 router.put("/TransactionSummaryPrint_Put/:TblSysNoCounterID", FATSDB.TransactionSummaryPrint_Put)
 router.put("/TransactionSummarytmp_Put/:TblSysNoCounterID", FATSDB.TransactionSummarytmp_Put)
-router.put("/CardTypes_Put/:tblItemBarcodesID",FATSDB.CardTypes_Put)
+router.put("/CardTypes_Put/:tblItemBarcodesID", FATSDB.CardTypes_Put)
+router.put("/Companies_Put/:tblCompaniesID",FATSDB.Companies_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
@@ -78,6 +82,7 @@ router.delete("/TransactionSummary_DELETE_BYID/:TblSysNoCounterID", FATSDB.Trans
 router.delete("/TransactionSummaryList_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryList_DELETE_BYID)
 router.delete("/TransactionSummaryPrint_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryPrint_DELETE_BYID)
 router.delete("/TransactionSummarytmp_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummarytmp_DELETE_BYID)
-router.delete("/CardTypes_DELETE_BYID/:tblItemBarcodesID",FATSDB.CardTypes_DELETE_BYID)
+router.delete("/CardTypes_DELETE_BYID/:tblItemBarcodesID", FATSDB.CardTypes_DELETE_BYID)
+router.delete("/Companies_DELETE_BYID/:tblCompaniesID",FATSDB.Companies_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
