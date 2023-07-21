@@ -497,6 +497,70 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async Customers_post(req, res, next) {
+    try {
+     
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("CustomerNo", sql.VarChar, req.body.CustomerNo)
+        .input("CustomerName", sql.VarChar, req.body.CustomerName)
+        .input("CustomerAddress", sql.VarChar, req.body.CustomerAddress)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("cCity", sql.VarChar, req.body.cCity)
+        .input("cRegion", sql.VarChar, req.body.cRegion)
+        .input("cCompanyName", sql.VarChar, req.body.cCompanyName)
+        .input("cGPSLocation", sql.VarChar, req.body.cGPSLocation)
+        .input("cGPSLatitude", sql.VarChar, req.body.cGPSLatitude)
+        .input("cGPSLongitude", sql.VarChar, req.body.cGPSLongitude)
+        .input("cGPSAreaName", sql.VarChar, req.body.cGPSAreaName)
+        .input("cPaymentType", sql.VarChar, req.body.cPaymentType)
+         .input("cAddressLocNo", sql.TinyInt, req.body.cAddressLocNo)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[TblCustomers]
+                      
+                      ( [CustomerNo]
+                         ,[CustomerName]
+                        ,[CustomerAddress]
+                         ,[MobileNo]
+                         ,[cCity]
+                        ,[cRegion]
+                         ,[cCompanyName]
+                        ,[cGPSLocation]
+                         ,[cGPSLatitude]
+                         ,[cGPSLongitude]
+                        ,[cPaymentType]
+                         ,[cGPSAreaName]
+                        ,[cAddressLocNo]
+                        
+                        )
+                 VALUES
+                       (
+                       @CustomerNo
+                       ,@CustomerName
+                       ,@CustomerAddress
+                       ,@MobileNo
+                       ,@cCity
+                       ,@cRegion
+                       ,@cCompanyName
+                       ,@cGPSLocation
+                       ,@cGPSLatitude
+                       ,@cGPSLongitude
+                       ,@cPaymentType
+                     ,@cGPSAreaName
+                       ,@cAddressLocNo
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -856,6 +920,55 @@ WHERE tblCompaniesID='${tblCompaniesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+      async Customers_Put(req, res, next) {
+    try {
+        
+      let pool = await sql.connect(config);
+      const TblCustomersID = req.params.TblCustomersID;
+      let data = await pool
+        .request()
+
+       .input("CustomerNo", sql.VarChar, req.body.CustomerNo)
+        .input("CustomerName", sql.VarChar, req.body.CustomerName)
+        .input("CustomerAddress", sql.VarChar, req.body.CustomerAddress)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("cCity", sql.VarChar, req.body.cCity)
+        .input("cRegion", sql.VarChar, req.body.cRegion)
+        .input("cCompanyName", sql.VarChar, req.body.cCompanyName)
+        .input("cGPSLocation", sql.VarChar, req.body.cGPSLocation)
+        .input("cGPSLatitude", sql.VarChar, req.body.cGPSLatitude)
+        .input("cGPSLongitude", sql.VarChar, req.body.cGPSLongitude)
+        .input("cGPSAreaName", sql.VarChar, req.body.cGPSAreaName)
+        .input("cPaymentType", sql.VarChar, req.body.cPaymentType)
+         .input("cAddressLocNo", sql.TinyInt, req.body.cAddressLocNo)
+        .query(
+          ` 
+          UPDATE [dbo].[TblCustomers]
+SET
+
+[CustomerNo] =@CustomerNo
+,[CustomerName] =@CustomerName
+,[CustomerAddress] =@CustomerAddress
+,[MobileNo] =@MobileNo
+,[cCity] =@cCity
+,[cRegion] =@cRegion
+,[cCompanyName] =@cCompanyName
+,[cGPSLocation] =@cGPSLocation
+,[cGPSLatitude] =@cGPSLatitude
+,[cGPSLongitude] =@cGPSLongitude
+,[cGPSAreaName] =@cGPSAreaName
+,[cPaymentType] =@cPaymentType
+,[cAddressLocNo] =@cAddressLocNo
+
+
+WHERE TblCustomersID='${TblCustomersID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -1095,6 +1208,32 @@ WHERE tblCompaniesID='${tblCompaniesID}'`
       res.status(500).json({ error: `${error}` });
     }
   }, 
+  async Customers_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblCustomersID = req.params.TblCustomersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from TblCustomers where TblCustomersID='${TblCustomersID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async Customers_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from TblCustomers`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  }, 
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -1251,7 +1390,23 @@ async apt_DELETE_BYID(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
-  
+    async Customers_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblCustomersID = req.params.TblCustomersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from TblCustomers where TblCustomersID='${TblCustomersID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
 };
 export default FATSDB;
 
