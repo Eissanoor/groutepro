@@ -37,7 +37,8 @@ router.post("/aptbckgrd_post", FATSDB.aptbckgrd_post)
 router.post("/contact_post", cpUpload, FATSDB.contact_post)
 router.post("/TransactionSummary_post", FATSDB.TransactionSummary_post)
 router.post("/TransactionSummaryList_post", FATSDB.TransactionSummaryList_post)
-router.post("/TransactionSummaryPrint_post",FATSDB.TransactionSummaryPrint_post)
+router.post("/TransactionSummaryPrint_post", FATSDB.TransactionSummaryPrint_post)
+router.post("/TransactionSummarytmp_post",FATSDB.TransactionSummarytmp_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -52,7 +53,9 @@ router.get("/TransactionSummary_GET_BYID/:TblSysNoCounterID", FATSDB.Transaction
 router.get("/TransactionSummaryList_GET_LIST", FATSDB.TransactionSummaryList_GET_LIST)
 router.get("/TransactionSummaryList_GET_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryList_GET_BYID)
 router.get("/TransactionSummaryPrint_GET_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryPrint_GET_BYID)
-router.get("/TransactionSummaryPrint_GET_LIST",FATSDB.TransactionSummaryPrint_GET_LIST)
+router.get("/TransactionSummaryPrint_GET_LIST", FATSDB.TransactionSummaryPrint_GET_LIST)
+router.get("/TransactionSummarytmp_GET_LIST", FATSDB.TransactionSummarytmp_GET_LIST)
+router.get("/TransactionSummarytmp_GET_BYID/:TblSysNoCounterID",FATSDB.TransactionSummarytmp_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -60,7 +63,8 @@ router.put("/aptbckgrd_Put/:APTBckgrdID", FATSDB.aptbckgrd_Put)
 router.put("/contact_Put/:ContactID", cpUpload, FATSDB.contact_Put)
 router.put("/TransactionSummary_Put/:TblSysNoCounterID", FATSDB.TransactionSummary_Put)
 router.put("/TransactionSummaryList_Put/:TblSysNoCounterID", FATSDB.TransactionSummaryList_Put)
-router.put("/TransactionSummaryPrint_Put/:TblSysNoCounterID",FATSDB.TransactionSummaryPrint_Put)
+router.put("/TransactionSummaryPrint_Put/:TblSysNoCounterID", FATSDB.TransactionSummaryPrint_Put)
+router.put("/TransactionSummarytmp_Put/:TblSysNoCounterID",FATSDB.TransactionSummarytmp_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
@@ -68,6 +72,7 @@ router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID", FATSDB.aptbckgrd_DELETE_BYI
 router.delete("/contact_DELETE_BYID/:ContactID", FATSDB.contact_DELETE_BYID)
 router.delete("/TransactionSummary_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummary_DELETE_BYID)
 router.delete("/TransactionSummaryList_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryList_DELETE_BYID)
-router.delete("/TransactionSummaryPrint_DELETE_BYID/:TblSysNoCounterID",FATSDB.TransactionSummaryPrint_DELETE_BYID)
+router.delete("/TransactionSummaryPrint_DELETE_BYID/:TblSysNoCounterID", FATSDB.TransactionSummaryPrint_DELETE_BYID)
+router.delete("/TransactionSummarytmp_DELETE_BYID/:TblSysNoCounterID",FATSDB.TransactionSummarytmp_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;

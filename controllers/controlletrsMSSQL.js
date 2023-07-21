@@ -356,6 +356,51 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+   async TransactionSummarytmp_post(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("TransactionName", sql.VarChar, req.body.TransactionName)
+        .input("TotalTransaction", sql.Numeric, req.body.TotalTransaction)
+        .input("TotalTransactionAmount", sql.Float, req.body.TotalTransactionAmount)
+        .input("TransactionDate", sql.Date, req.body.TransactionDate)
+        .input("TrxIndexNo", sql.TinyInt, req.body.TrxIndexNo)
+        .input("TransactionNameArabic", sql.VarChar, req.body.TransactionNameArabic)
+         
+        .query(
+          ` 
+            INSERT INTO [dbo].[TblAllTransactionSummarytmp]
+                      
+                      ( [TransactionName]
+                         ,[TotalTransaction]
+                        ,[TotalTransactionAmount]
+                         ,[TransactionDate]
+                         ,[TrxIndexNo]
+                        ,[TransactionNameArabic]
+                        
+                        )
+                 VALUES
+                       (
+                       @TransactionName
+                       ,@TotalTransaction
+                       ,@TotalTransactionAmount
+                       ,@TransactionDate
+                      
+                       ,@TrxIndexNo
+                       ,@TransactionNameArabic
+                       
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -606,6 +651,41 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+   async TransactionSummarytmp_Put(req, res, next) {
+    try {
+       
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+          .input("TransactionName", sql.VarChar, req.body.TransactionName)
+        .input("TotalTransaction", sql.Numeric, req.body.TotalTransaction)
+        .input("TotalTransactionAmount", sql.Float, req.body.TotalTransactionAmount)
+        .input("TransactionDate", sql.Date, req.body.TransactionDate)
+        .input("TrxIndexNo", sql.TinyInt, req.body.TrxIndexNo)
+        .input("TransactionNameArabic", sql.VarChar, req.body.TransactionNameArabic)
+        .query(
+          ` 
+          UPDATE [dbo].[TblAllTransactionSummarytmp]
+SET
+
+[TransactionName] =@TransactionName
+,[TotalTransaction] =@TotalTransaction
+,[TotalTransactionAmount] =@TotalTransactionAmount
+,[TransactionDate] =@TransactionDate
+,[TrxIndexNo] =@TrxIndexNo
+,[TransactionNameArabic] =@TransactionNameArabic
+
+
+WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -766,7 +846,33 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       console.log(error);
       res.status(500).json({ error: `${error}` });
     }
-  },   
+  },  
+      async TransactionSummarytmp_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from TblAllTransactionSummarytmp`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },  
+    async TransactionSummarytmp_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from TblAllTransactionSummarytmp where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },    
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -864,6 +970,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from TblAllTransactionSummaryPrint where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+     async TransactionSummarytmp_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from TblAllTransactionSummarytmp where TblSysNoCounterID='${TblSysNoCounterID}'`
         );
       console.log(data);
       res.status(200).json(data);
