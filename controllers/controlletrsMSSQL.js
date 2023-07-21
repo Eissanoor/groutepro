@@ -254,7 +254,7 @@ const FATSDB = {
                        ,@TotalTransaction
                        ,@TotalTransactionAmount
                        ,@TransactionDate
-                       ,@ChildrenNames
+                      
                        ,@TrxIndexNo
                        ,@TransactionNameArabic
                        
