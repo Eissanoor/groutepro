@@ -401,6 +401,43 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async CardTypes_post(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("code", sql.VarChar, req.body.code)
+        .input("descFo", sql.VarChar, req.body.descFo)
+        .input("id", sql.VarChar, req.body.id)
+        .input("descLo", sql.VarChar, req.body.descLo)
+        
+         
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblCardTypes]
+                      
+                      ( [code]
+                         ,[descFo]
+                        ,[id]
+                         ,[descLo]
+                        )
+                 VALUES
+                       (
+                       @code
+                       ,@descFo
+                       ,@id
+                       ,@descLo 
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -686,6 +723,36 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async CardTypes_Put(req, res, next) {
+    try {
+       
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+        .input("code", sql.VarChar, req.body.code)
+        .input("descFo", sql.VarChar, req.body.descFo)
+        .input("id", sql.VarChar, req.body.id)
+        .input("descLo", sql.VarChar, req.body.descLo)
+        .query(
+          ` 
+          UPDATE [dbo].[tblCardTypes]
+SET
+
+[code] =@code
+,[descFo] =@descFo
+,[id] =@id
+,[descLo] =@descLo
+
+WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -872,7 +939,33 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       console.log(error);
       res.status(500).json({ error: `${error}` });
     }
-  },    
+  },  
+  async CardTypes_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblCardTypes where tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  }, 
+     async CardTypes_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblCardTypes`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },  
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -987,6 +1080,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from TblAllTransactionSummarytmp where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+     async CardTypes_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblCardTypes where tblItemBarcodesID='${tblItemBarcodesID}'`
         );
       console.log(data);
       res.status(200).json(data);
