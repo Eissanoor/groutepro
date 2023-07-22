@@ -846,6 +846,87 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async ItemBarcodesTmp_post(req, res, next) {
+    try {
+     
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("id", sql.VarChar, req.body.id)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("itemId", sql.VarChar, req.body.itemId)
+        .input("itemDescLo", sql.NVarChar, req.body.itemDescLo)
+        .input("itemDescFo", sql.NVarChar, req.body.itemDescFo)
+        .input("scnId", sql.VarChar, req.body.scnId)
+        .input("itemType", sql.VarChar, req.body.itemType)
+        .input("unitId", sql.VarChar, req.body.unitId)
+        .input("unitCode", sql.VarChar, req.body.unitCode)
+        .input("unitDescLo", sql.NVarChar, req.body.unitDescLo)
+        .input("unitDescFo", sql.NVarChar, req.body.unitDescFo)
+        .input("baseUnitId", sql.VarChar, req.body.baseUnitId)
+        .input("unitPrice", sql.Real, req.body.unitPrice)
+         .input("hasOffer", sql.VarChar, req.body.hasOffer)
+        .input("unitPriceAlc", sql.Real, req.body.unitPriceAlc)
+        .input("longDesc", sql.VarChar, req.body.longDesc)
+        .input("qty", sql.Numeric, req.body.qty)
+      
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblItemBarcodesTmp]
+                      
+                      ( [id]
+                         ,[BarCode]
+                        ,[itemId]
+                         ,[itemDescLo]
+                         ,[itemDescFo]
+                        ,[scnId]
+                         ,[itemType]
+                        ,[unitId]
+                         ,[unitCode]
+                         ,[unitDescLo]
+                        ,[unitDescFo]
+                         ,[baseUnitId]
+                         ,[unitPrice]
+                         ,[hasOffer]
+                         ,[unitPriceAlc]
+                         ,[longDesc]
+                          ,[qty]
+                        
+                         
+
+                        )
+                 VALUES
+                       (
+                       @id
+                       ,@BarCode
+                       ,@itemId
+                       ,@itemDescLo
+                       ,@itemDescFo
+                       ,@scnId
+                       ,@itemType
+                       ,@unitId
+                       ,@unitCode
+                       ,@unitDescLo
+                       ,@unitDescFo
+                     ,@baseUnitId
+                     ,@unitPrice
+                     ,@hasOffer
+                     ,@unitPriceAlc
+                      ,@longDesc
+                       ,@qty
+                      
+                     
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -1471,6 +1552,67 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async ItemBarcodesTmp_Put(req, res, next) {
+    try {
+        
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+       .input("id", sql.VarChar, req.body.id)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("itemId", sql.VarChar, req.body.itemId)
+        .input("itemDescLo", sql.NVarChar, req.body.itemDescLo)
+        .input("itemDescFo", sql.NVarChar, req.body.itemDescFo)
+        .input("scnId", sql.VarChar, req.body.scnId)
+        .input("itemType", sql.VarChar, req.body.itemType)
+        .input("unitId", sql.VarChar, req.body.unitId)
+        .input("unitCode", sql.VarChar, req.body.unitCode)
+        .input("unitDescLo", sql.NVarChar, req.body.unitDescLo)
+        .input("unitDescFo", sql.NVarChar, req.body.unitDescFo)
+        .input("baseUnitId", sql.VarChar, req.body.baseUnitId)
+        .input("unitPrice", sql.Real, req.body.unitPrice)
+        .input("hasOffer", sql.VarChar, req.body.hasOffer)
+       .input("unitPriceAlc", sql.Real, req.body.unitPriceAlc)
+        .input("longDesc", sql.VarChar, req.body.longDesc)
+        .input("qty", sql.Numeric, req.body.qty)
+
+        .query(
+          ` 
+          UPDATE [dbo].[tblItemBarcodesTmp]
+SET
+
+[id] =@id
+,[BarCode] =@BarCode
+,[itemId] =@itemId
+,[itemDescLo] =@itemDescLo
+,[itemDescFo] =@itemDescFo
+,[scnId] =@scnId
+,[itemType] =@itemType
+,[unitId] =@unitId
+,[unitCode] =@unitCode
+,[unitDescLo] =@unitDescLo
+,[unitDescFo] =@unitDescFo
+,[baseUnitId] =@baseUnitId
+,[unitPrice] =@unitPrice
+,[hasOffer] =@hasOffer
+,[unitPriceAlc] =@unitPriceAlc
+,[longDesc] =@longDesc
+
+,[qty] =@qty
+
+
+
+
+WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -1840,6 +1982,32 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+     async ItemBarcodesTmp_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblItemBarcodesTmp`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+     async ItemBarcodesTmp_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblItemBarcodesTmp where tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -2073,6 +2241,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblItemBarcodesReturns where tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async ItemBarcodesTmp_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemBarcodesID = req.params.tblItemBarcodesID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblItemBarcodesTmp where tblItemBarcodesID='${tblItemBarcodesID}'`
         );
       console.log(data);
       res.status(200).json(data);
