@@ -43,7 +43,8 @@ router.post("/CardTypes_post", FATSDB.CardTypes_post)
 router.post("/Companies_post", FATSDB.Companies_post)
 router.post("/Customers_post", FATSDB.Customers_post)
 router.post("/FEMembers_post", FATSDB.FEMembers_post)
-router.post("/ItemBarcodes_post",FATSDB.ItemBarcodes_post)
+router.post("/ItemBarcodes_post", FATSDB.ItemBarcodes_post)
+router.post("/ItemBarcodesOnVan_post",FATSDB.ItemBarcodesOnVan_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -70,7 +71,9 @@ router.get("/Customers_GET_LIST", FATSDB.Customers_GET_LIST)
 router.get("/FEMembers_GET_LIST", FATSDB.FEMembers_GET_LIST)
 router.get("/FEMembers_GET_BYID/:tblLIMembersID", FATSDB.FEMembers_GET_BYID)
 router.get("/temBarcodes_GET_BYID/:tblItemBarcodesID", FATSDB.temBarcodes_GET_BYID)
-router.get("/ItemBarcodes_GET_LIST",FATSDB.ItemBarcodes_GET_LIST)
+router.get("/ItemBarcodes_GET_LIST", FATSDB.ItemBarcodes_GET_LIST)
+router.get("/ItemBarcodesOnVan_GET_LIST", FATSDB.ItemBarcodesOnVan_GET_LIST)
+router.get("/ItemBarcodesOnVan_GET_BYID/:tblItemBarcodesID",FATSDB.ItemBarcodesOnVan_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -84,7 +87,8 @@ router.put("/CardTypes_Put/:tblItemBarcodesID", FATSDB.CardTypes_Put)
 router.put("/Companies_Put/:tblCompaniesID", FATSDB.Companies_Put)
 router.put("/Customers_Put/:TblCustomersID", FATSDB.Customers_Put)
 router.put("/FEMembers_Put/:tblLIMembersID", FATSDB.FEMembers_Put)
-router.put("/ItemBarcodes_Put/:tblItemBarcodesID",FATSDB.ItemBarcodes_Put)
+router.put("/ItemBarcodes_Put/:tblItemBarcodesID", FATSDB.ItemBarcodes_Put)
+router.put("/ItemBarcodesOnVan_Put/:tblItemBarcodesID",FATSDB.ItemBarcodesOnVan_Put)
 //--------------------------------------------------------------------------------
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
@@ -98,6 +102,7 @@ router.delete("/CardTypes_DELETE_BYID/:tblItemBarcodesID", FATSDB.CardTypes_DELE
 router.delete("/Companies_DELETE_BYID/:tblCompaniesID", FATSDB.Companies_DELETE_BYID)
 router.delete("/Customers_DELETE_BYID/:TblCustomersID", FATSDB.Customers_DELETE_BYID)
 router.delete("/FEMembers_DELETE_BYID/:tblLIMembersID", FATSDB.FEMembers_DELETE_BYID)
-router.delete("/ItemBarcodes_DELETE_BYID/:tblItemBarcodesID",FATSDB.ItemBarcodes_DELETE_BYID)
+router.delete("/ItemBarcodes_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodes_DELETE_BYID)
+router.delete("/ItemBarcodesOnVan_DELETE_BYID/:tblItemBarcodesID",FATSDB.ItemBarcodesOnVan_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
