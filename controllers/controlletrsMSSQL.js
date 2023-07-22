@@ -632,7 +632,7 @@ const FATSDB = {
       let data = await pool
         .request()
       
-        .input("id", sql.Numeric, req.body.id)
+        .input("id", sql.VarChar, req.body.id)
         .input("BarCode", sql.VarChar, req.body.BarCode)
         .input("itemId", sql.VarChar, req.body.itemId)
         .input("itemDescLo", sql.NVarChar, req.body.itemDescLo)
