@@ -2141,7 +2141,7 @@ WHERE ProductID='${ProductID}'`
       let data = await pool
         .request()
 
-          .input("UserID", sql.Numeric, req.body.UserID)
+           .input("UserID", sql.Numeric, req.body.UserID)
         .input("MemberNameE", sql.NVarChar, req.body.MemberNameE)
         .input("MemberNameA", sql.NVarChar, req.body.MemberNameA)
         .input("MemberType", sql.VarChar, req.body.MemberType)
