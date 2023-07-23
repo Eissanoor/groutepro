@@ -943,7 +943,7 @@ const FATSDB = {
         .input("AvailableQty", sql.Numeric, req.body.AvailableQty)
         .input("BinNoLocation", sql.NVarChar, req.body.BinNoLocation)
         .input("ItemPrice", sql.Real, req.body.ItemPrice)
-        .input("ItemCategoryCode]", sql.VarChar, req.body.ItemCategoryCode)
+        .input("ItemCategoryCode", sql.VarChar, req.body.ItemCategoryCode)
         .input("ItemCategoryDesc", sql.VarChar, req.body.ItemCategoryDesc)
         .input("ItemPhoto", sql.VarChar, url)
         .query(
