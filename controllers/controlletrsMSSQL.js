@@ -1196,61 +1196,83 @@ const FATSDB = {
           ` 
             INSERT INTO [dbo].[tblMembers]
                       
-                      ( [MemberID]
-                         ,[ProductNameE]
-                        ,[ProductNameA]
-                         ,[BrandName]
-                         ,[ProductTypeID]
-                        ,[Origin]
-                         ,[ColorID]
-                        ,[PackagingTypeID]
-                         ,[PackagingLevelID]
-                         ,[MnfCode]
-                        ,[MnfGLN]
-                         ,[ProvGLN]
-                         ,[ImageURL]
-                         ,[DetailsPage]
-                         ,[ChildProductID]
-                         ,[ChildQuantity]
-                         ,[UOMID]
-                         ,[Size]
-                         ,[BarCodeID]
-                         ,[BarCode]
-                         ,[BarCodeURL]
-                         ,[IsActive]
+                      ( [UserID]
+                         ,[MemberNameE]
+                        ,[MemberNameA]
+                         ,[MemberType]
+                         ,[Address1]
+                        ,[Address2]
+                         ,[POBox]
+                        ,[CityID]
+                         ,[Phone1]
+                         ,[Phone2]
+                        ,[Fax]
+                         ,[Staff]
+                         ,[Email]
+                         ,[Website]
+                         ,[IndustryTypeID]
+                         ,[FieldOfWorkID]
+                         ,[OtherFieldOfWork]
+                         ,[Products]
+
+
+                         ,[GS1Prefix]
+                         ,[MOCRegNo]
+                         ,[MOCRegDate]
+                         ,[MOCRegCert]
+                         ,[GLNID]
+                         ,[GLN]
+                         ,[Is14]
+                         ,[Status]
+
+
+                         ,[Parent]
                          ,[CreatedBy]
                          ,[CreatedDate]
                          ,[UpdatedBy]
                          ,[UpdatedDate]
+                         ,[MembershipTypeID]
+                         ,[OtherIndustry]
+                         ,[IntID]
                         )
                  VALUES
                        (
-                       @MemberID
-                       ,@ProductNameE
-                       ,@ProductNameA
-                       ,@BrandName
-                       ,@ProductTypeID
-                       ,@Origin
-                       ,@ColorID
-                       ,@PackagingTypeID
-                       ,@PackagingLevelID
-                       ,@MnfCode
-                       ,@MnfGLN
-                       ,@ProvGLN
-                       ,@ImageURL
-                       ,@DetailsPage
-                       ,@ChildProductID
-                       ,@ChildQuantity
-                       ,@UOMID
-                       ,@Size
-                       ,@BarCodeID
-                       ,@BarCode
-                       ,@BarCodeURL
-                       ,@IsActive
+                       @UserID
+                       ,@MemberNameE
+                       ,@MemberNameA
+                       ,@MemberType
+                       ,@Address1
+                       ,@Address2
+                       ,@POBox
+                       ,@CityID
+                       ,@Phone1
+                       ,@Phone2
+                       ,@Fax
+                       ,@Staff
+                       ,@Email
+                       ,@Website
+                       ,@IndustryTypeID
+                       ,@FieldOfWorkID
+                       ,@OtherFieldOfWork
+                       ,@Products
+
+                       ,@GS1Prefix
+                       ,@MOCRegNo
+                       ,@MOCRegDate
+                       ,@MOCRegCert
+                       ,@GLNID
+                       ,@GLN
+                       ,@Is14
+                       ,@Status
+
+                       ,@Parent
                        ,@CreatedBy
                        ,@CreatedDate
                        ,@UpdatedBy
                        ,@UpdatedDate
+                       ,@MembershipTypeID
+                       ,@OtherIndustry
+                       ,@IntID
                    
                        )`
         );
