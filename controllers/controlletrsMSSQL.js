@@ -1145,6 +1145,121 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async Members_post(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("UserID", sql.Numeric, req.body.UserID)
+        .input("MemberNameE", sql.NVarChar, req.body.MemberNameE)
+        .input("MemberNameA", sql.NVarChar, req.body.MemberNameA)
+        .input("MemberType", sql.VarChar, req.body.MemberType)
+        .input("Address1", sql.NVarChar, req.body.Address1)
+        .input("Address2", sql.NVarChar, req.body.Address2)
+        .input("POBox", sql.VarChar, req.body.POBox)
+        .input("CityID", sql.Numeric, req.body.CityID)
+        .input("Phone1", sql.VarChar, req.body.Phone1)
+        .input("Phone2", sql.VarChar, req.body.Phone2)
+        .input("Fax", sql.VarChar, req.body.Fax)
+        .input("Staff", sql.Numeric, req.body.Staff)
+        .input("Email", sql.VarChar, req.body.Email)
+        .input("Website", sql.VarChar, req.body.Website)
+        .input("IndustryTypeID", sql.VarChar, req.body.IndustryTypeID)
+        .input("FieldOfWorkID", sql.VarChar, req.body.FieldOfWorkID)
+        .input("OtherFieldOfWork", sql.NVarChar, req.body.OtherFieldOfWork)
+        .input("Products", sql.VarChar, req.body.Products)
+
+        .input("GS1Prefix", sql.Numeric, req.body.GS1Prefix)
+        .input("MOCRegNo", sql.VarChar, req.body.MOCRegNo)
+        .input("MOCRegDate", sql.Date, req.body.MOCRegDate)
+        .input("MOCRegCert", sql.VarChar, req.body.MOCRegCert)
+        .input("GLNID", sql.Numeric, req.body.GLNID)
+        .input("GLN", sql.VarChar, req.body.GLN)
+        .input("Is14", sql.TinyInt, req.body.Is14)
+        .input("Status", sql.VarChar, req.body.Status)
+       
+        .input("Parent", sql.Numeric, req.body.Parent)
+        .input("CreatedBy", sql.Numeric, req.body.CreatedBy)
+        .input("CreatedDate", sql.DateTime, req.body.CreatedDate)
+        .input("UpdatedBy", sql.Numeric, req.body.UpdatedBy)
+        .input("UpdatedDate", sql.DateTime, req.body.UpdatedDate)
+        .input("MembershipTypeID", sql.Numeric, req.body.MembershipTypeID)
+        .input("OtherIndustry", sql.NVarChar, req.body.OtherIndustry)
+        .input("IntID", sql.Numeric, req.body.IntID)
+        
+
+
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblMembers]
+                      
+                      ( [MemberID]
+                         ,[ProductNameE]
+                        ,[ProductNameA]
+                         ,[BrandName]
+                         ,[ProductTypeID]
+                        ,[Origin]
+                         ,[ColorID]
+                        ,[PackagingTypeID]
+                         ,[PackagingLevelID]
+                         ,[MnfCode]
+                        ,[MnfGLN]
+                         ,[ProvGLN]
+                         ,[ImageURL]
+                         ,[DetailsPage]
+                         ,[ChildProductID]
+                         ,[ChildQuantity]
+                         ,[UOMID]
+                         ,[Size]
+                         ,[BarCodeID]
+                         ,[BarCode]
+                         ,[BarCodeURL]
+                         ,[IsActive]
+                         ,[CreatedBy]
+                         ,[CreatedDate]
+                         ,[UpdatedBy]
+                         ,[UpdatedDate]
+                        )
+                 VALUES
+                       (
+                       @MemberID
+                       ,@ProductNameE
+                       ,@ProductNameA
+                       ,@BrandName
+                       ,@ProductTypeID
+                       ,@Origin
+                       ,@ColorID
+                       ,@PackagingTypeID
+                       ,@PackagingLevelID
+                       ,@MnfCode
+                       ,@MnfGLN
+                       ,@ProvGLN
+                       ,@ImageURL
+                       ,@DetailsPage
+                       ,@ChildProductID
+                       ,@ChildQuantity
+                       ,@UOMID
+                       ,@Size
+                       ,@BarCodeID
+                       ,@BarCode
+                       ,@BarCodeURL
+                       ,@IsActive
+                       ,@CreatedBy
+                       ,@CreatedDate
+                       ,@UpdatedBy
+                       ,@UpdatedDate
+                   
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -1996,6 +2111,100 @@ WHERE ProductID='${ProductID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async Members_Put(req, res, next) {
+    try {
+      
+      let pool = await sql.connect(config);
+      const MemberID = req.params.MemberID;
+      let data = await pool
+        .request()
+
+          .input("UserID", sql.Numeric, req.body.UserID)
+        .input("MemberNameE", sql.NVarChar, req.body.MemberNameE)
+        .input("MemberNameA", sql.NVarChar, req.body.MemberNameA)
+        .input("MemberType", sql.VarChar, req.body.MemberType)
+        .input("Address1", sql.NVarChar, req.body.Address1)
+        .input("Address2", sql.NVarChar, req.body.Address2)
+        .input("POBox", sql.VarChar, req.body.POBox)
+        .input("CityID", sql.Numeric, req.body.CityID)
+        .input("Phone1", sql.VarChar, req.body.Phone1)
+        .input("Phone2", sql.VarChar, req.body.Phone2)
+        .input("Fax", sql.VarChar, req.body.Fax)
+        .input("Staff", sql.Numeric, req.body.Staff)
+        .input("Email", sql.VarChar, req.body.Email)
+        .input("Website", sql.VarChar, req.body.Website)
+        .input("IndustryTypeID", sql.VarChar, req.body.IndustryTypeID)
+        .input("FieldOfWorkID", sql.VarChar, req.body.FieldOfWorkID)
+        .input("OtherFieldOfWork", sql.NVarChar, req.body.OtherFieldOfWork)
+        .input("Products", sql.VarChar, req.body.Products)
+
+        .input("GS1Prefix", sql.Numeric, req.body.GS1Prefix)
+        .input("MOCRegNo", sql.VarChar, req.body.MOCRegNo)
+        .input("MOCRegDate", sql.Date, req.body.MOCRegDate)
+        .input("MOCRegCert", sql.VarChar, req.body.MOCRegCert)
+        .input("GLNID", sql.Numeric, req.body.GLNID)
+        .input("GLN", sql.VarChar, req.body.GLN)
+        .input("Is14", sql.TinyInt, req.body.Is14)
+        .input("Status", sql.VarChar, req.body.Status)
+       
+        .input("Parent", sql.Numeric, req.body.Parent)
+        .input("CreatedBy", sql.Numeric, req.body.CreatedBy)
+        .input("CreatedDate", sql.DateTime, req.body.CreatedDate)
+        .input("UpdatedBy", sql.Numeric, req.body.UpdatedBy)
+        .input("UpdatedDate", sql.DateTime, req.body.UpdatedDate)
+        .input("MembershipTypeID", sql.Numeric, req.body.MembershipTypeID)
+        .input("OtherIndustry", sql.NVarChar, req.body.OtherIndustry)
+        .input("IntID", sql.Numeric, req.body.IntID)
+        .query(
+          ` 
+          UPDATE [dbo].[tblMembers]
+SET
+
+[UserID] =@UserID
+,[MemberNameE] =@MemberNameE
+,[MemberNameA] =@MemberNameA
+,[MemberType] =@MemberType
+,[Address1] =@Address1
+,[Address2] =@Address2
+,[POBox] =@POBox
+,[CityID] =@CityID
+,[Phone1] =@Phone1
+,[Phone2] =@Phone2
+,[Fax] =@Fax
+,[Staff] =@Staff
+,[Email] =@Email
+,[Website] =@Website
+,[IndustryTypeID] =@IndustryTypeID
+,[FieldOfWorkID] =@FieldOfWorkID
+,[OtherFieldOfWork] =@OtherFieldOfWork
+,[Products] =@Products
+
+,[GS1Prefix] =@GS1Prefix
+,[MOCRegNo] =@MOCRegNo
+,[MOCRegDate] =@MOCRegDate
+,[MOCRegCert] =@MOCRegCert
+,[GLNID] =@GLNID
+,[GLN] =@GLN
+,[Is14] =@Is14
+,[Status] =@Status
+
+,[Parent] =@Parent
+,[CreatedBy] =@CreatedBy
+,[CreatedDate] =@CreatedDate
+,[UpdatedBy] =@UpdatedBy
+,[UpdatedDate] =@UpdatedDate
+,[MembershipTypeID] =@MembershipTypeID
+,[OtherIndustry] =@OtherIndustry
+,[IntID] =@IntID
+
+WHERE MemberID='${MemberID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -2468,6 +2677,32 @@ WHERE ProductID='${ProductID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+      async Members_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const MemberID = req.params.MemberID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblMembers where MemberID='${MemberID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+      async Members_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblMembers`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -2769,6 +3004,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblMemberProducts where ProductID='${ProductID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async Members_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const MemberID = req.params.MemberID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblMembers where MemberID='${MemberID}'`
         );
       console.log(data);
       res.status(200).json(data);

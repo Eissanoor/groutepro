@@ -89,7 +89,9 @@ router.get("/ItemMaster_GET_LIST", FATSDB.ItemMaster_GET_LIST)
 router.get("/LIMembers_GET_BYID/:tblLIMembersID", FATSDB.LIMembers_GET_BYID)
 router.get("/LIMembers_GET_LIST", FATSDB.LIMembers_GET_LIST)
 router.get("/MemberProducts_GET_LIST", FATSDB.MemberProducts_GET_LIST)
-router.get("/MemberProducts_GET_BYID/:ProductID",FATSDB.MemberProducts_GET_BYID)
+router.get("/MemberProducts_GET_BYID/:ProductID", FATSDB.MemberProducts_GET_BYID)
+router.get("/Members_GET_BYID/:MemberID", FATSDB.Members_GET_BYID)
+router.get("/Members_GET_LIST",FATSDB.Members_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -109,7 +111,8 @@ router.put("/ItemBarcodesReturns_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesRet
 router.put("/ItemBarcodesTmp_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_Put)
 router.put("/ItemMaster_Put/:tblItemMasterID", cpUpload, FATSDB.ItemMaster_Put)
 router.put("/LIMembers_Put/:tblLIMembersID", FATSDB.LIMembers_Put)
-router.put("/MemberProducts_Put/:ProductID",FATSDB.MemberProducts_Put)
+router.put("/MemberProducts_Put/:ProductID", FATSDB.MemberProducts_Put)
+router.put("/Members_Put/:Members_Put",FATSDB.Members_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -130,6 +133,7 @@ router.delete("/ItemBarcodesReturns_DELETE_BYID/:tblItemBarcodesID", FATSDB.Item
 router.delete("/ItemBarcodesTmp_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_DELETE_BYID)
 router.delete("/ItemMaster_DELETE_BYID/:tblItemMasterID", FATSDB.ItemMaster_DELETE_BYID)
 router.delete("/LIMembers_DELETE_BYID/:tblLIMembersID", FATSDB.LIMembers_DELETE_BYID)
-router.delete("/MemberProducts_DELETE_BYID/:ProductID",FATSDB.MemberProducts_DELETE_BYID)
+router.delete("/MemberProducts_DELETE_BYID/:ProductID", FATSDB.MemberProducts_DELETE_BYID)
+router.delete("/Members_DELETE_BYID/:MemberID",FATSDB.Members_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
