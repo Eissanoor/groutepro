@@ -979,6 +979,65 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async LIMembers_post(req, res, next) {
+    try {
+      
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("GCPCode", sql.VarChar, req.body.GCPCode)
+        .input("CompanyNameE", sql.VarChar, req.body.CompanyNameE)
+        .input("CompanyNameA", sql.Numeric, req.body.CompanyNameA)
+        .input("CompanyCRNo", sql.NVarChar, req.body.CompanyCRNo)
+        .input("CompanyAddress", sql.VarChar, req.body.CompanyAddress)
+        .input("CompanyVatNo", sql.VarChar, req.body.CompanyVatNo)
+        .input("CompanyLandLineNo", sql.VarChar, req.body.CompanyLandLineNo)
+        .input("CompanyEmailID", sql.VarChar, req.body.CompanyEmailID)
+        .input("CompanyGPSLocation1", sql.VarChar, req.body.CompanyGPSLocation1)
+        .input("CompanyContactPerson", sql.VarChar, req.body.CompanyContactPerson)
+         .input("CompanyCPMobileNo", sql.VarChar, req.body.CompanyCPMobileNo)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblLIMembers]
+                      
+                      ( [MemberID]
+                         ,[GCPCode]
+                        ,[CompanyNameE]
+                         ,[CompanyNameA]
+                         ,[CompanyCRNo]
+                        ,[CompanyAddress]
+                         ,[CompanyVatNo]
+                        ,[CompanyLandLineNo]
+                         ,[CompanyEmailID]
+                         ,[CompanyGPSLocation1]
+                         ,[CompanyContactPerson]
+                         ,[CompanyCPMobileNo]
+                        )
+                 VALUES
+                       (
+                       @MemberID
+                       ,@GCPCode
+                       ,@CompanyNameE
+                       ,@CompanyNameA
+                       ,@CompanyCRNo
+                       ,@CompanyAddress
+                       ,@CompanyVatNo
+                       ,@CompanyLandLineNo
+                       ,@CompanyEmailID 
+                       ,@CompanyGPSLocation1
+                       ,@CompanyContactPerson
+                       ,@CompanyCPMobileNo               
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -1708,6 +1767,53 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async LIMembers_Put(req, res, next) {
+    try {
+       
+      let pool = await sql.connect(config);
+      const tblLIMembersID = req.params.tblLIMembersID;
+      let data = await pool
+        .request()
+
+         .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("GCPCode", sql.VarChar, req.body.GCPCode)
+        .input("CompanyNameE", sql.VarChar, req.body.CompanyNameE)
+        .input("CompanyNameA", sql.Numeric, req.body.CompanyNameA)
+        .input("CompanyCRNo", sql.NVarChar, req.body.CompanyCRNo)
+        .input("CompanyAddress", sql.VarChar, req.body.CompanyAddress)
+        .input("CompanyVatNo", sql.VarChar, req.body.CompanyVatNo)
+        .input("CompanyLandLineNo", sql.VarChar, req.body.CompanyLandLineNo)
+        .input("CompanyEmailID", sql.VarChar, req.body.CompanyEmailID)
+        .input("CompanyGPSLocation1", sql.VarChar, req.body.CompanyGPSLocation1)
+        .input("CompanyContactPerson", sql.VarChar, req.body.CompanyContactPerson)
+         .input("CompanyCPMobileNo", sql.VarChar, req.body.CompanyCPMobileNo)
+
+        .query(
+          ` 
+          UPDATE [dbo].[tblLIMembers]
+SET
+
+[MemberID] =@MemberID
+,[GCPCode] =@GCPCode
+,[CompanyNameE] =@CompanyNameE
+,[CompanyNameA] =@CompanyNameA
+,[CompanyCRNo] =@CompanyCRNo
+,[CompanyAddress] =@CompanyAddress
+,[CompanyVatNo] =@CompanyVatNo
+,[CompanyLandLineNo] =@CompanyLandLineNo
+,[CompanyEmailID] =@CompanyEmailID
+,[CompanyGPSLocation1] =@CompanyGPSLocation1
+,[CompanyContactPerson] =@CompanyContactPerson
+,[CompanyCPMobileNo] =@CompanyCPMobileNo
+
+WHERE tblLIMembersID='${tblLIMembersID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -2128,6 +2234,32 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+      async LIMembers_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblLIMembersID = req.params.tblLIMembersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblLIMembers where tblLIMembersID='${tblLIMembersID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+      async LIMembers_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblLIMembers`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -2395,6 +2527,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblItemMaster where tblItemMasterID='${tblItemMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async LIMembers_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblLIMembersID = req.params.tblLIMembersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblLIMembers where tblLIMembersID='${tblLIMembersID}'`
         );
       console.log(data);
       res.status(200).json(data);

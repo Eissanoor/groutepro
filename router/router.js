@@ -49,6 +49,7 @@ router.post("/ItemBarcodesOnVan_post", FATSDB.ItemBarcodesOnVan_post)
 router.post("/ItemBarcodesReturns_post", FATSDB.ItemBarcodesReturns_post)
 router.post("/ItemBarcodesTmp_post", FATSDB.ItemBarcodesTmp_post)
 router.post("/ItemMaster_post", cpUpload, FATSDB.ItemMaster_post)
+router.post("/LIMembers_post",FATSDB.LIMembers_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -83,7 +84,9 @@ router.get("/ItemBarcodesReturns_GET_LIST", FATSDB.ItemBarcodesReturns_GET_LIST)
 router.get("/ItemBarcodesTmp_GET_LIST", FATSDB.ItemBarcodesTmp_GET_LIST)
 router.get("/ItemBarcodesTmp_GET_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_GET_BYID)
 router.get("/ItemMaster_GET_BYID/:tblItemMasterID", FATSDB.ItemMaster_GET_BYID)
-router.get("/ItemMaster_GET_LIST",FATSDB.ItemMaster_GET_LIST)
+router.get("/ItemMaster_GET_LIST", FATSDB.ItemMaster_GET_LIST)
+router.get("/LIMembers_GET_BYID/:tblLIMembersID", FATSDB.LIMembers_GET_BYID)
+router.get("/LIMembers_GET_LIST",FATSDB.LIMembers_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -102,6 +105,7 @@ router.put("/ItemBarcodesOnVan_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesOnVan
 router.put("/ItemBarcodesReturns_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesReturns_Put)
 router.put("/ItemBarcodesTmp_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_Put)
 router.put("/ItemMaster_Put/:tblItemMasterID", cpUpload, FATSDB.ItemMaster_Put)
+router.put("/LIMembers_Put/:tblLIMembersID",FATSDB.LIMembers_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -120,6 +124,7 @@ router.delete("/ItemBarcodes_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcode
 router.delete("/ItemBarcodesOnVan_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesOnVan_DELETE_BYID)
 router.delete("/ItemBarcodesReturns_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesReturns_DELETE_BYID)
 router.delete("/ItemBarcodesTmp_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_DELETE_BYID)
-router.delete("/ItemMaster_DELETE_BYID/:tblItemMasterID",FATSDB.ItemMaster_DELETE_BYID)
+router.delete("/ItemMaster_DELETE_BYID/:tblItemMasterID", FATSDB.ItemMaster_DELETE_BYID)
+router.delete("/LIMembers_DELETE_BYID/:tblLIMembersID",FATSDB.LIMembers_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
