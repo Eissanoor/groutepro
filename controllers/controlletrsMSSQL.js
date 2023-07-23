@@ -927,6 +927,58 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async ItemMaster_post(req, res, next) {
+    try {
+      const file = req.files["ItemPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("ItemCode", sql.VarChar, req.body.ItemCode)
+        .input("ItemDescription", sql.VarChar, req.body.ItemDescription)
+        .input("ItemUnit", sql.VarChar, req.body.ItemUnit)
+        .input("AvailableQty", sql.Numeric, req.body.AvailableQty)
+        .input("BinNoLocation", sql.NVarChar, req.body.BinNoLocation)
+        .input("ItemPrice", sql.Real, req.body.ItemPrice)
+        .input("ItemCategoryCode]", sql.VarChar, req.body.ItemCategoryCode)
+        .input("ItemCategoryDesc", sql.VarChar, req.body.ItemCategoryDesc)
+        .input("ItemPhoto", sql.VarChar, url)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblItemMaster]
+                      
+                      ( [ItemCode]
+                         ,[ItemDescription]
+                        ,[ItemUnit]
+                         ,[AvailableQty]
+                         ,[BinNoLocation]
+                        ,[ItemPrice]
+                         ,[ItemCategoryCode]
+                        ,[ItemCategoryDesc]
+                         ,[ItemPhoto]
+                        )
+                 VALUES
+                       (
+                       @ItemCode
+                       ,@ItemDescription
+                       ,@ItemUnit
+                       ,@AvailableQty
+                       ,@BinNoLocation
+                       ,@ItemPrice
+                       ,@ItemCategoryCode
+                       ,@ItemCategoryDesc
+                       ,@ItemPhoto                
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -1613,6 +1665,49 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async ItemMaster_Put(req, res, next) {
+    try {
+        const file = req.files["ItemPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+       .input("ItemCode", sql.VarChar, req.body.ItemCode)
+        .input("ItemDescription", sql.VarChar, req.body.ItemDescription)
+        .input("ItemUnit", sql.VarChar, req.body.ItemUnit)
+        .input("AvailableQty", sql.Numeric, req.body.AvailableQty)
+        .input("BinNoLocation", sql.NVarChar, req.body.BinNoLocation)
+        .input("ItemPrice", sql.Real, req.body.ItemPrice)
+        .input("ItemCategoryCode]", sql.VarChar, req.body.ItemCategoryCode)
+        .input("ItemCategoryDesc", sql.VarChar, req.body.ItemCategoryDesc)
+        .input("ItemPhoto", sql.VarChar, url)
+
+        .query(
+          ` 
+          UPDATE [dbo].[tblItemMaster]
+SET
+
+[ItemCode] =@ItemCode
+,[ItemDescription] =@ItemDescription
+,[ItemUnit] =@ItemUnit
+,[AvailableQty] =@AvailableQty
+,[BinNoLocation] =@BinNoLocation
+,[ItemPrice] =@ItemPrice
+,[ItemCategoryCode] =@ItemCategoryCode
+,[ItemCategoryDesc] =@ItemCategoryDesc
+,[ItemPhoto] =@ItemPhoto
+
+WHERE tblItemMasterID='${tblItemMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -1747,7 +1842,6 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
-  
       async TransactionSummaryPrint_GET_BYID(req, res, next) {
     try {
       let pool = await sql.connect(config);
@@ -2008,6 +2102,32 @@ WHERE tblItemBarcodesID='${tblItemBarcodesID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+     async ItemMaster_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblItemMaster where tblItemMasterID='${tblItemMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+      async ItemMaster_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblItemMaster`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -2258,6 +2378,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblItemBarcodesTmp where tblItemBarcodesID='${tblItemBarcodesID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async ItemMaster_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblItemMaster where tblItemMasterID='${tblItemMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);

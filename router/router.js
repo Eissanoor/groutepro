@@ -30,6 +30,7 @@ router.use("/profile", express.static("uploads"));
 const cpUpload = upload.fields([
   { name: "Image" },
   { name: "Photo" },
+  { name: "ItemPhoto" }
 ]);
 //----------------POST_API---------------------------------------------------------
 router.post("/apt_post", cpUpload, FATSDB.apt_post)
@@ -46,7 +47,8 @@ router.post("/FEMembers_post", FATSDB.FEMembers_post)
 router.post("/ItemBarcodes_post", FATSDB.ItemBarcodes_post)
 router.post("/ItemBarcodesOnVan_post", FATSDB.ItemBarcodesOnVan_post)
 router.post("/ItemBarcodesReturns_post", FATSDB.ItemBarcodesReturns_post)
-router.post("/ItemBarcodesTmp_post",FATSDB.ItemBarcodesTmp_post)
+router.post("/ItemBarcodesTmp_post", FATSDB.ItemBarcodesTmp_post)
+router.post("/ItemMaster_post", cpUpload, FATSDB.ItemMaster_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -79,7 +81,9 @@ router.get("/ItemBarcodesOnVan_GET_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodes
 router.get("/ItemBarcodesReturns_GET_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesReturns_GET_BYID)
 router.get("/ItemBarcodesReturns_GET_LIST", FATSDB.ItemBarcodesReturns_GET_LIST)
 router.get("/ItemBarcodesTmp_GET_LIST", FATSDB.ItemBarcodesTmp_GET_LIST)
-router.get("/ItemBarcodesTmp_GET_BYID/:tblItemBarcodesID",FATSDB.ItemBarcodesTmp_GET_BYID)
+router.get("/ItemBarcodesTmp_GET_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_GET_BYID)
+router.get("/ItemMaster_GET_BYID/:tblItemMasterID", FATSDB.ItemMaster_GET_BYID)
+router.get("/ItemMaster_GET_LIST",FATSDB.ItemMaster_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -96,8 +100,10 @@ router.put("/FEMembers_Put/:tblLIMembersID", FATSDB.FEMembers_Put)
 router.put("/ItemBarcodes_Put/:tblItemBarcodesID", FATSDB.ItemBarcodes_Put)
 router.put("/ItemBarcodesOnVan_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesOnVan_Put)
 router.put("/ItemBarcodesReturns_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesReturns_Put)
-router.put("/ItemBarcodesTmp_Put/:tblItemBarcodesID",FATSDB.ItemBarcodesTmp_Put)
+router.put("/ItemBarcodesTmp_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_Put)
+router.put("/ItemMaster_Put/:tblItemMasterID", cpUpload, FATSDB.ItemMaster_Put)
 //--------------------------------------------------------------------------------
+
 //-----------------------------------DELETE_API-----------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
 router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID", FATSDB.aptbckgrd_DELETE_BYID)
@@ -113,6 +119,7 @@ router.delete("/FEMembers_DELETE_BYID/:tblLIMembersID", FATSDB.FEMembers_DELETE_
 router.delete("/ItemBarcodes_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodes_DELETE_BYID)
 router.delete("/ItemBarcodesOnVan_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesOnVan_DELETE_BYID)
 router.delete("/ItemBarcodesReturns_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesReturns_DELETE_BYID)
-router.delete("/ItemBarcodesTmp_DELETE_BYID/:tblItemBarcodesID",FATSDB.ItemBarcodesTmp_DELETE_BYID)
+router.delete("/ItemBarcodesTmp_DELETE_BYID/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_DELETE_BYID)
+router.delete("/ItemMaster_DELETE_BYID/:tblItemMasterID",FATSDB.ItemMaster_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
