@@ -113,7 +113,7 @@ router.put("/ItemBarcodesTmp_Put/:tblItemBarcodesID", FATSDB.ItemBarcodesTmp_Put
 router.put("/ItemMaster_Put/:tblItemMasterID", cpUpload, FATSDB.ItemMaster_Put)
 router.put("/LIMembers_Put/:tblLIMembersID", FATSDB.LIMembers_Put)
 router.put("/MemberProducts_Put/:ProductID", FATSDB.MemberProducts_Put)
-router.put("/Members_Put/:Members_Put",FATSDB.Members_Put)
+router.put("/Members_Put/:MemberID",FATSDB.Members_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
