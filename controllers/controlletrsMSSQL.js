@@ -1038,6 +1038,113 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async MemberProducts_post(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ProductNameE", sql.NVarChar, req.body.ProductNameE)
+        .input("ProductNameA", sql.NVarChar, req.body.ProductNameA)
+        .input("BrandName", sql.NVarChar, req.body.BrandName)
+        .input("ProductTypeID", sql.Numeric, req.body.ProductTypeID)
+        .input("Origin", sql.NVarChar, req.body.Origin)
+        .input("ColorID", sql.Numeric, req.body.ColorID)
+        .input("PackagingTypeID", sql.Numeric, req.body.PackagingTypeID)
+        .input("PackagingLevelID", sql.Numeric, req.body.PackagingLevelID)
+        .input("MnfCode", sql.VarChar, req.body.MnfCode)
+        .input("MnfGLN", sql.VarChar, req.body.MnfGLN)
+        .input("ProvGLN", sql.VarChar, req.body.ProvGLN)
+        .input("ImageURL", sql.VarChar, req.body.ImageURL)
+        .input("DetailsPage", sql.VarChar, req.body.DetailsPage)
+        .input("ChildProductID", sql.Numeric, req.body.ChildProductID)
+        .input("ChildQuantity", sql.Numeric, req.body.ChildQuantity)
+        .input("UOMID", sql.Numeric, req.body.UOMID)
+        .input("Size", sql.Numeric, req.body.Size)
+
+        .input("BarCodeID", sql.Numeric, req.body.BarCodeID)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("BarCodeURL", sql.NVarChar, req.body.BarCodeURL)
+        .input("IsActive", sql.TinyInt, req.body.IsActive)
+        .input("CreatedBy", sql.Numeric, req.body.CreatedBy)
+        .input("CreatedDate", sql.DateTime, req.body.CreatedDate)
+        .input("UpdatedBy", sql.Numeric, req.body.UpdatedBy)
+        .input("UpdatedDate", sql.DateTime, req.body.UpdatedDate)
+       
+        
+
+
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblMemberProducts]
+                      
+                      ( [MemberID]
+                         ,[ProductNameE]
+                        ,[ProductNameA]
+                         ,[BrandName]
+                         ,[ProductTypeID]
+                        ,[Origin]
+                         ,[ColorID]
+                        ,[PackagingTypeID]
+                         ,[PackagingLevelID]
+                         ,[MnfCode]
+                        ,[MnfGLN]
+                         ,[ProvGLN]
+                         ,[ImageURL]
+                         ,[DetailsPage]
+                         ,[ChildProductID]
+                         ,[ChildQuantity]
+                         ,[UOMID]
+                         ,[Size]
+                         ,[BarCodeID]
+                         ,[BarCode]
+                         ,[BarCodeURL]
+                         ,[IsActive]
+                         ,[CreatedBy]
+                         ,[CreatedDate]
+                         ,[UpdatedBy]
+                         ,[UpdatedDate]
+                        )
+                 VALUES
+                       (
+                       @MemberID
+                       ,@ProductNameE
+                       ,@ProductNameA
+                       ,@BrandName
+                       ,@ProductTypeID
+                       ,@Origin
+                       ,@ColorID
+                       ,@PackagingTypeID
+                       ,@PackagingLevelID
+                       ,@MnfCode
+                       ,@MnfGLN
+                       ,@ProvGLN
+                       ,@ImageURL
+                       ,@DetailsPage
+                       ,@ChildProductID
+                       ,@ChildQuantity
+                       ,@UOMID
+                       ,@Size
+                       ,@BarCodeID
+                       ,@BarCode
+                       ,@BarCodeURL
+                       ,@IsActive
+                       ,@CreatedBy
+                       ,@CreatedDate
+                       ,@UpdatedBy
+                       ,@UpdatedDate
+                   
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -1814,6 +1921,81 @@ WHERE tblLIMembersID='${tblLIMembersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async MemberProducts_Put(req, res, next) {
+    try {
+      
+      let pool = await sql.connect(config);
+      const ProductID = req.params.ProductID;
+      let data = await pool
+        .request()
+
+          .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ProductNameE", sql.NVarChar, req.body.ProductNameE)
+        .input("ProductNameA", sql.NVarChar, req.body.ProductNameA)
+        .input("BrandName", sql.NVarChar, req.body.BrandName)
+        .input("ProductTypeID", sql.Numeric, req.body.ProductTypeID)
+        .input("Origin", sql.NVarChar, req.body.Origin)
+        .input("ColorID", sql.Numeric, req.body.ColorID)
+        .input("PackagingTypeID", sql.Numeric, req.body.PackagingTypeID)
+        .input("PackagingLevelID", sql.Numeric, req.body.PackagingLevelID)
+        .input("MnfCode", sql.VarChar, req.body.MnfCode)
+        .input("MnfGLN", sql.VarChar, req.body.MnfGLN)
+        .input("ProvGLN", sql.VarChar, req.body.ProvGLN)
+        .input("ImageURL", sql.VarChar, req.body.ImageURL)
+        .input("DetailsPage", sql.VarChar, req.body.DetailsPage)
+        .input("ChildProductID", sql.Numeric, req.body.ChildProductID)
+        .input("ChildQuantity", sql.Numeric, req.body.ChildQuantity)
+        .input("UOMID", sql.Numeric, req.body.UOMID)
+        .input("Size", sql.Numeric, req.body.Size)
+
+        .input("BarCodeID", sql.Numeric, req.body.BarCodeID)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("BarCodeURL", sql.NVarChar, req.body.BarCodeURL)
+        .input("IsActive", sql.TinyInt, req.body.IsActive)
+        .input("CreatedBy", sql.Numeric, req.body.CreatedBy)
+        .input("CreatedDate", sql.DateTime, req.body.CreatedDate)
+        .input("UpdatedBy", sql.Numeric, req.body.UpdatedBy)
+        .input("UpdatedDate", sql.DateTime, req.body.UpdatedDate)
+        .query(
+          ` 
+          UPDATE [dbo].[tblMemberProducts]
+SET
+
+[MemberID] =@MemberID
+,[ProductNameE] =@ProductNameE
+,[ProductNameA] =@ProductNameA
+,[BrandName] =@BrandName
+,[ProductTypeID] =@ProductTypeID
+,[Origin] =@Origin
+,[ColorID] =@ColorID
+,[PackagingTypeID] =@PackagingTypeID
+,[PackagingLevelID] =@PackagingLevelID
+,[MnfCode] =@MnfCode
+,[MnfGLN] =@MnfGLN
+,[ProvGLN] =@ProvGLN
+,[ImageURL] =@ImageURL
+,[DetailsPage] =@DetailsPage
+,[ChildProductID] =@ChildProductID
+,[ChildQuantity] =@ChildQuantity
+,[UOMID] =@UOMID
+,[Size] =@Size
+,[BarCodeID] =@BarCodeID
+,[BarCode] =@BarCode
+,[BarCodeURL] =@BarCodeURL
+,[IsActive] =@IsActive
+,[CreatedBy] =@CreatedBy
+,[CreatedDate] =@CreatedDate
+,[UpdatedBy] =@UpdatedBy
+,[UpdatedDate] =@UpdatedDate
+
+WHERE ProductID='${ProductID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -2260,6 +2442,32 @@ WHERE tblLIMembersID='${tblLIMembersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+      async MemberProducts_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblMemberProducts`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+      async MemberProducts_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const ProductID = req.params.ProductID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblMemberProducts where ProductID='${ProductID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -2544,6 +2752,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblLIMembers where tblLIMembersID='${tblLIMembersID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async MemberProducts_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const ProductID = req.params.ProductID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblMemberProducts where ProductID='${ProductID}'`
         );
       console.log(data);
       res.status(200).json(data);
