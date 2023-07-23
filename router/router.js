@@ -50,7 +50,8 @@ router.post("/ItemBarcodesReturns_post", FATSDB.ItemBarcodesReturns_post)
 router.post("/ItemBarcodesTmp_post", FATSDB.ItemBarcodesTmp_post)
 router.post("/ItemMaster_post", cpUpload, FATSDB.ItemMaster_post)
 router.post("/LIMembers_post", FATSDB.LIMembers_post)
-router.post("/MemberProducts_post",FATSDB.MemberProducts_post)
+router.post("/MemberProducts_post", FATSDB.MemberProducts_post)
+router.post("/Members_post",FATSDB.Members_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
