@@ -55,6 +55,7 @@ router.post("/MemberProducts_post", FATSDB.MemberProducts_post)
 router.post("/Members_post", FATSDB.Members_post)
 router.post("/PDFs_post", cpUpload, FATSDB.PDFs_post)
 router.post("/PDFsRPrintInvoice_post", cpUpload, FATSDB.PDFsRPrintInvoice_post)
+router.post("/tblPDFsRPrintInvoiceDirect_post", cpUpload, FATSDB.tblPDFsRPrintInvoiceDirect_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -99,7 +100,9 @@ router.get("/Members_GET_LIST", FATSDB.Members_GET_LIST)
 router.get("/PDFs_GET_LIST", FATSDB.PDFs_GET_LIST)
 router.get("/PDFs_GET_BYID/:tblPDFsID", FATSDB.PDFs_GET_BYID)
 router.get("/PDFsRPrintInvoice_GET_BYID/:tblPDFsID", FATSDB.PDFsRPrintInvoice_GET_BYID)
-router.get("/PDFsRPrintInvoice_GET_LIST",FATSDB.PDFsRPrintInvoice_GET_LIST)
+router.get("/PDFsRPrintInvoice_GET_LIST", FATSDB.PDFsRPrintInvoice_GET_LIST)
+router.get("/PDFsRPrintInvoiceDirect_GET_LIST", FATSDB.PDFsRPrintInvoiceDirect_GET_LIST)
+router.get("/PDFsRPrintInvoiceDirect_GET_BYID/:tblPDFsID",FATSDB.PDFsRPrintInvoiceDirect_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -122,7 +125,8 @@ router.put("/LIMembers_Put/:tblLIMembersID", FATSDB.LIMembers_Put)
 router.put("/MemberProducts_Put/:ProductID", FATSDB.MemberProducts_Put)
 router.put("/Members_Put/:MemberID", FATSDB.Members_Put)
 router.put("/PDFs_Put/:tblPDFsID", cpUpload, FATSDB.PDFs_Put)
-router.put("/PDFsRPrintInvoice_Put/:tblPDFsID",cpUpload, FATSDB.PDFsRPrintInvoice_Put)
+router.put("/PDFsRPrintInvoice_Put/:tblPDFsID", cpUpload, FATSDB.PDFsRPrintInvoice_Put)
+router.put("/PDFsRPrintInvoiceDirect_Put/:tblPDFsID",cpUpload, FATSDB.PDFsRPrintInvoiceDirect_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -146,6 +150,7 @@ router.delete("/LIMembers_DELETE_BYID/:tblLIMembersID", FATSDB.LIMembers_DELETE_
 router.delete("/MemberProducts_DELETE_BYID/:ProductID", FATSDB.MemberProducts_DELETE_BYID)
 router.delete("/Members_DELETE_BYID/:MemberID", FATSDB.Members_DELETE_BYID)
 router.delete("/PDFs_DELETE_BYID/:tblPDFsID", FATSDB.PDFs_DELETE_BYID)
-router.delete("/PDFsRPrintInvoice_DELETE_BYID/:tblPDFsID",FATSDB.PDFsRPrintInvoice_DELETE_BYID)
+router.delete("/PDFsRPrintInvoice_DELETE_BYID/:tblPDFsID", FATSDB.PDFsRPrintInvoice_DELETE_BYID)
+router.delete("/PDFsRPrintInvoiceDirect_DELETE_BYID/:tblPDFsID",FATSDB.PDFsRPrintInvoiceDirect_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
