@@ -1319,6 +1319,43 @@ const FATSDB = {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async PDFsRPrintInvoice_post(req, res, next) {
+    try {
+    const file = req.files["PDFFileName"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("PDFFileName", sql.VarChar, url)
+        
+         
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblPDFsRPrintInvoice]
+                      
+                      ( [RPDocNo]
+                         ,[PDFFileName]
+                        
+                        
+                        )
+                 VALUES
+                       (
+                       @RPDocNo
+                       ,@PDFFileName
+                      
+                       
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -2294,6 +2331,36 @@ WHERE tblPDFsID='${tblPDFsID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async PDFsRPrintInvoice_Put(req, res, next) {
+    try {
+        const file = req.files["PDFFileName"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+      const tblPDFsID = req.params.tblPDFsID;
+      let data = await pool
+        .request()
+
+          .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("PDFFileName", sql.VarChar, url)
+        .query(
+          ` 
+          UPDATE [dbo].[tblPDFsRPrintInvoice]
+SET
+
+[RPDocNo] =@RPDocNo
+,[PDFFileName] =@PDFFileName
+
+
+
+WHERE tblPDFsID='${tblPDFsID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -2818,6 +2885,32 @@ WHERE tblPDFsID='${tblPDFsID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+       async PDFsRPrintInvoice_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblPDFsID = req.params.tblPDFsID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblPDFsRPrintInvoice where tblPDFsID='${tblPDFsID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+       async PDFsRPrintInvoice_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblPDFsRPrintInvoice`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -3153,6 +3246,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblPDFs where tblPDFsID='${tblPDFsID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async PDFsRPrintInvoice_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblPDFsID = req.params.tblPDFsID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblPDFsRPrintInvoice where tblPDFsID='${tblPDFsID}'`
         );
       console.log(data);
       res.status(200).json(data);
