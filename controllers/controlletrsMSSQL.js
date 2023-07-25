@@ -2700,14 +2700,14 @@ WHERE tblPDFsID='${tblPDFsID}'`
       let data = await pool
         .request()
 
-          .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+          .input("SalesManName", sql.VarChar, req.body.SalesManName)
        
         .query(
           ` 
           UPDATE [dbo].[tblPDFsSummary]
 SET
 
-[RPDocNo] =@RPDocNo
+[SalesManName] =@SalesManName
 WHERE tblPDFsID='${tblPDFsID}'`
         );
       res.status(201).json(data);
