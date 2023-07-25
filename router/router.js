@@ -56,7 +56,8 @@ router.post("/Members_post", FATSDB.Members_post)
 router.post("/PDFs_post", cpUpload, FATSDB.PDFs_post)
 router.post("/PDFsRPrintInvoice_post", cpUpload, FATSDB.PDFsRPrintInvoice_post)
 router.post("/tblPDFsRPrintInvoiceDirect_post", cpUpload, FATSDB.tblPDFsRPrintInvoiceDirect_post)
-router.post("/PDFsSalesCollectionPrint_post", cpUpload,FATSDB.PDFsSalesCollectionPrint_post)
+router.post("/PDFsSalesCollectionPrint_post", cpUpload, FATSDB.PDFsSalesCollectionPrint_post)
+router.post("/PDFsSalesCollectionReprint_post",cpUpload, FATSDB.PDFsSalesCollectionReprint_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -105,7 +106,9 @@ router.get("/PDFsRPrintInvoice_GET_LIST", FATSDB.PDFsRPrintInvoice_GET_LIST)
 router.get("/PDFsRPrintInvoiceDirect_GET_LIST", FATSDB.PDFsRPrintInvoiceDirect_GET_LIST)
 router.get("/PDFsRPrintInvoiceDirect_GET_BYID/:tblPDFsID", FATSDB.PDFsRPrintInvoiceDirect_GET_BYID)
 router.get("/PDFsSalesCollectionPrint_GET_BYID/:tblPDFsID", FATSDB.PDFsSalesCollectionPrint_GET_BYID)
-router.get("/PDFsSalesCollectionPrint_GET_LIST",FATSDB.PDFsSalesCollectionPrint_GET_LIST)
+router.get("/PDFsSalesCollectionPrint_GET_LIST", FATSDB.PDFsSalesCollectionPrint_GET_LIST)
+router.get("/PDFsSalesCollectionReprint_GET_LIST", FATSDB.PDFsSalesCollectionReprint_GET_LIST)
+router.get("/PDFsSalesCollectionReprint_GET_BYID/:tblPDFsID",FATSDB.PDFsSalesCollectionReprint_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -131,6 +134,7 @@ router.put("/PDFs_Put/:tblPDFsID", cpUpload, FATSDB.PDFs_Put)
 router.put("/PDFsRPrintInvoice_Put/:tblPDFsID", cpUpload, FATSDB.PDFsRPrintInvoice_Put)
 router.put("/PDFsRPrintInvoiceDirect_Put/:tblPDFsID", cpUpload, FATSDB.PDFsRPrintInvoiceDirect_Put)
 router.put("/PDFsSalesCollectionPrint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesCollectionPrint_Put)
+router.put("/PDFsSalesCollectionReprint_Put/:tblPDFsID",cpUpload, FATSDB.PDFsSalesCollectionReprint_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -156,6 +160,7 @@ router.delete("/Members_DELETE_BYID/:MemberID", FATSDB.Members_DELETE_BYID)
 router.delete("/PDFs_DELETE_BYID/:tblPDFsID", FATSDB.PDFs_DELETE_BYID)
 router.delete("/PDFsRPrintInvoice_DELETE_BYID/:tblPDFsID", FATSDB.PDFsRPrintInvoice_DELETE_BYID)
 router.delete("/PDFsRPrintInvoiceDirect_DELETE_BYID/:tblPDFsID", FATSDB.PDFsRPrintInvoiceDirect_DELETE_BYID)
-router.delete("/PDFsSalesCollectionPrint_DELETE_BYID/:tblPDFsID",FATSDB.PDFsSalesCollectionPrint_DELETE_BYID)
+router.delete("/PDFsSalesCollectionPrint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesCollectionPrint_DELETE_BYID)
+router.delete("/PDFsSalesCollectionReprint_DELETE_BYID/:tblPDFsID",FATSDB.PDFsSalesCollectionReprint_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
