@@ -1519,7 +1519,7 @@ const FATSDB = {
       let data = await pool
         .request()
       
-        .input("SalesManName", sql.VarChar, req.body.RPDocNo)
+        .input("SalesManName", sql.VarChar, req.body.SalesManName)
         .query(
           ` 
             INSERT INTO [dbo].[tblPDFsSummary]
@@ -1529,6 +1529,35 @@ const FATSDB = {
                  VALUES
                        (
                        @SalesManName         
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+    async QRCodeLogin_post(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("QRLoginID", sql.VarChar, req.body.QRLoginID)
+        .input("QRLoginPass", sql.VarChar, req.body.QRLoginPass)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblQRCodeLogin]
+                      
+                      ( [QRLoginID]
+                        ,[QRLoginPass]  
+                        )
+                 VALUES
+                       (
+                       @QRLoginID 
+                       ,@QRLoginPass         
                        )`
         );
       res.status(201).json(data);
@@ -2716,6 +2745,32 @@ WHERE tblPDFsID='${tblPDFsID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async QRCodeLogin_Put(req, res, next) {
+    try {
+        
+      let pool = await sql.connect(config);
+      const tblQRCodeLoginID = req.params.tblQRCodeLoginID;
+      let data = await pool
+        .request()
+
+          .input("QRLoginID", sql.VarChar, req.body.QRLoginID)
+        .input("QRLoginPass", sql.VarChar, req.body.QRLoginPass)
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblQRCodeLogin]
+SET
+
+[QRLoginID] =@QRLoginID
+,[QRLoginPass] =@QRLoginPass
+WHERE tblQRCodeLoginID='${tblQRCodeLoginID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -3422,6 +3477,32 @@ WHERE tblPDFsID='${tblPDFsID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async QRCodeLogin_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblQRCodeLoginID = req.params.tblQRCodeLoginID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblQRCodeLogin where tblQRCodeLoginID='${tblQRCodeLoginID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async QRCodeLogin_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblQRCodeLogin`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -3876,6 +3957,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblPDFsSummary where tblPDFsID='${tblPDFsID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async QRCodeLogin_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblQRCodeLoginID = req.params.tblQRCodeLoginID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblQRCodeLogin where tblQRCodeLoginID='${tblQRCodeLoginID}'`
         );
       console.log(data);
       res.status(200).json(data);

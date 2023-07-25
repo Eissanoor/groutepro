@@ -60,7 +60,8 @@ router.post("/PDFsSalesCollectionPrint_post", cpUpload, FATSDB.PDFsSalesCollecti
 router.post("/PDFsSalesCollectionReprint_post", cpUpload, FATSDB.PDFsSalesCollectionReprint_post)
 router.post("/PDFsSalesReturnPrint_post", cpUpload, FATSDB.PDFsSalesReturnPrint_post)
 router.post("/PDFsSalesReturnReprint_post", cpUpload, FATSDB.PDFsSalesReturnReprint_post)
-router.post("/PDFsSummary_post",FATSDB.PDFsSummary_post)
+router.post("/PDFsSummary_post", FATSDB.PDFsSummary_post)
+router.post("/QRCodeLogin_post",FATSDB.QRCodeLogin_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -117,7 +118,9 @@ router.get("/PDFsSalesReturnPrint_GET_BYID/:tblPDFsID", FATSDB.PDFsSalesReturnPr
 router.get("/PDFsSalesReturnReprint_GET_BYID/:tblPDFsID", FATSDB.PDFsSalesReturnReprint_GET_BYID)
 router.get("/PDFsSalesReturnReprint_GET_LIST", FATSDB.PDFsSalesReturnReprint_GET_LIST)
 router.get("/PDFsSummary_GET_LIST", FATSDB.PDFsSummary_GET_LIST)
-router.get("/PDFsSummary_GET_BYID/:tblPDFsID",FATSDB.PDFsSummary_GET_BYID)
+router.get("/PDFsSummary_GET_BYID/:tblPDFsID", FATSDB.PDFsSummary_GET_BYID)
+router.get("/QRCodeLogin_GET_BYID/:tblQRCodeLoginID", FATSDB.QRCodeLogin_GET_BYID)
+router.get("/QRCodeLogin_GET_LIST",FATSDB.QRCodeLogin_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -146,7 +149,8 @@ router.put("/PDFsSalesCollectionPrint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSale
 router.put("/PDFsSalesCollectionReprint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesCollectionReprint_Put)
 router.put("/PDFsSalesReturnPrint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesReturnPrint_Put)
 router.put("/PDFsSalesReturnReprint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesReturnReprint_Put)
-router.put("/PDFsSummary_Put/:tblPDFsID",FATSDB.PDFsSummary_Put)
+router.put("/PDFsSummary_Put/:tblPDFsID", FATSDB.PDFsSummary_Put)
+router.put("/QRCodeLogin_Put/:tblQRCodeLoginID",FATSDB.QRCodeLogin_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -176,6 +180,7 @@ router.delete("/PDFsSalesCollectionPrint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSal
 router.delete("/PDFsSalesCollectionReprint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesCollectionReprint_DELETE_BYID)
 router.delete("/PDFsSalesReturnPrint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesReturnPrint_DELETE_BYID)
 router.delete("/PDFsSalesReturnReprint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesReturnReprint_DELETE_BYID)
-router.delete("/PDFsSummary_DELETE_BYID/:tblPDFsID",FATSDB.PDFsSummary_DELETE_BYID)
+router.delete("/PDFsSummary_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSummary_DELETE_BYID)
+router.delete("/QRCodeLogin_DELETE_BYID/:tblQRCodeLoginID",FATSDB.QRCodeLogin_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
