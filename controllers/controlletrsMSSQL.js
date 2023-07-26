@@ -1920,13 +1920,15 @@ async UserLoginAuth(req, res, next) {
                         )
                  VALUES
                        (
-                       @RequestNo
-                       ,@DateRequested
-                       ,@RequestStatus
-                       ,@FEName
-                       ,@FECountryOrigin
-                       ,@MemberID
-                       ,@ShipmentGLNNo
+                       @RPDocNo
+                       ,@DateTimeCreated
+                       ,@SORefCodeNo
+                       ,@SOItemCode
+                       ,@SOItemDescription
+                       ,@SOOrderQty
+                       ,@SOItemUnit
+                       ,@SOItemPrice
+                       ,@SOPickedQty
                        )`
         );
       res.status(201).json(data);
