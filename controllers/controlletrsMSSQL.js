@@ -1636,7 +1636,7 @@ async UserLoginAuth(req, res, next) {
       let data = await pool
         .request()
       
-        .input("tblRequestMasterID", sql.Numeric, req.body.tblRequestMasterID)
+        .input("ProductID", sql.Numeric, req.body.ProductID)
         .input("RequestNo", sql.Numeric, req.body.RequestNo)
         .input("DateRequested", sql.DateTime, req.body.DateRequested)
         .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
@@ -1658,7 +1658,7 @@ async UserLoginAuth(req, res, next) {
           ` 
             INSERT INTO [dbo].[tblRequestDets]
                       
-                      ( [tblRequestMasterID]
+                      ( [ProductID]
                          ,[RequestNo]
                         ,[DateRequested]
                          ,[RequestStatus]
@@ -1680,7 +1680,7 @@ async UserLoginAuth(req, res, next) {
                         )
                  VALUES
                        (
-                       @tblRequestMasterID
+                       @ProductID
                        ,@RequestNo
                        ,@DateRequested
                        ,@RequestStatus
@@ -2923,7 +2923,7 @@ WHERE tblQRCodeLoginID='${tblQRCodeLoginID}'`
       let data = await pool
         .request()
 
-           .input("tblRequestMasterID", sql.Numeric, req.body.tblRequestMasterID)
+           .input("ProductID", sql.Numeric, req.body.ProductID)
         .input("RequestNo", sql.Numeric, req.body.RequestNo)
         .input("DateRequested", sql.DateTime, req.body.DateRequested)
         .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
@@ -2946,7 +2946,7 @@ WHERE tblQRCodeLoginID='${tblQRCodeLoginID}'`
           UPDATE [dbo].[tblRequestDets]
 SET
 
-[tblRequestMasterID] =@tblRequestMasterID
+[ProductID] =@ProductID
 ,[RequestNo] =@RequestNo
 ,[DateRequested] =@DateRequested
 ,[RequestStatus] =@RequestStatus
