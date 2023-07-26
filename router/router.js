@@ -65,7 +65,8 @@ router.post("/PDFsSummary_post", FATSDB.PDFsSummary_post)
 router.post("/QRCodeLogin_post", FATSDB.QRCodeLogin_post)
 router.post("/RequestDets_post", cpUpload, FATSDB.RequestDets_post)
 router.post("/RequestDetsSHP_post", cpUpload, FATSDB.RequestDetsSHP_post)
-router.post("/RequestMaster_post",FATSDB.RequestMaster_post)
+router.post("/RequestMaster_post", FATSDB.RequestMaster_post)
+router.post("/RequestMasterSHP_post",FATSDB.RequestMasterSHP_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -130,7 +131,9 @@ router.get("/RequestDets_GET_BYID/:tblRequestMasterID", FATSDB.RequestDets_GET_B
 router.get("/RequestDetsSHP_GET_BYID/:tblRequestMasterID", FATSDB.RequestDetsSHP_GET_BYID)
 router.get("/RequestDetsSHP_GET_LIST", FATSDB.RequestDetsSHP_GET_LIST)
 router.get("/RequestMaster_GET_LIST", FATSDB.RequestMaster_GET_LIST)
-router.get("/RequestMaster_GET_BYID/:tblRequestMasterID",FATSDB.RequestMaster_GET_BYID)
+router.get("/RequestMaster_GET_BYID/:tblRequestMasterID", FATSDB.RequestMaster_GET_BYID)
+router.get("/RequestMasterSHP_GET_BYID/:tblRequestMasterID", FATSDB.RequestMasterSHP_GET_BYID)
+router.get("/RequestMasterSHP_GET_LIST",FATSDB.RequestMasterSHP_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -163,7 +166,8 @@ router.put("/PDFsSummary_Put/:tblPDFsID", FATSDB.PDFsSummary_Put)
 router.put("/QRCodeLogin_Put/:tblQRCodeLoginID", FATSDB.QRCodeLogin_Put)
 router.put("/RequestDets_Put/:tblRequestMasterID", cpUpload, FATSDB.RequestDets_Put)
 router.put("/RequestDetsSHP_Put/:tblRequestMasterID", cpUpload, FATSDB.RequestDetsSHP_Put)
-router.put("/RequestMaster_Put/:tblRequestMasterID",FATSDB.RequestMaster_Put)
+router.put("/RequestMaster_Put/:tblRequestMasterID", FATSDB.RequestMaster_Put)
+router.put("/RequestMasterSHP_Put/:tblRequestMasterID",FATSDB.RequestMasterSHP_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -197,6 +201,7 @@ router.delete("/PDFsSummary_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSummary_DELETE_B
 router.delete("/QRCodeLogin_DELETE_BYID/:tblQRCodeLoginID", FATSDB.QRCodeLogin_DELETE_BYID)
 router.delete("/RequestDets_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestDets_DELETE_BYID)
 router.delete("/RequestDetsSHP_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestDetsSHP_DELETE_BYID)
-router.delete("/RequestMaster_DELETE_BYID/:tblRequestMasterID",FATSDB.RequestMaster_DELETE_BYID)
+router.delete("/RequestMaster_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestMaster_DELETE_BYID)
+router.delete("/RequestMasterSHP_DELETE_BYID/:tblRequestMasterID",FATSDB.RequestMasterSHP_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
