@@ -1790,6 +1790,52 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RequestMaster_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("FEName", sql.VarChar, req.body.FEName)
+        .input("FECountryOrigin", sql.VarChar, req.body.FECountryOrigin)
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRequestMaster]
+                      
+                      ( 
+                         [RequestNo]
+                        ,[DateRequested]
+                         ,[RequestStatus]
+                         ,[FEName]
+                        ,[FECountryOrigin]
+                         ,[MemberID]
+                        ,[ShipmentGLNNo]
+                        )
+                 VALUES
+                       (
+                       @RequestNo
+                       ,@DateRequested
+                       ,@RequestStatus
+                       ,@FEName
+                       ,@FECountryOrigin
+                       ,@MemberID
+                       ,@ShipmentGLNNo
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3115,6 +3161,42 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RequestMaster_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+            .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("FEName", sql.VarChar, req.body.FEName)
+        .input("FECountryOrigin", sql.VarChar, req.body.FECountryOrigin)
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRequestMaster]
+SET
+
+
+[RequestNo] =@RequestNo
+,[DateRequested] =@DateRequested
+,[RequestStatus] =@RequestStatus
+,[FEName] =@FEName
+,[FECountryOrigin] =@FECountryOrigin
+,[MemberID] =@MemberID
+,[ShipmentGLNNo] =@ShipmentGLNNo
+WHERE tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -3899,6 +3981,32 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RequestMaster_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRequestMaster`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RequestMaster_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRequestMaster where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -4404,6 +4512,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRequestDetsSHP where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RequestMaster_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRequestMaster where tblRequestMasterID='${tblRequestMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
