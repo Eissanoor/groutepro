@@ -1708,6 +1708,88 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RequestDetsSHP_post(req, res, next) {
+    try {
+     const file = req.files["ProductPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        .input("ProductID", sql.Numeric, req.body.ProductID)
+        .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("ProductBarcode", sql.VarChar, req.body.ProductBarcode)
+        .input("ProductDescriptionE", sql.VarChar, req.body.ProductDescriptionE)
+        .input("ProductDescriptionA", sql.VarChar, req.body.ProductDescriptionA)
+        .input("ProductModelNo", sql.VarChar, req.body.ProductModelNo)
+        .input("ProductSerialNo", sql.VarChar, req.body.ProductSerialNo)
+        .input("ProductHSCode", sql.VarChar, req.body.ProductHSCode)
+        .input("ProductBrandName", sql.VarChar, req.body.ProductBrandName)
+        .input("ProductUnit", sql.VarChar, req.body.ProductUnit)
+        .input("ProductType", sql.VarChar, req.body.ProductType)
+        .input("ProductSize", sql.VarChar, req.body.ProductSize)
+        .input("ProductPhotoIDNo", sql.Numeric, req.body.ProductPhotoIDNo)
+        .input("ProductPhoto", sql.VarChar, url)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .input("ProductQtyOrder", sql.Numeric, req.body.ProductQtyOrder)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRequestDetsSHP]
+                      
+                      ( [ProductID]
+                         ,[RequestNo]
+                        ,[DateRequested]
+                         ,[RequestStatus]
+                         ,[ProductBarcode]
+                        ,[ProductDescriptionE]
+                         ,[ProductDescriptionA]
+                        ,[ProductModelNo]
+                         ,[ProductSerialNo]
+                         ,[ProductHSCode]
+                        ,[ProductBrandName]
+                         ,[ProductUnit]
+                         ,[ProductType]
+                         ,[ProductSize]
+                         ,[ProductPhotoIDNo]
+                         ,[ProductPhoto]
+                         ,[ShipmentGLNNo]
+                         ,[ProductQtyOrder]
+                        
+                        )
+                 VALUES
+                       (
+                       @ProductID
+                       ,@RequestNo
+                       ,@DateRequested
+                       ,@RequestStatus
+                       ,@ProductBarcode
+                       ,@ProductDescriptionE
+                       ,@ProductDescriptionA
+                       ,@ProductModelNo
+                       ,@ProductSerialNo
+                       ,@ProductHSCode
+                       ,@ProductBrandName
+                       ,@ProductUnit
+                       ,@ProductType
+                       ,@ProductSize
+                       ,@ProductPhotoIDNo
+                       ,@ProductPhoto
+                       ,@ShipmentGLNNo
+                       ,@ProductQtyOrder
+                      
+                   
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -2973,6 +3055,66 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RequestDetsSHP_Put(req, res, next) {
+    try {
+       const file = req.files["ProductPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+           .input("ProductID", sql.Numeric, req.body.ProductID)
+        .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("ProductBarcode", sql.VarChar, req.body.ProductBarcode)
+        .input("ProductDescriptionE", sql.VarChar, req.body.ProductDescriptionE)
+        .input("ProductDescriptionA", sql.VarChar, req.body.ProductDescriptionA)
+        .input("ProductModelNo", sql.VarChar, req.body.ProductModelNo)
+        .input("ProductSerialNo", sql.VarChar, req.body.ProductSerialNo)
+        .input("ProductHSCode", sql.VarChar, req.body.ProductHSCode)
+        .input("ProductBrandName", sql.VarChar, req.body.ProductBrandName)
+        .input("ProductUnit", sql.VarChar, req.body.ProductUnit)
+        .input("ProductType", sql.VarChar, req.body.ProductType)
+        .input("ProductSize", sql.VarChar, req.body.ProductSize)
+        .input("ProductPhotoIDNo", sql.Numeric, req.body.ProductPhotoIDNo)
+        .input("ProductPhoto", sql.VarChar, url)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .input("ProductQtyOrder", sql.Numeric, req.body.ProductQtyOrder)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRequestDetsSHP]
+SET
+
+[ProductID] =@ProductID
+,[RequestNo] =@RequestNo
+,[DateRequested] =@DateRequested
+,[RequestStatus] =@RequestStatus
+,[ProductBarcode] =@ProductBarcode
+,[ProductDescriptionE] =@ProductDescriptionE
+,[ProductDescriptionA] =@ProductDescriptionA
+,[ProductModelNo] =@ProductModelNo
+,[ProductSerialNo] =@ProductSerialNo
+,[ProductHSCode] =@ProductHSCode
+,[ProductBrandName] =@ProductBrandName
+,[ProductUnit] =@ProductUnit
+,[ProductType] =@ProductType
+,[ProductSize] =@ProductSize
+,[ProductPhotoIDNo] =@ProductPhotoIDNo
+,[ProductPhoto] =@ProductPhoto
+,[ShipmentGLNNo] =@ShipmentGLNNo
+,[ProductQtyOrder] =@ProductQtyOrder
+
+WHERE tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -3731,6 +3873,32 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RequestDetsSHP_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRequestDetsSHP where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RequestDetsSHP_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRequestDetsSHP`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -4219,6 +4387,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRequestDets where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RequestDetsSHP_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRequestDetsSHP where tblRequestMasterID='${tblRequestMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
