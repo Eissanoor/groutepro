@@ -124,7 +124,7 @@ router.get("/PDFsSummary_GET_BYID/:tblPDFsID", FATSDB.PDFsSummary_GET_BYID)
 router.get("/QRCodeLogin_GET_BYID/:tblQRCodeLoginID", FATSDB.QRCodeLogin_GET_BYID)
 router.get("/QRCodeLogin_GET_LIST", FATSDB.QRCodeLogin_GET_LIST)
 router.get("/RequestDets_GET_LIST", FATSDB.RequestDets_GET_LIST)
-router.get("/RequestDets_GET_BYID/:ProductID",FATSDB.RequestDets_GET_BYID)
+router.get("/RequestDets_GET_BYID/:tblRequestMasterID",FATSDB.RequestDets_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -155,7 +155,7 @@ router.put("/PDFsSalesReturnPrint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesRet
 router.put("/PDFsSalesReturnReprint_Put/:tblPDFsID", cpUpload, FATSDB.PDFsSalesReturnReprint_Put)
 router.put("/PDFsSummary_Put/:tblPDFsID", FATSDB.PDFsSummary_Put)
 router.put("/QRCodeLogin_Put/:tblQRCodeLoginID", FATSDB.QRCodeLogin_Put)
-router.put("/RequestDets_Put/:ProductID", cpUpload, FATSDB.RequestDets_Put)
+router.put("/RequestDets_Put/:tblRequestMasterID", cpUpload, FATSDB.RequestDets_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -187,6 +187,6 @@ router.delete("/PDFsSalesReturnPrint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesRe
 router.delete("/PDFsSalesReturnReprint_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSalesReturnReprint_DELETE_BYID)
 router.delete("/PDFsSummary_DELETE_BYID/:tblPDFsID", FATSDB.PDFsSummary_DELETE_BYID)
 router.delete("/QRCodeLogin_DELETE_BYID/:tblQRCodeLoginID", FATSDB.QRCodeLogin_DELETE_BYID)
-router.delete("/RequestDets_DELETE_BYID/:ProductID",FATSDB.RequestDets_DELETE_BYID)
+router.delete("/RequestDets_DELETE_BYID/:tblRequestMasterID",FATSDB.RequestDets_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;

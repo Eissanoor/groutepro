@@ -2919,7 +2919,7 @@ WHERE tblQRCodeLoginID='${tblQRCodeLoginID}'`
 
       const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
       let pool = await sql.connect(config);
-      const ProductID = req.params.ProductID;
+      const tblRequestMasterID = req.params.tblRequestMasterID;
       let data = await pool
         .request()
 
@@ -2965,7 +2965,7 @@ SET
 ,[ShipmentGLNNo] =@ShipmentGLNNo
 ,[ProductQtyOrder] =@ProductQtyOrder
 
-WHERE ProductID='${ProductID}'`
+WHERE tblRequestMasterID='${tblRequestMasterID}'`
         );
       res.status(201).json(data);
     } catch (error) {
@@ -3718,12 +3718,12 @@ WHERE ProductID='${ProductID}'`
   async RequestDets_GET_BYID(req, res, next) {
     try {
       let pool = await sql.connect(config);
-      const ProductID = req.params.ProductID;
+      const tblRequestMasterID = req.params.tblRequestMasterID;
       let data = await pool
         .request()
 
         .query(
-          `select * from tblRequestDets where ProductID='${ProductID}'`
+          `select * from tblRequestDets where tblRequestMasterID='${tblRequestMasterID}'`
         );
       res.status(200).json(data);
     } catch (error) {
@@ -4213,12 +4213,12 @@ async apt_DELETE_BYID(req, res, next) {
    async RequestDets_DELETE_BYID(req, res, next) {
     try {
       let pool = await sql.connect(config);
-      const ProductID = req.params.ProductID;
+      const tblRequestMasterID = req.params.tblRequestMasterID;
       let data = await pool
         .request()
 
         .query(
-          `delete from tblRequestDets where ProductID='${ProductID}'`
+          `delete from tblRequestDets where tblRequestMasterID='${tblRequestMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
