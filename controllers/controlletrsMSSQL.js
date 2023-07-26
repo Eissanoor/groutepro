@@ -1947,12 +1947,12 @@ async UserLoginAuth(req, res, next) {
       
         
         .input("RouteIDNo", sql.VarChar, req.body.RouteIDNo)
-        .input("RouteRegion", sql.DateTime, req.body.RouteRegion)
+        .input("RouteRegion", sql.VarChar, req.body.RouteRegion)
         .input("RouteCity", sql.VarChar, req.body.RouteCity)
         .input("RouteArea", sql.VarChar, req.body.RouteArea)
         .input("RouteAreaGPS", sql.VarChar, req.body.RouteAreaGPS)
-        .input("RouteGeoFenceGPS", sql.Numeric, req.body.RouteGeoFenceGPS)
-        .input("RouteInUsed", sql.VarChar, req.body.RouteInUsed)
+        .input("RouteGeoFenceGPS", sql.VarChar, req.body.RouteGeoFenceGPS)
+        .input("RouteInUsed", sql.TinyInt, req.body.RouteInUsed)
         .query(
           ` 
             INSERT INTO [dbo].[tblRouteMasterData]
@@ -3429,13 +3429,13 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       let data = await pool
         .request()
 
-             .input("RouteIDNo", sql.VarChar, req.body.RouteIDNo)
-        .input("RouteRegion", sql.DateTime, req.body.RouteRegion)
+              .input("RouteIDNo", sql.VarChar, req.body.RouteIDNo)
+        .input("RouteRegion", sql.VarChar, req.body.RouteRegion)
         .input("RouteCity", sql.VarChar, req.body.RouteCity)
         .input("RouteArea", sql.VarChar, req.body.RouteArea)
         .input("RouteAreaGPS", sql.VarChar, req.body.RouteAreaGPS)
-        .input("RouteGeoFenceGPS", sql.Numeric, req.body.RouteGeoFenceGPS)
-        .input("RouteInUsed", sql.VarChar, req.body.RouteInUsed)
+        .input("RouteGeoFenceGPS", sql.VarChar, req.body.RouteGeoFenceGPS)
+        .input("RouteInUsed", sql.TinyInt, req.body.RouteInUsed)
         .query(
           ` 
           UPDATE [dbo].[tblRouteMasterData]
