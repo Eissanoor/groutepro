@@ -1882,6 +1882,59 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteDetails_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SOItemCode", sql.VarChar, req.body.SOItemCode)
+        .input("SOItemDescription", sql.VarChar, req.body.SOItemDescription)
+        .input("SOOrderQty", sql.Numeric, req.body.SOOrderQty)
+        .input("SOItemUnit", sql.VarChar, req.body.SOItemUnit)
+        .input("SOItemPrice", sql.Float, req.body.SOItemPrice)
+        .input("SOPickedQty", sql.Numeric, req.body.SOPickedQty)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRouteDetails]
+                      
+                      ( 
+                         [RPDocNo]
+                        ,[DateTimeCreated]
+                         ,[SORefCodeNo]
+                         ,[SOItemCode]
+                        ,[SOItemDescription]
+                         ,[SOOrderQty]
+                        ,[SOItemUnit]
+                         ,[SOItemPrice]
+                        ,[SOPickedQty]
+                        
+                        
+                       
+                        )
+                 VALUES
+                       (
+                       @RequestNo
+                       ,@DateRequested
+                       ,@RequestStatus
+                       ,@FEName
+                       ,@FECountryOrigin
+                       ,@MemberID
+                       ,@ShipmentGLNNo
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3279,6 +3332,47 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteDetails_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+            .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SOItemCode", sql.VarChar, req.body.SOItemCode)
+        .input("SOItemDescription", sql.VarChar, req.body.SOItemDescription)
+        .input("SOOrderQty", sql.Numeric, req.body.SOOrderQty)
+        .input("SOItemUnit", sql.VarChar, req.body.SOItemUnit)
+        .input("SOItemPrice", sql.Float, req.body.SOItemPrice)
+        .input("SOPickedQty", sql.Numeric, req.body.SOPickedQty)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRouteDetails]
+SET
+
+
+[RPDocNo] =@RPDocNo
+,[DateTimeCreated] =@DateTimeCreated
+,[SORefCodeNo] =@SORefCodeNo
+,[SOItemCode] =@SOItemCode
+,[SOItemDescription] =@SOItemDescription
+,[SOOrderQty] =@SOOrderQty
+,[SOItemUnit] =@SOItemUnit
+,[SOItemPrice] =@SOItemPrice
+,[SOPickedQty] =@SOPickedQty
+
+WHERE tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -4115,6 +4209,32 @@ WHERE tblRequestMasterID='${tblRequestMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RouteDetails_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRouteDetails`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RouteDetails_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRouteDetails where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -4654,6 +4774,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRequestMasterSHP where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RouteDetails_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRouteDetails where tblRouteMasterID='${tblRouteMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
