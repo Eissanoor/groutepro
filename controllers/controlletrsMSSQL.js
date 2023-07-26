@@ -1937,6 +1937,52 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterData_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RouteIDNo", sql.VarChar, req.body.RouteIDNo)
+        .input("RouteRegion", sql.DateTime, req.body.RouteRegion)
+        .input("RouteCity", sql.VarChar, req.body.RouteCity)
+        .input("RouteArea", sql.VarChar, req.body.RouteArea)
+        .input("RouteAreaGPS", sql.VarChar, req.body.RouteAreaGPS)
+        .input("RouteGeoFenceGPS", sql.Numeric, req.body.RouteGeoFenceGPS)
+        .input("RouteInUsed", sql.VarChar, req.body.RouteInUsed)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRouteMasterData]
+                      
+                      ( 
+                         [RouteIDNo]
+                        ,[RouteRegion]
+                         ,[RouteCity]
+                         ,[RouteArea]
+                        ,[RouteAreaGPS]
+                         ,[RouteGeoFenceGPS]
+                        ,[RouteInUsed]
+                        )
+                 VALUES
+                       (
+                       @RouteIDNo
+                       ,@RouteRegion
+                       ,@RouteCity
+                       ,@RouteArea
+                       ,@RouteAreaGPS
+                       ,@RouteGeoFenceGPS
+                       ,@RouteInUsed
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3375,6 +3421,44 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterData_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRouteMasterDataID = req.params.tblRouteMasterDataID;
+      let data = await pool
+        .request()
+
+             .input("RouteIDNo", sql.VarChar, req.body.RouteIDNo)
+        .input("RouteRegion", sql.DateTime, req.body.RouteRegion)
+        .input("RouteCity", sql.VarChar, req.body.RouteCity)
+        .input("RouteArea", sql.VarChar, req.body.RouteArea)
+        .input("RouteAreaGPS", sql.VarChar, req.body.RouteAreaGPS)
+        .input("RouteGeoFenceGPS", sql.Numeric, req.body.RouteGeoFenceGPS)
+        .input("RouteInUsed", sql.VarChar, req.body.RouteInUsed)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRouteMasterData]
+SET
+
+
+[RouteIDNo] =@RouteIDNo
+,[RouteRegion] =@RouteRegion
+,[RouteCity] =@RouteCity
+,[RouteArea] =@RouteArea
+,[RouteAreaGPS] =@RouteAreaGPS
+,[RouteGeoFenceGPS] =@RouteGeoFenceGPS
+,[RouteInUsed] =@RouteInUsed
+
+
+WHERE tblRouteMasterDataID='${tblRouteMasterDataID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -4237,6 +4321,32 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RouteMasterData_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterDataID = req.params.tblRouteMasterDataID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRouteMasterData where tblRouteMasterDataID='${tblRouteMasterDataID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RouteMasterData_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRouteMasterData`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -4793,6 +4903,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRouteDetails where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RouteMasterData_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterDataID = req.params.tblRouteMasterDataID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRouteMasterData where tblRouteMasterDataID='${tblRouteMasterDataID}'`
         );
       console.log(data);
       res.status(200).json(data);
