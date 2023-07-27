@@ -2125,6 +2125,58 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterPlanDownloaded_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SoDate", sql.DateTime, req.body.SoDate)
+        .input("SOAreaAssigned", sql.VarChar, req.body.SOAreaAssigned)
+        .input("SORouteNo", sql.VarChar, req.body.SORouteNo)
+        .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
+        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
+        .input("SOStage", sql.VarChar, req.body.SOStage)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRouteMasterPlanDownloaded]
+                      
+                      ( 
+                         [RPDocNo]
+                        ,[DateTimeCreated]
+                         ,[SORefCodeNo]
+                         ,[SoDate]
+                        ,[SOAreaAssigned]
+                         ,[SORouteNo]
+                        ,[SOShipTo]
+                        ,[SOBillTo]
+                        ,[SOStage]
+                        )
+                 VALUES
+                       (
+                       @RPDocNo
+                       ,@DateTimeCreated
+                       ,@SORefCodeNo
+                       ,@SoDate
+                       ,@SOAreaAssigned
+                       ,@SORouteNo
+                       ,@SOShipTo
+                       ,@SOBillTo
+                       ,@SOStage
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3709,6 +3761,48 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterPlanDownloaded_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+         .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SoDate", sql.DateTime, req.body.SoDate)
+        .input("SOAreaAssigned", sql.VarChar, req.body.SOAreaAssigned)
+        .input("SORouteNo", sql.VarChar, req.body.SORouteNo)
+        .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
+        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
+        .input("SOStage", sql.VarChar, req.body.SOStage)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRouteMasterPlanDownloaded]
+SET
+
+
+[RPDocNo] =@RPDocNo
+,[DateTimeCreated] =@DateTimeCreated
+,[SORefCodeNo] =@SORefCodeNo
+,[SoDate] =@SoDate
+,[SOAreaAssigned] =@SOAreaAssigned
+,[SORouteNo] =@SORouteNo
+,[SOShipTo] =@SOShipTo
+,[SOBillTo] =@SOBillTo
+,[SOStage] =@SOStage
+
+
+WHERE tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -4649,6 +4743,32 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RouteMasterPlanDownloaded_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRouteMasterPlanDownloaded`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RouteMasterPlanDownloaded_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRouteMasterPlanDownloaded where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
  
   //-----------------------------------------------------------------------------------
 
@@ -5257,6 +5377,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRouteMasterPlan1 where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RouteMasterPlanDownloaded_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRouteMasterPlanDownloaded where tblRouteMasterID='${tblRouteMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
