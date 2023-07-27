@@ -1983,6 +1983,77 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterPlan_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SoDate", sql.DateTime, req.body.SoDate)
+        .input("SOAreaAssigned", sql.VarChar, req.body.SOAreaAssigned)
+        .input("SORouteNo", sql.VarChar, req.body.SORouteNo)
+        .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
+        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
+        .input("SOStage", sql.VarChar, req.body.SOStage)
+        .input("SOAssignedVanIDNo", sql.VarChar, req.body.SOAssignedVanIDNo)
+        .input("SOAssignedDriverIDNo", sql.VarChar, req.body.SOAssignedDriverIDNo)
+        .input("SOAreaGPS", sql.VarChar, req.body.SOAreaGPS)
+        .input("SOStartTime", sql.DateTime, req.body.SOStartTime)
+        .input("SOEndTime", sql.DateTime, req.body.SOEndTime)
+        .input("SOCustomerNo", sql.VarChar, req.body.SOCustomerNo)
+       
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblRouteMasterPlan]
+                      
+                      ( 
+                         [RPDocNo]
+                        ,[DateTimeCreated]
+                         ,[SORefCodeNo]
+                         ,[SoDate]
+                        ,[SOAreaAssigned]
+                         ,[SORouteNo]
+                        ,[SOShipTo]
+                        ,[SOBillTo]
+                        ,[SOStage]
+                        ,[SOAssignedVanIDNo]
+                        ,[SOAssignedDriverIDNo]
+                        ,[SOAreaGPS]
+                        ,[SOStartTime]
+                        ,[SOEndTime]
+                        ,[SOCustomerNo]
+                        )
+                 VALUES
+                       (
+                       @RPDocNo
+                       ,@DateTimeCreated
+                       ,@SORefCodeNo
+                       ,@SoDate
+                       ,@SOAreaAssigned
+                       ,@SORouteNo
+                       ,@SOShipTo
+                       ,@SOBillTo
+                       ,@SOStage
+                       ,@SOAssignedVanIDNo
+                       ,@SOAssignedDriverIDNo
+                       ,@SOAreaGPS
+                       ,@SOStartTime
+                       ,@SOEndTime
+                       ,@SOCustomerNo
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3459,6 +3530,60 @@ WHERE tblRouteMasterDataID='${tblRouteMasterDataID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async RouteMasterPlan_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+               .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SoDate", sql.DateTime, req.body.SoDate)
+        .input("SOAreaAssigned", sql.VarChar, req.body.SOAreaAssigned)
+        .input("SORouteNo", sql.VarChar, req.body.SORouteNo)
+        .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
+        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
+        .input("SOStage", sql.VarChar, req.body.SOStage)
+        .input("SOAssignedVanIDNo", sql.VarChar, req.body.SOAssignedVanIDNo)
+        .input("SOAssignedDriverIDNo", sql.VarChar, req.body.SOAssignedDriverIDNo)
+        .input("SOAreaGPS", sql.VarChar, req.body.SOAreaGPS)
+        .input("SOStartTime", sql.DateTime, req.body.SOStartTime)
+        .input("SOEndTime", sql.DateTime, req.body.SOEndTime)
+        .input("SOCustomerNo", sql.VarChar, req.body.SOCustomerNo)
+        .query(
+          ` 
+          UPDATE [dbo].[tblRouteMasterPlan]
+SET
+
+
+[RPDocNo] =@RPDocNo
+,[DateTimeCreated] =@DateTimeCreated
+,[SORefCodeNo] =@SORefCodeNo
+,[SoDate] =@SoDate
+,[SOAreaAssigned] =@SOAreaAssigned
+,[SORouteNo] =@SORouteNo
+,[SOShipTo] =@SOShipTo
+,[SOBillTo] =@SOBillTo
+,[SOStage] =@SOStage
+,[SOAssignedVanIDNo] =@SOAssignedVanIDNo
+,[SOAssignedDriverIDNo] =@SOAssignedDriverIDNo
+,[SOAreaGPS] =@SOAreaGPS
+,[SOStartTime] =@SOStartTime
+,[SOEndTime] =@SOEndTime
+,[SOCustomerNo] =@SOCustomerNo
+
+
+WHERE tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-------------------------------------------------------------------------------------
 
   //---------------------------GET--------------------------------------------------------
@@ -4347,6 +4472,33 @@ WHERE tblRouteMasterDataID='${tblRouteMasterDataID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+  async RouteMasterPlan_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblRouteMasterPlan`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async RouteMasterPlan_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblRouteMasterPlan where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ 
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -4920,6 +5072,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblRouteMasterData where tblRouteMasterDataID='${tblRouteMasterDataID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async RouteMasterPlan_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblRouteMasterPlan where tblRouteMasterID='${tblRouteMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);

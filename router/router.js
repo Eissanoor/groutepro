@@ -68,7 +68,8 @@ router.post("/RequestDetsSHP_post", cpUpload, FATSDB.RequestDetsSHP_post)
 router.post("/RequestMaster_post", FATSDB.RequestMaster_post)
 router.post("/RequestMasterSHP_post", FATSDB.RequestMasterSHP_post)
 router.post("/RouteDetails_post", FATSDB.RouteDetails_post)
-router.post("/RouteMasterData_post",FATSDB.RouteMasterData_post)
+router.post("/RouteMasterData_post", FATSDB.RouteMasterData_post)
+router.post("/RouteMasterPlan_post",FATSDB.RouteMasterPlan_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -139,7 +140,9 @@ router.get("/RequestMasterSHP_GET_LIST", FATSDB.RequestMasterSHP_GET_LIST)
 router.get("/RouteDetails_GET_LIST", FATSDB.RouteDetails_GET_LIST)
 router.get("/RouteDetails_GET_BYID/:tblRouteMasterID", FATSDB.RouteDetails_GET_BYID)
 router.get("/RouteMasterData_GET_BYID/:tblRouteMasterDataID", FATSDB.RouteMasterData_GET_BYID)
-router.get("/RouteMasterData_GET_LIST",FATSDB.RouteMasterData_GET_LIST)
+router.get("/RouteMasterData_GET_LIST", FATSDB.RouteMasterData_GET_LIST)
+router.get("/RouteMasterPlan_GET_LIST", FATSDB.RouteMasterPlan_GET_LIST)
+router.get("/RouteMasterPlan_GET_BYID/:tblRouteMasterID",FATSDB.RouteMasterPlan_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -175,7 +178,8 @@ router.put("/RequestDetsSHP_Put/:tblRequestMasterID", cpUpload, FATSDB.RequestDe
 router.put("/RequestMaster_Put/:tblRequestMasterID", FATSDB.RequestMaster_Put)
 router.put("/RequestMasterSHP_Put/:tblRequestMasterID", FATSDB.RequestMasterSHP_Put)
 router.put("/RouteDetails_Put/:tblRouteMasterID", FATSDB.RouteDetails_Put)
-router.put("/RouteMasterData_Put/:tblRouteMasterDataID",FATSDB.RouteMasterData_Put)
+router.put("/RouteMasterData_Put/:tblRouteMasterDataID", FATSDB.RouteMasterData_Put)
+router.put("/RouteMasterPlan_Put/:tblRouteMasterID",FATSDB.RouteMasterPlan_Put)
 //--------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API-----------------------------------------
@@ -212,6 +216,7 @@ router.delete("/RequestDetsSHP_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestD
 router.delete("/RequestMaster_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestMaster_DELETE_BYID)
 router.delete("/RequestMasterSHP_DELETE_BYID/:tblRequestMasterID", FATSDB.RequestMasterSHP_DELETE_BYID)
 router.delete("/RouteDetails_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteDetails_DELETE_BYID)
-router.delete("/RouteMasterData_DELETE_BYID/:tblRouteMasterDataID",FATSDB.RouteMasterData_DELETE_BYID)
+router.delete("/RouteMasterData_DELETE_BYID/:tblRouteMasterDataID", FATSDB.RouteMasterData_DELETE_BYID)
+router.delete("/RouteMasterPlan_DELETE_BYID/:tblRouteMasterID",FATSDB.RouteMasterPlan_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
