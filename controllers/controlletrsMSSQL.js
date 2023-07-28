@@ -2475,7 +2475,7 @@ async UserLoginAuth(req, res, next) {
                         ,[lineId]
                         ,[seq]
                         ,[source]
-                        ,[targetMelId]
+                       
                         ,[entryLevel]
                         ,[BarCode]
                         ,[roiId]
