@@ -2538,7 +2538,7 @@ async UserLoginAuth(req, res, next) {
                        ,@mcaId
                        ,@partType
 
-                       , @gprId
+                       ,@gprId
                        ,@siteId
                        ,@contactId
                        ,@billToFreeText
@@ -2556,7 +2556,7 @@ async UserLoginAuth(req, res, next) {
                        ,@netPriceAfc
                        ,@currApproxAlc
 
-                       , @proposedAmountAlc
+                       ,@proposedAmountAlc
                        ,@proposedamountAfc
                        ,@rem
                        ,@ertId
@@ -2592,7 +2592,7 @@ async UserLoginAuth(req, res, next) {
                        ,@itemAddonsAfc
                        ,@itemNetPriceAlc
 
-                       , @itemNetPriceAfc
+                       ,@itemNetPriceAfc
                        ,@warantyPeriod
                        ,@warantyPeriodUom
                        ,@lineStatus
