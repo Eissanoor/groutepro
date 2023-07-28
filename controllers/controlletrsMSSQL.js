@@ -2326,6 +2326,299 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesInvoiceDets_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("id", sql.VarChar, req.body.id)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("melId", sql.VarChar, req.body.melId)
+        .input("floId", sql.VarChar, req.body.floId)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("refCode", sql.VarChar, req.body.refCode)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("dateDhi", sql.VarChar, req.body.dateDhi)
+        .input("globalStatus", sql.VarChar, req.body.globalStatus)
+        .input("type", sql.VarChar, req.body.type)
+        .input("header", sql.NVarChar, req.body.header)
+        .input("targetMelId", sql.VarChar, req.body.targetMelId)
+        .input("targetTrxHeaderId", sql.VarChar, req.body.targetTrxHeaderId)
+        .input("targetTrxCode", sql.VarChar, req.body.targetTrxCode)
+        .input("maeId", sql.VarChar, req.body.maeId)
+        .input("mcaId", sql.VarChar, req.body.mcaId)
+        .input("partType", sql.Real, req.body.partType)
+
+        .input("gprId", sql.VarChar, req.body.gprId)
+        .input("siteId", sql.VarChar, req.body.siteId)
+        .input("contactId", sql.VarChar, req.body.contactId)
+        .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
+        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
+        .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
+        .input("crrId", sql.VarChar, req.body.crrId)
+        .input("fcuId", sql.VarChar, req.body.fcuId)
+        .input("exchngRate", sql.VarChar, req.body.exchngRate)
+        .input("itemsTotalAlc", sql.VarChar, req.body.itemsTotalAlc)
+        .input("addonsTotalAlc", sql.VarChar, req.body.addonsTotalAlc)
+        .input("addonsTotalAfc", sql.VarChar, req.body.addonsTotalAfc)
+        .input("totalDiscountsAlc", sql.VarChar, req.body.totalDiscountsAlc)
+        .input("totalDiscountsAfc", sql.VarChar, req.body.totalDiscountsAfc)
+        .input("netPriceAlc", sql.VarChar, req.body.netPriceAlc)
+        .input("netPriceAfc", sql.VarChar, req.body.netPriceAfc)
+        .input("currApproxAlc", sql.VarChar, req.body.currApproxAlc)
+
+        .input("proposedAmountAlc", sql.VarChar, req.body.proposedAmountAlc)
+        .input("proposedamountAfc", sql.VarChar, req.body.proposedamountAfc)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("ertId", sql.VarChar, req.body.ertId)
+        .input("shipToFreeText", sql.VarChar, req.body.shipToFreeText)
+        .input("isOnAccount", sql.VarChar, req.body.isOnAccount)
+        .input("taxExemptionPerc", sql.VarChar, req.body.taxExemptionPerc)
+        .input("lines", sql.VarChar, req.body.lines)
+        .input("lineId", sql.VarChar, req.body.lineId)
+        .input("seq", sql.VarChar, req.body.seq)
+        .input("source", sql.VarChar, req.body.source)
+        .input("entryLevel", sql.VarChar, req.body.entryLevel)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("roiId", sql.VarChar, req.body.roiId)
+        .input("itemType", sql.VarChar, req.body.itemType)
+        .input("itemId", sql.VarChar, req.body.itemId)
+        .input("itemScn", sql.VarChar, req.body.itemScn)
+
+        .input("qty", sql.Numeric, req.body.qty)
+        .input("freeQtyManual", sql.VarChar, req.body.freeQtyManual)
+        .input("imuId", sql.VarChar, req.body.imuId)
+        .input("baseImuId", sql.VarChar, req.body.baseImuId)
+        .input("baseUomQty", sql.VarChar, req.body.baseUomQty)
+        .input("unitPriceAlc", sql.Real, req.body.unitPriceAlc)
+        .input("unitPriceAfc", sql.Real, req.body.unitPriceAfc)
+        .input("totPriceAlc", sql.Real, req.body.totPriceAlc)
+        .input("totPriceAfc", sql.Real, req.body.totPriceAfc)
+        .input("priceListUnitPriceAlc", sql.Real, req.body.priceListUnitPriceAlc)
+        .input("priceListUnitPriceAfc", sql.Real, req.body.priceListUnitPriceAfc)
+        .input("priceSource", sql.VarChar, req.body.priceSource)
+        .input("discountType", sql.VarChar, req.body.discountType)
+        .input("discountPerc", sql.VarChar, req.body.discountPerc)
+        .input("itemAddonsAlc", sql.VarChar, req.body.itemAddonsAlc)
+        .input("itemAddonsAfc", sql.VarChar, req.body.itemAddonsAfc)
+        .input("itemNetPriceAlc", sql.Real, req.body.itemNetPriceAlc)
+
+        .input("itemNetPriceAfc", sql.Real, req.body.itemNetPriceAfc)
+        .input("warantyPeriod", sql.VarChar, req.body.warantyPeriod)
+        .input("warantyPeriodUom", sql.VarChar, req.body.warantyPeriodUom)
+        .input("lineStatus", sql.NVarChar, req.body.lineStatus)
+        .input("itemsDiscAlc", sql.Real, req.body.itemsDiscAlc)
+        .input("itemsDiscAfc", sql.Real, req.body.itemsDiscAfc)
+        .input("actualCostAlc", sql.Real, req.body.actualCostAlc)
+        .input("actualCostAfc", sql.Real, req.body.actualCostAfc)
+        .input("balanceQty", sql.Numeric, req.body.balanceQty)
+        .input("longDesc", sql.NVarChar, req.body.longDesc)
+        .input("taxAlc", sql.Numeric, req.body.taxAlc)
+        .input("taxAfc", sql.Numeric, req.body.taxAfc)
+        .input("maxDiscPer", sql.Numeric, req.body.maxDiscPer)
+        .input("allowedDiscPerc", sql.VarChar, req.body.allowedDiscPerc)
+        .input("allowedDiscAlc", sql.VarChar, req.body.allowedDiscAlc)
+        .input("allowedDiscAfc", sql.VarChar, req.body.allowedDiscAfc)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesInvoiceDets]
+                      
+                      ( 
+                         [id]
+                        ,[fogId]
+                         ,[melId]
+                         ,[floId]
+                        ,[code]
+                         ,[refCode]
+                        ,[dateDgr]
+                        ,[dateDhi]
+                        ,[globalStatus]
+                        ,[type]
+                        ,[header]
+                        ,[targetMelId]
+                        ,[targetTrxHeaderId]
+                        ,[targetTrxCode]
+                        ,[maeId]
+                        ,[mcaId]
+                         ,[partType]
+
+                         ,[gprId]
+                        ,[siteId]
+                         ,[contactId]
+                         ,[billToFreeText]
+                        ,[PaymentTerms]
+                         ,[creditPeriodDays]
+                        ,[crrId]
+                        ,[fcuId]
+                        ,[exchngRate]
+                        ,[itemsTotalAlc]
+                        ,[addonsTotalAlc]
+                        ,[addonsTotalAfc]
+                        ,[totalDiscountsAlc]
+                        ,[totalDiscountsAfc]
+                        ,[netPriceAlc]
+                        ,[netPriceAfc]
+                         ,[currApproxAlc]
+
+                         ,[proposedAmountAlc]
+                        ,[proposedamountAfc]
+                         ,[rem]
+                         ,[ertId]
+                        ,[shipToFreeText]
+                         ,[isOnAccount]
+                        ,[taxExemptionPerc]
+                        ,[lines]
+                        ,[lineId]
+                        ,[seq]
+                        ,[source]
+                        ,[targetMelId]
+                        ,[entryLevel]
+                        ,[BarCode]
+                        ,[roiId]
+                        ,[itemType]
+                         ,[itemId]
+
+                         ,[itemScn]
+                        ,[qty]
+                         ,[freeQtyManual]
+                         ,[imuId]
+                        ,[baseImuId]
+                         ,[baseUomQty]
+                        ,[unitPriceAlc]
+                        ,[unitPriceAfc]
+                        ,[totPriceAlc]
+                        ,[totPriceAfc]
+                        ,[priceListUnitPriceAlc]
+                        ,[priceListUnitPriceAfc]
+                        ,[priceSource]
+                        ,[discountType]
+                        ,[discountPerc]
+                        ,[itemAddonsAlc]
+                         ,[itemAddonsAfc]
+
+                          ,[itemNetPriceAlc]
+                        ,[itemNetPriceAfc]
+                         ,[warantyPeriod]
+                         ,[warantyPeriodUom]
+                        ,[lineStatus]
+                         ,[itemsDiscAlc]
+                        ,[itemsDiscAfc]
+                        ,[actualCostAlc]
+                        ,[actualCostAfc]
+                        ,[balanceQty]
+                        ,[longDesc]
+                        ,[taxAlc]
+                        ,[taxAfc]
+                        ,[maxDiscPer]
+                        ,[allowedDiscPerc]
+                        ,[allowedDiscAlc]
+                         ,[allowedDiscAfc]
+                        )
+                 VALUES
+                       (
+                       @id
+                       ,@fogId
+                       ,@melId
+                       ,@floId
+                       ,@code
+                       ,@refCode
+                       ,@dateDgr
+                       ,@dateDhi
+                       ,@globalStatus
+                       ,@type
+                       ,@header
+                       ,@targetMelId
+                       ,@targetTrxHeaderId
+                       ,@targetTrxCode
+                       ,@maeId
+                       ,@mcaId
+                       ,@partType
+
+                       , @gprId
+                       ,@siteId
+                       ,@contactId
+                       ,@billToFreeText
+                       ,@PaymentTerms
+                       ,@creditPeriodDays
+                       ,@crrId
+                       ,@fcuId
+                       ,@exchngRate
+                       ,@itemsTotalAlc
+                       ,@addonsTotalAlc
+                       ,@addonsTotalAfc
+                       ,@totalDiscountsAlc
+                       ,@totalDiscountsAfc
+                       ,@netPriceAlc
+                       ,@netPriceAfc
+                       ,@currApproxAlc
+
+                       , @proposedAmountAlc
+                       ,@proposedamountAfc
+                       ,@rem
+                       ,@ertId
+                       ,@shipToFreeText
+                       ,@isOnAccount
+                       ,@taxExemptionPerc
+                       ,@lines
+                       ,@lineId
+                       ,@seq
+                       ,@source
+                       ,@entryLevel
+                       ,@BarCode
+                       ,@roiId
+                       ,@itemType
+                       ,@itemId
+                       ,@itemScn
+
+                        ,@qty
+                       ,@freeQtyManual
+                       ,@imuId
+                       ,@baseImuId
+                       ,@baseUomQty
+                       ,@unitPriceAlc
+                       ,@unitPriceAfc
+                       ,@totPriceAlc
+                       ,@totPriceAfc
+                       ,@priceListUnitPriceAlc
+                       ,@priceListUnitPriceAfc
+                       ,@priceSource
+                       ,@discountType
+                       ,@discountPerc
+                       ,@itemAddonsAlc
+                       ,@itemAddonsAfc
+                       ,@itemNetPriceAlc
+
+                       , @itemNetPriceAfc
+                       ,@warantyPeriod
+                       ,@warantyPeriodUom
+                       ,@lineStatus
+                       ,@itemsDiscAlc
+                       ,@itemsDiscAfc
+                       ,@actualCostAlc
+                       ,@actualCostAfc
+                       ,@balanceQty
+                       ,@longDesc
+                       ,@taxAlc
+                       ,@taxAfc
+                       ,@maxDiscPer
+                       ,@allowedDiscPerc
+                       ,@allowedDiscAlc
+                       ,@allowedDiscAfc
+                       ,@accountBalanceAmount
+
+                  
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -2410,7 +2703,6 @@ WHERE APTBckgrdID='${APTBckgrdID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
-
   async contact_Put(req, res, next) {
     try {
         const file = req.files["Photo"];
@@ -4066,6 +4358,207 @@ WHERE tblSalesCustomersID='${tblSalesCustomersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesInvoiceDets_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .input("id", sql.VarChar, req.body.id)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("melId", sql.VarChar, req.body.melId)
+        .input("floId", sql.VarChar, req.body.floId)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("refCode", sql.VarChar, req.body.refCode)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("dateDhi", sql.VarChar, req.body.dateDhi)
+        .input("globalStatus", sql.VarChar, req.body.globalStatus)
+        .input("type", sql.VarChar, req.body.type)
+        .input("header", sql.NVarChar, req.body.header)
+        .input("targetMelId", sql.VarChar, req.body.targetMelId)
+        .input("targetTrxHeaderId", sql.VarChar, req.body.targetTrxHeaderId)
+        .input("targetTrxCode", sql.VarChar, req.body.targetTrxCode)
+        .input("maeId", sql.VarChar, req.body.maeId)
+        .input("mcaId", sql.VarChar, req.body.mcaId)
+        .input("partType", sql.Real, req.body.partType)
+
+        .input("gprId", sql.VarChar, req.body.gprId)
+        .input("siteId", sql.VarChar, req.body.siteId)
+        .input("contactId", sql.VarChar, req.body.contactId)
+        .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
+        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
+        .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
+        .input("crrId", sql.VarChar, req.body.crrId)
+        .input("fcuId", sql.VarChar, req.body.fcuId)
+        .input("exchngRate", sql.VarChar, req.body.exchngRate)
+        .input("itemsTotalAlc", sql.VarChar, req.body.itemsTotalAlc)
+        .input("addonsTotalAlc", sql.VarChar, req.body.addonsTotalAlc)
+        .input("addonsTotalAfc", sql.VarChar, req.body.addonsTotalAfc)
+        .input("totalDiscountsAlc", sql.VarChar, req.body.totalDiscountsAlc)
+        .input("totalDiscountsAfc", sql.VarChar, req.body.totalDiscountsAfc)
+        .input("netPriceAlc", sql.VarChar, req.body.netPriceAlc)
+        .input("netPriceAfc", sql.VarChar, req.body.netPriceAfc)
+        .input("currApproxAlc", sql.VarChar, req.body.currApproxAlc)
+
+        .input("proposedAmountAlc", sql.VarChar, req.body.proposedAmountAlc)
+        .input("proposedamountAfc", sql.VarChar, req.body.proposedamountAfc)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("ertId", sql.VarChar, req.body.ertId)
+        .input("shipToFreeText", sql.VarChar, req.body.shipToFreeText)
+        .input("isOnAccount", sql.VarChar, req.body.isOnAccount)
+        .input("taxExemptionPerc", sql.VarChar, req.body.taxExemptionPerc)
+        .input("lines", sql.VarChar, req.body.lines)
+        .input("lineId", sql.VarChar, req.body.lineId)
+        .input("seq", sql.VarChar, req.body.seq)
+        .input("source", sql.VarChar, req.body.source)
+        .input("entryLevel", sql.VarChar, req.body.entryLevel)
+        .input("BarCode", sql.VarChar, req.body.BarCode)
+        .input("roiId", sql.VarChar, req.body.roiId)
+        .input("itemType", sql.VarChar, req.body.itemType)
+        .input("itemId", sql.VarChar, req.body.itemId)
+        .input("itemScn", sql.VarChar, req.body.itemScn)
+
+        .input("qty", sql.Numeric, req.body.qty)
+        .input("freeQtyManual", sql.VarChar, req.body.freeQtyManual)
+        .input("imuId", sql.VarChar, req.body.imuId)
+        .input("baseImuId", sql.VarChar, req.body.baseImuId)
+        .input("baseUomQty", sql.VarChar, req.body.baseUomQty)
+        .input("unitPriceAlc", sql.Real, req.body.unitPriceAlc)
+        .input("unitPriceAfc", sql.Real, req.body.unitPriceAfc)
+        .input("totPriceAlc", sql.Real, req.body.totPriceAlc)
+        .input("totPriceAfc", sql.Real, req.body.totPriceAfc)
+        .input("priceListUnitPriceAlc", sql.Real, req.body.priceListUnitPriceAlc)
+        .input("priceListUnitPriceAfc", sql.Real, req.body.priceListUnitPriceAfc)
+        .input("priceSource", sql.VarChar, req.body.priceSource)
+        .input("discountType", sql.VarChar, req.body.discountType)
+        .input("discountPerc", sql.VarChar, req.body.discountPerc)
+        .input("itemAddonsAlc", sql.VarChar, req.body.itemAddonsAlc)
+        .input("itemAddonsAfc", sql.VarChar, req.body.itemAddonsAfc)
+        .input("itemNetPriceAlc", sql.Real, req.body.itemNetPriceAlc)
+
+        .input("itemNetPriceAfc", sql.Real, req.body.itemNetPriceAfc)
+        .input("warantyPeriod", sql.VarChar, req.body.warantyPeriod)
+        .input("warantyPeriodUom", sql.VarChar, req.body.warantyPeriodUom)
+        .input("lineStatus", sql.NVarChar, req.body.lineStatus)
+        .input("itemsDiscAlc", sql.Real, req.body.itemsDiscAlc)
+        .input("itemsDiscAfc", sql.Real, req.body.itemsDiscAfc)
+        .input("actualCostAlc", sql.Real, req.body.actualCostAlc)
+        .input("actualCostAfc", sql.Real, req.body.actualCostAfc)
+        .input("balanceQty", sql.Numeric, req.body.balanceQty)
+        .input("longDesc", sql.NVarChar, req.body.longDesc)
+        .input("taxAlc", sql.Numeric, req.body.taxAlc)
+        .input("taxAfc", sql.Numeric, req.body.taxAfc)
+        .input("maxDiscPer", sql.Numeric, req.body.maxDiscPer)
+        .input("allowedDiscPerc", sql.VarChar, req.body.allowedDiscPerc)
+        .input("allowedDiscAlc", sql.VarChar, req.body.allowedDiscAlc)
+        .input("allowedDiscAfc", sql.VarChar, req.body.allowedDiscAfc)
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesInvoiceDets]
+SET
+
+
+[id] =@id
+,[fogId] =@fogId
+,[melId] =@melId
+,[floId] =@floId
+,[code] =@code
+,[refCode] =@refCode
+,[dateDgr] =@dateDgr
+,[dateDhi] =@dateDhi
+,[globalStatus] =@globalStatus
+,[type] =@type
+,[header] =@header
+,[targetMelId] =@targetMelId
+,[targetTrxHeaderId] =@targetTrxHeaderId
+,[targetTrxCode] =@targetTrxCode
+,[maeId] =@maeId
+,[mcaId] =@mcaId
+,[partType] =@partType
+
+,[gprId] =@gprId
+,[siteId] =@siteId
+,[contactId] =@contactId
+,[billToFreeText] =@billToFreeText
+,[PaymentTerms] =@PaymentTerms
+,[creditPeriodDays] =@creditPeriodDays
+,[crrId] =@crrId
+,[fcuId] =@fcuId
+,[exchngRate] =@exchngRate
+,[itemsTotalAlc] =@itemsTotalAlc
+,[addonsTotalAlc] =@addonsTotalAlc
+,[addonsTotalAfc] =@addonsTotalAfc
+,[totalDiscountsAlc] =@totalDiscountsAlc
+,[totalDiscountsAfc] =@totalDiscountsAfc
+,[netPriceAlc] =@netPriceAlc
+,[netPriceAfc] =@netPriceAfc
+,[currApproxAlc] =@currApproxAlc
+
+,[proposedAmountAlc] =@proposedAmountAlc
+,[proposedamountAfc] =@proposedamountAfc
+,[rem] =@rem
+,[ertId] =@ertId
+,[shipToFreeText] =@shipToFreeText
+,[isOnAccount] =@isOnAccount
+,[taxExemptionPerc] =@taxExemptionPerc
+,[lines] =@lines
+,[lineId] =@lineId
+,[seq] =@seq
+,[source] =@source
+,[entryLevel] =@entryLevel
+,[BarCode] =@BarCode
+,[roiId] =@roiId
+,[itemType] =@itemType
+,[itemId] =@itemId
+,[itemScn] =@itemScn
+
+,[qty] =@qty
+,[freeQtyManual] =@freeQtyManual
+,[imuId] =@imuId
+,[baseImuId] =@baseImuId
+,[baseUomQty] =@baseUomQty
+,[unitPriceAlc] =@unitPriceAlc
+,[unitPriceAfc] =@unitPriceAfc
+,[totPriceAlc] =@totPriceAlc
+,[totPriceAfc] =@totPriceAfc
+,[priceListUnitPriceAlc] =@priceListUnitPriceAlc
+,[priceListUnitPriceAfc] =@priceListUnitPriceAfc
+,[priceSource] =@priceSource
+,[discountType] =@discountType
+,[discountPerc] =@discountPerc
+,[itemAddonsAlc] =@itemAddonsAlc
+,[itemAddonsAfc] =@itemAddonsAfc
+,[itemNetPriceAlc] =@itemNetPriceAlc
+
+,[itemNetPriceAfc] =@itemNetPriceAfc
+,[warantyPeriod] =@warantyPeriod
+,[warantyPeriodUom] =@warantyPeriodUom
+,[lineStatus] =@lineStatus
+,[itemsDiscAlc] =@itemsDiscAlc
+,[itemsDiscAfc] =@itemsDiscAfc
+,[actualCostAlc] =@actualCostAlc
+,[actualCostAfc] =@actualCostAfc
+,[balanceQty] =@balanceQty
+,[longDesc] =@longDesc
+,[taxAlc] =@taxAlc
+,[taxAfc] =@taxAfc
+,[maxDiscPer] =@maxDiscPer
+,[allowedDiscPerc] =@allowedDiscPerc
+,[allowedDiscAlc] =@allowedDiscAlc
+,[allowedDiscAfc] =@allowedDiscAfc
+
+
+
+WHERE tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -5084,6 +5577,32 @@ WHERE tblSalesCustomersID='${tblSalesCustomersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesInvoiceDets_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesInvoiceDets where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesInvoiceDets_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesInvoiceDets`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -5742,6 +6261,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesCustomersReturn where tblSalesCustomersID='${tblSalesCustomersID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesInvoiceDets_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesInvoiceDets where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
         );
       console.log(data);
       res.status(200).json(data);
