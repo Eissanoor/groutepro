@@ -2608,7 +2608,7 @@ async UserLoginAuth(req, res, next) {
                        ,@allowedDiscPerc
                        ,@allowedDiscAlc
                        ,@allowedDiscAfc
-                       ,@accountBalanceAmount
+                      
 
                   
                        )`
