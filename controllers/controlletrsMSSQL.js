@@ -2351,7 +2351,7 @@ async UserLoginAuth(req, res, next) {
         .input("targetTrxCode", sql.VarChar, req.body.targetTrxCode)
         .input("maeId", sql.VarChar, req.body.maeId)
         .input("mcaId", sql.VarChar, req.body.mcaId)
-        .input("partType", sql.Real, req.body.partType)
+        .input("partType", sql.VarChar, req.body.partType)
 
         .input("gprId", sql.VarChar, req.body.gprId)
         .input("siteId", sql.VarChar, req.body.siteId)
