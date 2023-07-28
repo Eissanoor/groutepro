@@ -72,7 +72,8 @@ router.post("/RouteMasterData_post", FATSDB.RouteMasterData_post)
 router.post("/RouteMasterPlan_post", FATSDB.RouteMasterPlan_post)
 router.post("/RouteMasterPlan1_post", FATSDB.RouteMasterPlan1_post)
 router.post("/RouteMasterPlanDownloaded_post", FATSDB.RouteMasterPlanDownloaded_post)
-router.post("/SalesCustomers_post",FATSDB.SalesCustomers_post)
+router.post("/SalesCustomers_post", FATSDB.SalesCustomers_post)
+router.post("/SalesCustomersReturn_post",FATSDB.SalesCustomersReturn_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -151,7 +152,9 @@ router.get("/RouteMasterPlan1_GET_LIST", FATSDB.RouteMasterPlan1_GET_LIST)
 router.get("/RouteMasterPlanDownloaded_GET_LIST", FATSDB.RouteMasterPlanDownloaded_GET_LIST)
 router.get("/RouteMasterPlanDownloaded_GET_BYID/:tblRouteMasterID", FATSDB.RouteMasterPlanDownloaded_GET_BYID)
 router.get("/SalesCustomers_GET_BYID/:tblSalesCustomersID", FATSDB.SalesCustomers_GET_BYID)
-router.get("/SalesCustomers_GET_LIST",FATSDB.SalesCustomers_GET_LIST)
+router.get("/SalesCustomers_GET_LIST", FATSDB.SalesCustomers_GET_LIST)
+router.get("/SalesCustomersReturn_GET_LIST", FATSDB.SalesCustomersReturn_GET_LIST)
+router.get("/SalesCustomersReturn_GET_BYID/:tblSalesCustomersID",FATSDB.SalesCustomersReturn_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -191,10 +194,11 @@ router.put("/RouteMasterData_Put/:tblRouteMasterDataID", FATSDB.RouteMasterData_
 router.put("/RouteMasterPlan_Put/:tblRouteMasterID", FATSDB.RouteMasterPlan_Put)
 router.put("/RouteMasterPlan1_Put/:tblRouteMasterID",FATSDB.RouteMasterPlan1_Put)
 router.put("/RouteMasterPlanDownloaded_Put/:tblRouteMasterID", FATSDB.RouteMasterPlanDownloaded_Put)
-router.put("/SalesCustomers_Put/:tblSalesCustomersID",FATSDB.SalesCustomers_Put)
-//--------------------------------------------------------------------------------
+router.put("/SalesCustomers_Put/:tblSalesCustomersID", FATSDB.SalesCustomers_Put)
+router.put("/SalesCustomersReturn_Put/:tblSalesCustomersID",FATSDB.SalesCustomersReturn_Put)
+//---------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------DELETE_API-----------------------------------------
+//-----------------------------------DELETE_API------------------------------------------------------------------
 router.delete("/apt_DELETE_BYID/:APTID", FATSDB.apt_DELETE_BYID)
 router.delete("/aptbckgrd_DELETE_BYID/:APTBckgrdID", FATSDB.aptbckgrd_DELETE_BYID)
 router.delete("/contact_DELETE_BYID/:ContactID", FATSDB.contact_DELETE_BYID)
@@ -232,6 +236,7 @@ router.delete("/RouteMasterData_DELETE_BYID/:tblRouteMasterDataID", FATSDB.Route
 router.delete("/RouteMasterPlan_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteMasterPlan_DELETE_BYID)
 router.delete("/RouteMasterPlan1_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteMasterPlan1_DELETE_BYID)
 router.delete("/RouteMasterPlanDownloaded_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteMasterPlanDownloaded_DELETE_BYID)
-router.delete("/SalesCustomers_DELETE_BYID/:tblSalesCustomersID",FATSDB.SalesCustomers_DELETE_BYID)
+router.delete("/SalesCustomers_DELETE_BYID/:tblSalesCustomersID", FATSDB.SalesCustomers_DELETE_BYID)
+router.delete("/SalesCustomersReturn_DELETE_BYID/:tblSalesCustomersID",FATSDB.SalesCustomersReturn_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;

@@ -2250,6 +2250,82 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesCustomersReturn_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("id", sql.VarChar, req.body.id)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("addressLo", sql.NVarChar, req.body.addressLo)
+        .input("addressFo", sql.NVarChar, req.body.addressFo)
+        .input("isActive", sql.VarChar, req.body.isActive)
+        .input("phone", sql.VarChar, req.body.phone)
+        .input("phoneExt", sql.VarChar, req.body.phoneExt)
+        .input("mobile", sql.NVarChar, req.body.mobile)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("email", sql.NVarChar, req.body.email)
+        .input("customerType", sql.VarChar, req.body.customerType)
+        .input("creditPeriod", sql.VarChar, req.body.creditPeriod)
+        .input("accountBalanceAmount", sql.Real, req.body.accountBalanceAmount)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesCustomersReturn]
+                      
+                      ( 
+                         [id]
+                        ,[code]
+                         ,[descLo]
+                         ,[descFo]
+                        ,[shDescLo]
+                         ,[shDescFo]
+                        ,[addressLo]
+                        ,[addressFo]
+                        ,[isActive]
+                        ,[phone]
+                        ,[phoneExt]
+                        ,[mobile]
+                        ,[rem]
+                        ,[email]
+                        ,[customerType]
+                        ,[creditPeriod]
+                         ,[accountBalanceAmount]
+                        )
+                 VALUES
+                       (
+                       @id
+                       ,@code
+                       ,@descLo
+                       ,@descFo
+                       ,@shDescLo
+                       ,@shDescFo
+                       ,@addressLo
+                       ,@addressFo
+                       ,@isActive
+                       ,@phone
+                       ,@phoneExt
+                       ,@mobile
+                       ,@rem
+                       ,@email
+                       ,@customerType
+                       ,@creditPeriod
+                       ,@accountBalanceAmount
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -3932,9 +4008,67 @@ WHERE tblSalesCustomersID='${tblSalesCustomersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
-  //-------------------------------------------------------------------------------------
+    async SalesCustomersReturn_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesCustomersID = req.params.tblSalesCustomersID;
+      let data = await pool
+        .request()
 
-  //---------------------------GET--------------------------------------------------------
+        .input("id", sql.VarChar, req.body.id)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("addressLo", sql.NVarChar, req.body.addressLo)
+        .input("addressFo", sql.NVarChar, req.body.addressFo)
+        .input("isActive", sql.VarChar, req.body.isActive)
+        .input("phone", sql.VarChar, req.body.phone)
+        .input("phoneExt", sql.VarChar, req.body.phoneExt)
+        .input("mobile", sql.NVarChar, req.body.mobile)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("email", sql.NVarChar, req.body.email)
+        .input("customerType", sql.VarChar, req.body.customerType)
+        .input("creditPeriod", sql.VarChar, req.body.creditPeriod)
+        .input("accountBalanceAmount", sql.Real, req.body.accountBalanceAmount)
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesCustomersReturn]
+SET
+
+
+[id] =@id
+,[code] =@code
+,[descLo] =@descLo
+,[descFo] =@descFo
+,[shDescLo] =@shDescLo
+,[shDescFo] =@shDescFo
+,[addressLo] =@addressLo
+,[addressFo] =@addressFo
+,[isActive] =@isActive
+,[phone] =@phone
+,[phoneExt] =@phoneExt
+,[mobile] =@mobile
+,[rem] =@rem
+,[email] =@email
+,[customerType] =@customerType
+,[creditPeriod] =@creditPeriod
+,[accountBalanceAmount] =@accountBalanceAmount
+
+
+WHERE tblSalesCustomersID='${tblSalesCustomersID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  //----------------------------------------------------------------------------------------------------------
+
+  //---------------------------GET----------------------------------------------------------------------------
  
   async apt_GET_LIST(req, res, next) {
     try {
@@ -4924,6 +5058,32 @@ WHERE tblSalesCustomersID='${tblSalesCustomersID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesCustomersReturn_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesCustomersReturn`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesCustomersReturn_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesCustomersID = req.params.tblSalesCustomersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesCustomersReturn where tblSalesCustomersID='${tblSalesCustomersID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -5565,6 +5725,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesCustomers where tblSalesCustomersID='${tblSalesCustomersID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesCustomersReturn_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesCustomersID = req.params.tblSalesCustomersID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesCustomersReturn where tblSalesCustomersID='${tblSalesCustomersID}'`
         );
       console.log(data);
       res.status(200).json(data);
