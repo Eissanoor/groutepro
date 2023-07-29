@@ -165,6 +165,7 @@ router.get("/SalesInvoiceM_GET_LIST", FATSDB.SalesInvoiceM_GET_LIST)
 router.get("/SalesInvoiceM_GET_BYID/:tblSalesInvoiceMID", FATSDB.SalesInvoiceM_GET_BYID)
 router.get("/SalesInvoiceMList_GET_BYID/:tblSalesInvoiceMListID", FATSDB.SalesInvoiceMList_GET_BYID)
 router.get("/SalesInvoiceMList_GET_LIST", FATSDB.SalesInvoiceMList_GET_LIST)
+router.get("/SalesManConfirmedDetsView_GET_BYID/:tblSalesInvoiceMID", FATSDB.SalesManConfirmedDetsView_GET_BYID)
 router.get("/SalesManConfirmedDetsView_GET_LIST", FATSDB.SalesManConfirmedDetsView_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
