@@ -74,7 +74,8 @@ router.post("/RouteMasterPlan1_post", FATSDB.RouteMasterPlan1_post)
 router.post("/RouteMasterPlanDownloaded_post", FATSDB.RouteMasterPlanDownloaded_post)
 router.post("/SalesCustomers_post", FATSDB.SalesCustomers_post)
 router.post("/SalesCustomersReturn_post", FATSDB.SalesCustomersReturn_post)
-router.post("/SalesInvoiceDets_post",FATSDB.SalesInvoiceDets_post)
+router.post("/SalesInvoiceDets_post", FATSDB.SalesInvoiceDets_post)
+router.post("/SalesInvoiceM_post",FATSDB.SalesInvoiceM_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -157,7 +158,9 @@ router.get("/SalesCustomers_GET_LIST", FATSDB.SalesCustomers_GET_LIST)
 router.get("/SalesCustomersReturn_GET_LIST", FATSDB.SalesCustomersReturn_GET_LIST)
 router.get("/SalesCustomersReturn_GET_BYID/:tblSalesCustomersID", FATSDB.SalesCustomersReturn_GET_BYID)
 router.get("/SalesInvoiceDets_GET_BYID/:tblSalesInvoiceMID", FATSDB.SalesInvoiceDets_GET_BYID)
-router.get("/SalesInvoiceDets_GET_LIST",FATSDB.SalesInvoiceDets_GET_LIST)
+router.get("/SalesInvoiceDets_GET_LIST", FATSDB.SalesInvoiceDets_GET_LIST)
+router.get("/SalesInvoiceM_GET_LIST", FATSDB.SalesInvoiceM_GET_LIST)
+router.get("/SalesInvoiceM_GET_BYID/:tblSalesInvoiceMID",FATSDB.SalesInvoiceM_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -199,7 +202,8 @@ router.put("/RouteMasterPlan1_Put/:tblRouteMasterID",FATSDB.RouteMasterPlan1_Put
 router.put("/RouteMasterPlanDownloaded_Put/:tblRouteMasterID", FATSDB.RouteMasterPlanDownloaded_Put)
 router.put("/SalesCustomers_Put/:tblSalesCustomersID", FATSDB.SalesCustomers_Put)
 router.put("/SalesCustomersReturn_Put/:tblSalesCustomersID", FATSDB.SalesCustomersReturn_Put)
-router.put("/SalesInvoiceDets_Put/:tblSalesInvoiceMID",FATSDB.SalesInvoiceDets_Put)
+router.put("/SalesInvoiceDets_Put/:tblSalesInvoiceMID", FATSDB.SalesInvoiceDets_Put)
+router.put("/SalesInvoiceM_Put/:tblSalesInvoiceMID",FATSDB.SalesInvoiceM_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -242,6 +246,7 @@ router.delete("/RouteMasterPlan1_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteMas
 router.delete("/RouteMasterPlanDownloaded_DELETE_BYID/:tblRouteMasterID", FATSDB.RouteMasterPlanDownloaded_DELETE_BYID)
 router.delete("/SalesCustomers_DELETE_BYID/:tblSalesCustomersID", FATSDB.SalesCustomers_DELETE_BYID)
 router.delete("/SalesCustomersReturn_DELETE_BYID/:tblSalesCustomersID", FATSDB.SalesCustomersReturn_DELETE_BYID)
-router.delete("/SalesInvoiceDets_DELETE_BYID/:tblSalesInvoiceMID",FATSDB.SalesInvoiceDets_DELETE_BYID)
+router.delete("/SalesInvoiceDets_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesInvoiceDets_DELETE_BYID)
+router.delete("/SalesInvoiceM_DELETE_BYID/:tblSalesInvoiceMID",FATSDB.SalesInvoiceM_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
