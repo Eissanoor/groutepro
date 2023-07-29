@@ -222,7 +222,8 @@ router.put("/SalesInvoiceM_Put/:tblSalesInvoiceMID", FATSDB.SalesInvoiceM_Put)
 router.put("/SalesInvoiceMList_Put/:tblSalesInvoiceMListID", FATSDB.SalesInvoiceMList_Put)
 router.put("/SalesManConfirmedDetsView_Put/:tblSalesInvoiceMID", FATSDB.SalesManConfirmedDetsView_Put)
 router.put("/SalesManConfirmedOrderDets_Put/:tblRouteMasterID", FATSDB.SalesManConfirmedOrderDets_Put)
-router.put("/SalesManConfirmedOrderDetsSelected_Put/:tblRouteMasterID",FATSDB.SalesManConfirmedOrderDetsSelected_Put)
+router.put("/SalesManConfirmedOrderDetsSelected_Put/:tblRouteMasterID", FATSDB.SalesManConfirmedOrderDetsSelected_Put)
+router.put("/SalesManConfirmedOrdersM_Put/:tblSalesOrderID",FATSDB.SalesManConfirmedOrdersM_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
