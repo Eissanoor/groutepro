@@ -3487,6 +3487,86 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async SalesOrder_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("BillTo", sql.NVarChar, req.body.BillTo)
+        .input("ShipTo", sql.NVarChar, req.body.ShipTo)
+        .input("PaymentTerms", sql.NVarChar, req.body.PaymentTerms)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("ShiperGLNNo", sql.VarChar, req.body.ShiperGLNNo)
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("SOStatus", sql.TinyInt, req.body.SOStatus)
+        .input("SODateTimeCreated", sql.DateTime, req.body.SODateTimeCreated)
+        .input("SOSalesManIdNo", sql.VarChar, req.body.SOSalesManIdNo)
+        .input("SOTotalAmountNoVat", sql.Real, req.body.SOTotalAmountNoVat)
+        .input("SOTotalAmountWVat", sql.Real, req.body.SOTotalAmountWVat)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalItemFreeQty", sql.Numeric, req.body.SOTotalItemFreeQty)
+        .input("SOTotalItemFreeAmount", sql.Real, req.body.SOTotalItemFreeAmount)
+
+       
+        
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesOrder]
+                      
+                      ( 
+                         [SORefCodeNo]
+                        ,[BillTo]
+                         ,[ShipTo]
+                         ,[PaymentTerms]
+                        ,[MobileNo]
+                         ,[ShiperGLNNo]
+                        ,[RPDocNo]
+                        ,[SOStatus]
+                        ,[SODateTimeCreated]
+                        ,[SOSalesManIdNo]
+                        ,[SOTotalAmountNoVat]
+                        ,[SOTotalAmountWVat]
+                        
+                        ,[SOTotalVatAmount]
+                        ,[SOTotalItemFreeQty]
+                        ,[SOTotalItemFreeAmount]
+                        
+                       
+                        )
+                 VALUES
+                       (
+                       @SORefCodeNo
+                       ,@BillTo
+                       ,@ShipTo
+                       ,@PaymentTerms
+                       ,@MobileNo
+                       ,@ShiperGLNNo
+                       ,@RPDocNo
+                       ,@SOStatus
+                       ,@SODateTimeCreated
+                       ,@SOSalesManIdNo
+                       ,@SOTotalAmountNoVat
+                       ,@SOTotalAmountWVat
+                     
+                       ,@SOTotalVatAmount
+                       ,@SOTotalItemFreeQty
+                       ,@SOTotalItemFreeAmount
+
+  
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //
   //-----------------------------------------------------------------------------------
 
@@ -6033,6 +6113,62 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesOrder_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("BillTo", sql.NVarChar, req.body.BillTo)
+        .input("ShipTo", sql.NVarChar, req.body.ShipTo)
+        .input("PaymentTerms", sql.NVarChar, req.body.PaymentTerms)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("ShiperGLNNo", sql.VarChar, req.body.ShiperGLNNo)
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("SOStatus", sql.TinyInt, req.body.SOStatus)
+        .input("SODateTimeCreated", sql.DateTime, req.body.SODateTimeCreated)
+        .input("SOSalesManIdNo", sql.VarChar, req.body.SOSalesManIdNo)
+        .input("SOTotalAmountNoVat", sql.Real, req.body.SOTotalAmountNoVat)
+        .input("SOTotalAmountWVat", sql.Real, req.body.SOTotalAmountWVat)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalItemFreeQty", sql.Numeric, req.body.SOTotalItemFreeQty)
+        .input("SOTotalItemFreeAmount", sql.Real, req.body.SOTotalItemFreeAmount)
+
+       
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesOrder]
+SET
+
+[SORefCodeNo] =@SORefCodeNo
+,[BillTo] =@BillTo
+,[ShipTo] =@ShipTo
+,[PaymentTerms] =@PaymentTerms
+,[MobileNo] =@MobileNo
+,[ShiperGLNNo] =@ShiperGLNNo
+,[RPDocNo] =@RPDocNo
+,[SOStatus] =@SOStatus
+,[SODateTimeCreated] =@SODateTimeCreated
+,[SOSalesManIdNo] =@SOSalesManIdNo
+,[SOTotalAmountNoVat] =@SOTotalAmountNoVat
+,[SOTotalAmountWVat] =@SOTotalAmountWVat
+,[SOTotalVatAmount] =@SOTotalVatAmount
+,[SOTotalItemFreeQty] =@SOTotalItemFreeQty
+,[SOTotalItemFreeAmount] =@SOTotalItemFreeAmount
+
+
+WHERE tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -7259,6 +7395,32 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesOrder_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesOrder where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesOrder_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesOrder`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -8053,6 +8215,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesManConfirmedOrdersMSelected where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesOrder_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesOrder where tblSalesOrderID='${tblSalesOrderID}'`
         );
       console.log(data);
       res.status(200).json(data);
