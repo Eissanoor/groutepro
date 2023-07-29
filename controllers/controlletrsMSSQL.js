@@ -7305,5 +7305,22 @@ async apt_DELETE_BYID(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+   async SalesManConfirmedDetsView_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesManConfirmedDetsView where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
 };
 export default FATSDB;
