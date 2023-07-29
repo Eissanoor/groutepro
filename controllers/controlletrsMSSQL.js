@@ -2782,6 +2782,83 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesInvoiceMList_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("id", sql.VarChar, req.body.id)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("addressLo", sql.NVarChar, req.body.addressLo)
+        .input("addressFo", sql.NVarChar, req.body.addressFo)
+        .input("isActive", sql.VarChar, req.body.isActive)
+        .input("phone", sql.VarChar, req.body.phone)
+        .input("phoneExt", sql.VarChar, req.body.phoneExt)
+        .input("mobile", sql.NVarChar, req.body.mobile)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("email", sql.NVarChar, req.body.email)
+        .input("customerType", sql.VarChar, req.body.customerType)
+        .input("creditPeriod", sql.VarChar, req.body.creditPeriod)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesInvoiceMList]
+                      
+                      ( 
+                         [id]
+                        ,[code]
+                         ,[descLo]
+                         ,[descFo]
+                        ,[shDescLo]
+                         ,[shDescFo]
+                        ,[addressLo]
+                        ,[addressFo]
+                        ,[isActive]
+                        ,[phone]
+                        ,[phoneExt]
+                        ,[mobile]
+                        ,[rem]
+                        ,[email]
+                        ,[customerType]
+                        ,[creditPeriod]
+                        
+                        )
+                 VALUES
+                       (
+                       @id
+                       ,@code
+                       ,@descLo
+                       ,@descFo
+                       ,@shDescLo
+                       ,@shDescFo
+                       ,@addressLo
+                       ,@addressFo
+                       ,@isActive
+                       ,@phone
+                       ,@phoneExt
+                       ,@mobile
+                       ,@rem
+                       ,@email
+                       ,@customerType
+                       ,@creditPeriod
+                      
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  
   //
   //-----------------------------------------------------------------------------------
 
@@ -4837,6 +4914,64 @@ WHERE tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesInvoiceMList_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMListID = req.params.tblSalesInvoiceMListID;
+      let data = await pool
+        .request()
+
+        .input("id", sql.VarChar, req.body.id)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("addressLo", sql.NVarChar, req.body.addressLo)
+        .input("addressFo", sql.NVarChar, req.body.addressFo)
+        .input("isActive", sql.VarChar, req.body.isActive)
+        .input("phone", sql.VarChar, req.body.phone)
+        .input("phoneExt", sql.VarChar, req.body.phoneExt)
+        .input("mobile", sql.NVarChar, req.body.mobile)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("email", sql.NVarChar, req.body.email)
+        .input("customerType", sql.VarChar, req.body.customerType)
+        .input("creditPeriod", sql.VarChar, req.body.creditPeriod)
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesInvoiceMList]
+SET
+
+
+[id] =@id
+,[code] =@code
+,[descLo] =@descLo
+,[descFo] =@descFo
+,[shDescLo] =@shDescLo
+,[shDescFo] =@shDescFo
+,[addressLo] =@addressLo
+,[addressFo] =@addressFo
+,[isActive] =@isActive
+,[phone] =@phone
+,[phoneExt] =@phoneExt
+,[mobile] =@mobile
+,[rem] =@rem
+,[email] =@email
+,[customerType] =@customerType
+,[creditPeriod] =@creditPeriod
+
+
+
+WHERE tblSalesInvoiceMListID='${tblSalesInvoiceMListID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -5907,6 +6042,32 @@ WHERE tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesInvoiceMList_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMListID = req.params.tblSalesInvoiceMListID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesInvoiceMList where tblSalesInvoiceMListID='${tblSalesInvoiceMListID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesInvoiceMList_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesInvoiceMList`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -6599,6 +6760,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesInvoiceM where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesInvoiceMList_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMListID = req.params.tblSalesInvoiceMListID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesInvoiceMList where tblSalesInvoiceMListID='${tblSalesInvoiceMListID}'`
         );
       console.log(data);
       res.status(200).json(data);
