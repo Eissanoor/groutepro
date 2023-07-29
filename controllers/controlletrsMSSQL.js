@@ -3567,6 +3567,82 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async SalesOrderDets_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SOItemCode", sql.VarChar, req.body.SOItemCode)
+        .input("SOItemDescription", sql.NVarChar, req.body.SOItemDescription)
+        .input("SOOrderQty", sql.Numeric, req.body.SOOrderQty)
+        .input("SOItemUnit", sql.VarChar, req.body.SOItemUnit)
+        .input("SOItemPrice", sql.Float, req.body.SOItemPrice)
+        .input("SOCustomerNo", sql.VarChar, req.body.SOCustomerNo)
+        .input("SOAlreadySelected", sql.TinyInt, req.body.SOAlreadySelected)
+        .input("SOItemFreeQty", sql.Numeric, req.body.SOItemFreeQty)
+        .input("SOTotalAmountPrice", sql.Real, req.body.SOTotalAmountPrice)
+        .input("SOTotalAmountNetPrice", sql.Real, req.body.SOTotalAmountNetPrice)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalDiscountAmount", sql.Real, req.body.SOTotalDiscountAmount)
+        .input("SORemarks", sql.VarChar, req.body.SORemarks)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesOrderDets]
+                      
+                      ( 
+                         [RPDocNo]
+                        ,[DateTimeCreated]
+                         ,[SORefCodeNo]
+                         ,[SOItemCode]
+                        ,[SOItemDescription]
+                         ,[SOOrderQty]
+                        ,[SOItemUnit]
+                        ,[SOItemPrice]
+                        ,[SOCustomerNo]
+                        ,[SOAlreadySelected]
+                        ,[SOItemFreeQty]
+                        ,[SOTotalAmountPrice]
+                        ,[SOTotalAmountNetPrice]
+                        ,[SOTotalVatAmount]
+                        ,[SOTotalDiscountAmount]
+                        ,[SORemarks]                       
+                        )
+                 VALUES
+                       (
+                       @RPDocNo
+                       ,@DateTimeCreated
+                       ,@SORefCodeNo
+                       ,@SOItemCode
+                       ,@SOItemDescription
+                       ,@SOOrderQty
+                       ,@SOItemUnit
+                       ,@SOItemPrice
+                       ,@SOCustomerNo
+                       ,@SOAlreadySelected
+                       ,@SOItemFreeQty
+                       ,@SOTotalAmountPrice
+                       ,@SOTotalAmountNetPrice
+                       ,@SOTotalVatAmount
+                       ,@SOTotalDiscountAmount
+                       ,@SORemarks
+                      
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  
   //
   //-----------------------------------------------------------------------------------
 
@@ -6169,6 +6245,59 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesOrderDets_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("SOItemCode", sql.VarChar, req.body.SOItemCode)
+        .input("SOItemDescription", sql.NVarChar, req.body.SOItemDescription)
+        .input("SOOrderQty", sql.Numeric, req.body.SOOrderQty)
+        .input("SOItemUnit", sql.VarChar, req.body.SOItemUnit)
+        .input("SOItemPrice", sql.Float, req.body.SOItemPrice)
+        .input("SOCustomerNo", sql.VarChar, req.body.SOCustomerNo)
+        .input("SOAlreadySelected", sql.TinyInt, req.body.SOAlreadySelected)
+        .input("SOItemFreeQty", sql.Numeric, req.body.SOItemFreeQty)
+        .input("SOTotalAmountPrice", sql.Real, req.body.SOTotalAmountPrice)
+        .input("SOTotalAmountNetPrice", sql.Real, req.body.SOTotalAmountNetPrice)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalDiscountAmount", sql.Real, req.body.SOTotalDiscountAmount)
+       .input("SORemarks", sql.VarChar, req.body.SORemarks)
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesOrderDets]
+SET
+
+[RPDocNo] =@RPDocNo
+,[DateTimeCreated] =@DateTimeCreated
+,[SORefCodeNo] =@SORefCodeNo
+,[SOItemCode] =@SOItemCode
+,[SOItemDescription] =@SOItemDescription
+,[SOOrderQty] =@SOOrderQty
+,[SOItemUnit] =@SOItemUnit
+,[SOItemPrice] =@SOItemPrice
+,[SOCustomerNo] =@SOCustomerNo
+,[SOAlreadySelected] =@SOAlreadySelected
+,[SOItemFreeQty] =@SOItemFreeQty
+,[SOTotalAmountPrice] =@SOTotalAmountPrice
+,[SOTotalAmountNetPrice] =@SOTotalAmountNetPrice
+,[SOTotalVatAmount] =@SOTotalVatAmount
+,[SOTotalDiscountAmount] =@SOTotalDiscountAmount
+,[SORemarks] =@SORemarks
+WHERE tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -7421,6 +7550,32 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesOrderDets_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesOrderDets`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesOrderDets_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesOrderDets where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -8232,6 +8387,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesOrder where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesOrderDets_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRouteMasterID = req.params.tblRouteMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesOrderDets where tblRouteMasterID='${tblRouteMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);

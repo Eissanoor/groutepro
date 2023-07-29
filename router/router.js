@@ -82,7 +82,8 @@ router.post("/SalesManConfirmedOrderDets_post", FATSDB.SalesManConfirmedOrderDet
 router.post("/SalesManConfirmedOrderDetsSelected_post", FATSDB.SalesManConfirmedOrderDetsSelected_post)
 router.post("/SalesManConfirmedOrdersM_post", FATSDB.SalesManConfirmedOrdersM_post)
 router.post("/SalesManConfirmedOrdersMSelected_post", FATSDB.SalesManConfirmedOrdersMSelected_post)
-router.post("/SalesOrder_post",FATSDB.SalesOrder_post)
+router.post("/SalesOrder_post", FATSDB.SalesOrder_post)
+router.post("/SalesOrderDets_post",FATSDB.SalesOrderDets_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -181,7 +182,9 @@ router.get("/SalesManConfirmedOrdersM_GET_LIST", FATSDB.SalesManConfirmedOrdersM
 router.get("/SalesManConfirmedOrdersMSelected_GET_LIST", FATSDB.SalesManConfirmedOrdersMSelected_GET_LIST)
 router.get("/SalesManConfirmedOrdersMSelected_GET_BYID/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersMSelected_GET_BYID)
 router.get("/SalesOrder_GET_BYID/:tblSalesOrderID", FATSDB.SalesOrder_GET_BYID)
-router.get("/SalesOrder_GET_LIST",FATSDB.SalesOrder_GET_LIST)
+router.get("/SalesOrder_GET_LIST", FATSDB.SalesOrder_GET_LIST)
+router.get("/SalesOrderDets_GET_LIST", FATSDB.SalesOrderDets_GET_LIST)
+router.get("/SalesOrderDets_GET_BYID/:tblRouteMasterID",FATSDB.SalesOrderDets_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -231,7 +234,8 @@ router.put("/SalesManConfirmedOrderDets_Put/:tblRouteMasterID", FATSDB.SalesManC
 router.put("/SalesManConfirmedOrderDetsSelected_Put/:tblRouteMasterID", FATSDB.SalesManConfirmedOrderDetsSelected_Put)
 router.put("/SalesManConfirmedOrdersM_Put/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersM_Put)
 router.put("/SalesManConfirmedOrdersMSelected_Put/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersMSelected_Put)
-router.put("/SalesOrder_Put/:tblSalesOrderID",FATSDB.SalesOrder_Put)
+router.put("/SalesOrder_Put/:tblSalesOrderID", FATSDB.SalesOrder_Put)
+router.put("/SalesOrderDets_Put/:tblRouteMasterID",FATSDB.SalesOrderDets_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -282,6 +286,7 @@ router.delete("/SalesManConfirmedOrderDets_DELETE_BYID/:tblRouteMasterID", FATSD
 router.delete("/SalesManConfirmedOrderDetsSelected_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesManConfirmedOrderDetsSelected_DELETE_BYID)
 router.delete("/SalesManConfirmedOrdersM_DELETE_BYID/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersM_DELETE_BYID)
 router.delete("/SalesManConfirmedOrdersMSelected_DELETE_BYID/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersMSelected_DELETE_BYID)
-router.delete("/SalesOrder_DELETE_BYID/:tblSalesOrderID",FATSDB.SalesOrder_DELETE_BYID)
+router.delete("/SalesOrder_DELETE_BYID/:tblSalesOrderID", FATSDB.SalesOrder_DELETE_BYID)
+router.delete("/SalesOrderDets_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDets_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
