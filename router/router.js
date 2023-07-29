@@ -257,6 +257,6 @@ router.delete("/SalesCustomersReturn_DELETE_BYID/:tblSalesCustomersID", FATSDB.S
 router.delete("/SalesInvoiceDets_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesInvoiceDets_DELETE_BYID)
 router.delete("/SalesInvoiceM_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesInvoiceM_DELETE_BYID)
 router.delete("/SalesInvoiceMList_DELETE_BYID/:tblSalesInvoiceMListID", FATSDB.SalesInvoiceMList_DELETE_BYID)
-router.delete("/SalesManConfirmedDetsView_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesManConfirmedDetsView_GET_BYID)
+router.delete("/SalesManConfirmedDetsView_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesManConfirmedDetsView_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
