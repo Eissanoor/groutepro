@@ -3348,7 +3348,7 @@ async UserLoginAuth(req, res, next) {
                         ,[SOSalesManIdNo]
                         ,[SOTotalAmountNoVat]
                         ,[SOTotalAmountWVat]
-                        ,[SOTotalAmountNetPrice]
+                        
                         ,[SOTotalVatAmount]
                         ,[SOTotalItemFreeQty]
                         ,[SOTotalItemFreeAmount]
@@ -3373,7 +3373,7 @@ async UserLoginAuth(req, res, next) {
                        ,@SOSalesManIdNo
                        ,@SOTotalAmountNoVat
                        ,@SOTotalAmountWVat
-                       ,@SOTotalAmountNetPrice
+                     
                        ,@SOTotalVatAmount
                        ,@SOTotalItemFreeQty
                        ,@SOTotalItemFreeAmount
