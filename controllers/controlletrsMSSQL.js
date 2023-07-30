@@ -3834,7 +3834,7 @@ async UserLoginAuth(req, res, next) {
         .input("SOLineRemarks", sql.VarChar, req.body.SOLineRemarks)
         .input("SOPaymentType", sql.VarChar, req.body.SOPaymentType)
         .input("SOCustomerName", sql.VarChar, req.body.SOCustomerName)
-         .input("CustomerSignature", sql.VarBinary, req.body.CustomerSignature)
+         .input("CustomerSignature", sql.VarChar, req.body.CustomerSignature)
         
         .query(
           ` 
@@ -6695,7 +6695,7 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
         .input("SOLineRemarks", sql.VarChar, req.body.SOLineRemarks)
         .input("SOPaymentType", sql.VarChar, req.body.SOPaymentType)
         .input("SOCustomerName", sql.VarChar, req.body.SOCustomerName)
-        .input("CustomerSignature", sql.VarBinary, req.body.CustomerSignature)
+        .input("CustomerSignature", sql.VarChar, req.body.CustomerSignature)
         .query(
           ` 
           UPDATE [dbo].[tblSalesOrderDetsMPrintCollection]
