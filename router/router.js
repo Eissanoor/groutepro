@@ -210,8 +210,8 @@ router.get("/SalesOrderDetsMPrintR_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrde
 router.get("/SalesOrderDetsMPrintR_GET_LIST", FATSDB.SalesOrderDetsMPrintR_GET_LIST)
 router.get("/SalesOrderDetsMPrintRSReturn_GET_LIST", FATSDB.SalesOrderDetsMPrintRSReturn_GET_LIST)
 router.get("/SalesOrderDetsMPrintRSReturn_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintRSReturn_GET_BYID)
-router.get("SalesOrderDetsMPrintRSReturnInvoice_GET_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_GET_BYID)
-router.get("SalesOrderDetsMPrintRSReturnInvoice_GET_LIST",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_GET_LIST)
+router.get("/SalesOrderDetsMPrintRSReturnInvoice_GET_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_GET_BYID)
+router.get("/SalesOrderDetsMPrintRSReturnInvoice_GET_LIST",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -332,6 +332,6 @@ router.delete("/SalesOrderDetsMPrintDN_DELETE_BYID/:tblRouteMasterID", FATSDB.Sa
 router.delete("/SalesOrderDetsMPrintDSI_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintDSI_DELETE_BYID)
 router.delete("/SalesOrderDetsMPrintR_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintR_DELETE_BYID)
 router.delete("/SalesOrderDetsMPrintRSReturn_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturn_DELETE_BYID)
-router.delete("SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID)
+router.delete("/SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
