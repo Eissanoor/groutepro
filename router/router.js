@@ -88,7 +88,8 @@ router.post("/SalesOrderDetsM_post", FATSDB.SalesOrderDetsM_post)
 router.post("/SalesOrderDetsMPrint_post", FATSDB.SalesOrderDetsMPrint_post)
 router.post("/SalesOrderDetsMPrintCollection_post", FATSDB.SalesOrderDetsMPrintCollection_post)
 router.post("/SalesOrderDetsMPrintCollectionR_post", FATSDB.SalesOrderDetsMPrintCollectionR_post)
-router.post("/SalesOrderDetsMPrintDN_post",FATSDB.SalesOrderDetsMPrintDN_post)
+router.post("/SalesOrderDetsMPrintDN_post", FATSDB.SalesOrderDetsMPrintDN_post)
+router.post("/SalesOrderDetsMPrintDSI_post",FATSDB.SalesOrderDetsMPrintDSI_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -199,7 +200,9 @@ router.get("/SalesOrderDetsMPrintCollection_GET_LIST", FATSDB.SalesOrderDetsMPri
 router.get("/SalesOrderDetsMPrintCollectionR_GET_LIST", FATSDB.SalesOrderDetsMPrintCollectionR_GET_LIST)
 router.get("/SalesOrderDetsMPrintCollectionR_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintCollectionR_GET_BYID)
 router.get("/SalesOrderDetsMPrintDN_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintDN_GET_BYID)
-router.get("/SalesOrderDetsMPrintDN_GET_LIST",FATSDB.SalesOrderDetsMPrintDN_GET_LIST)
+router.get("/SalesOrderDetsMPrintDN_GET_LIST", FATSDB.SalesOrderDetsMPrintDN_GET_LIST)
+router.get("/SalesOrderDetsMPrintDSI_GET_LIST", FATSDB.SalesOrderDetsMPrintDSI_GET_LIST)
+router.get("/SalesOrderDetsMPrintDSI_GET_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintDSI_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -255,7 +258,8 @@ router.put("/SalesOrderDetsM_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsM_Put)
 router.put("/SalesOrderDetsMPrint_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrint_Put)
 router.put("/SalesOrderDetsMPrintCollection_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintCollection_Put)
 router.put("/SalesOrderDetsMPrintCollectionR_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintCollectionR_Put)
-router.put("/SalesOrderDetsMPrintDN_Put/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintDN_Put)
+router.put("/SalesOrderDetsMPrintDN_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintDN_Put)
+router.put("/SalesOrderDetsMPrintDSI_Put/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintDSI_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -312,6 +316,7 @@ router.delete("/SalesOrderDetsM_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesOrde
 router.delete("/SalesOrderDetsMPrint_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrint_DELETE_BYID)
 router.delete("/SalesOrderDetsMPrintCollection_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintCollection_DELETE_BYID)
 router.delete("/SalesOrderDetsMPrintCollectionR_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintCollectionR_DELETE_BYID)
-router.delete("/SalesOrderDetsMPrintDN_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintDN_DELETE_BYID)
+router.delete("/SalesOrderDetsMPrintDN_DELETE_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintDN_DELETE_BYID)
+router.delete("/SalesOrderDetsMPrintDSI_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintDSI_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
