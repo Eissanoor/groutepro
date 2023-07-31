@@ -4965,6 +4965,74 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async ShipmentGLNTracking_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("FEName", sql.VarChar, req.body.FEName)
+        .input("FECountryOrigin", sql.VarChar, req.body.FECountryOrigin)
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .input("ShipmentDateConfirmation", sql.DateTime, req.body.ShipmentDateConfirmation)
+        .input("GPSLocation", sql.VarChar, req.body.GPSLocation)
+        .input("GPSLatitude", sql.VarChar, req.body.GPSLatitude)
+        .input("GPSLongitude", sql.VarChar, req.body.GPSLongitude)
+        .input("ProductBarcode", sql.VarChar, req.body.ProductBarcode)
+        .input("ProductDescriptionE", sql.VarChar, req.body.ProductDescriptionE)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblShipmentGLNTracking]
+                      
+                      ( 
+                         [RequestNo]
+                        ,[DateRequested]
+                         ,[RequestStatus]
+                         ,[FEName]
+                        ,[FECountryOrigin]
+                         ,[MemberID]
+                        ,[ShipmentGLNNo]
+                        ,[ShipmentDateConfirmation]
+                        ,[GPSLocation]
+                        ,[GPSLatitude]
+                        ,[GPSLongitude]
+                        ,[ProductBarcode]
+                        
+                        ,[ProductDescriptionE]
+                       
+                        )
+                 VALUES
+                       (
+                       @RequestNo
+                       ,@DateRequested
+                       ,@RequestStatus
+                       ,@FEName
+                       ,@FECountryOrigin
+                       ,@MemberID
+                       ,@ShipmentGLNNo
+                       ,@ShipmentDateConfirmation
+                       ,@GPSLocation
+                       ,@GPSLatitude
+                       ,@GPSLongitude
+                       ,@ProductBarcode
+                       ,@ProductDescriptionE
+                     
+              
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -8558,6 +8626,55 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async ShipmentGLNTracking_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .input("RequestNo", sql.Numeric, req.body.RequestNo)
+        .input("DateRequested", sql.DateTime, req.body.DateRequested)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("FEName", sql.VarChar, req.body.FEName)
+        .input("FECountryOrigin", sql.VarChar, req.body.FECountryOrigin)
+        .input("MemberID", sql.Numeric, req.body.MemberID)
+        .input("ShipmentGLNNo", sql.VarChar, req.body.ShipmentGLNNo)
+        .input("ShipmentDateConfirmation", sql.DateTime, req.body.ShipmentDateConfirmation)
+        .input("GPSLocation", sql.VarChar, req.body.GPSLocation)
+        .input("GPSLatitude", sql.VarChar, req.body.GPSLatitude)
+        .input("GPSLongitude", sql.VarChar, req.body.GPSLongitude)
+        .input("ProductBarcode", sql.VarChar, req.body.ProductBarcode)
+        .input("ProductDescriptionE", sql.VarChar, req.body.ProductDescriptionE)
+        .query(
+          ` 
+          UPDATE [dbo].[tblShipmentGLNTracking]
+SET
+
+[RequestNo] =@RequestNo
+,[DateRequested] =@DateRequested
+,[RequestStatus] =@RequestStatus
+,[FEName] =@FEName
+,[FECountryOrigin] =@FECountryOrigin
+,[MemberID] =@MemberID
+,[ShipmentGLNNo] =@ShipmentGLNNo
+,[ShipmentDateConfirmation] =@ShipmentDateConfirmation
+,[GPSLocation] =@GPSLocation
+,[GPSLatitude] =@GPSLatitude
+,[GPSLongitude] =@GPSLongitude
+,[ProductBarcode] =@ProductBarcode
+,[ProductDescriptionE] =@ProductDescriptionE
+,[SOTotalItemFreeQty] =@SOTotalItemFreeQty
+
+WHERE tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10200,6 +10317,32 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async ShipmentGLNTracking_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblShipmentGLNTracking where tblRequestMasterID='${tblRequestMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async ShipmentGLNTracking_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblShipmentGLNTracking`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -11266,6 +11409,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesOrderMPosted where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async ShipmentGLNTracking_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblRequestMasterID = req.params.tblRequestMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblShipmentGLNTracking where tblRequestMasterID='${tblRequestMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
