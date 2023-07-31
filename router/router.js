@@ -224,6 +224,7 @@ router.get("/SalesOrderDetsViewInvoiceLine1_GET_LIST", FATSDB.SalesOrderDetsView
 router.get("/SalesOrderfromERPM_GET_LIST", FATSDB.SalesOrderfromERPM_GET_LIST)
 router.get("/SalesOrderfromERPM_GET_BYID/:tblSalesInvoiceMID", FATSDB.SalesOrderfromERPM_GET_BYID)
 router.get("/SalesOrderM_GET_BYID/:tblSalesOrderID", FATSDB.SalesOrderM_GET_BYID)
+router.get("/SalesOrderM_GET_LIST",FATSDB.SalesOrderM_GET_LIST)
 router.get("/SalesOrderMPosted_GET_LIST", FATSDB.SalesOrderMPosted_GET_LIST)
 router.get("/SalesOrderMPosted_GET_BYID/:tblSalesOrderID",FATSDB.SalesOrderMPosted_GET_BYID)
 //------------------------------------------------------------------------------
