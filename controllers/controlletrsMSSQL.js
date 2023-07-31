@@ -8665,7 +8665,7 @@ SET
 ,[GPSLongitude] =@GPSLongitude
 ,[ProductBarcode] =@ProductBarcode
 ,[ProductDescriptionE] =@ProductDescriptionE
-,[SOTotalItemFreeQty] =@SOTotalItemFreeQty
+
 
 WHERE tblRequestMasterID='${tblRequestMasterID}'`
         );
