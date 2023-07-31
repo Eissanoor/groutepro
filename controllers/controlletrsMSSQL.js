@@ -4870,6 +4870,101 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async SalesOrderMPosted_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("BillTo", sql.NVarChar, req.body.BillTo)
+        .input("ShipTo", sql.NVarChar, req.body.ShipTo)
+        .input("PaymentTerms", sql.NVarChar, req.body.PaymentTerms)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("ShiperGLNNo", sql.VarChar, req.body.ShiperGLNNo)
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("SOStatus", sql.TinyInt, req.body.SOStatus)
+        .input("SODateTimeCreated", sql.DateTime, req.body.SODateTimeCreated)
+        .input("SOSalesManIdNo", sql.VarChar, req.body.SOSalesManIdNo)
+        .input("SOTotalAmountNoVat", sql.Real, req.body.SOTotalAmountNoVat)
+        .input("SOTotalAmountWVat", sql.Real, req.body.SOTotalAmountWVat)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalItemFreeQty", sql.Numeric, req.body.SOTotalItemFreeQty)
+        .input("SOTotalItemFreeAmount", sql.Real, req.body.SOTotalItemFreeAmount)
+
+        .input("creditPeriodDays", sql.Numeric, req.body.creditPeriodDays)
+        .input("grpID", sql.VarChar, req.body.grpID)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("param1", sql.VarChar, req.body.param1)
+        .input("param2", sql.VarChar, req.body.param2)
+        
+        .input("SORemarks", sql.VarChar, req.body.param2)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesOrderMPosted]
+                      
+                      ( 
+                         [SORefCodeNo]
+                        ,[BillTo]
+                         ,[ShipTo]
+                         ,[PaymentTerms]
+                        ,[MobileNo]
+                         ,[ShiperGLNNo]
+                        ,[RPDocNo]
+                        ,[SOStatus]
+                        ,[SODateTimeCreated]
+                        ,[SOSalesManIdNo]
+                        ,[SOTotalAmountNoVat]
+                        ,[SOTotalAmountWVat]
+                        
+                        ,[SOTotalVatAmount]
+                        ,[SOTotalItemFreeQty]
+                        ,[SOTotalItemFreeAmount]
+                        
+                        ,[creditPeriodDays]  
+                        ,[grpID]  
+                        ,[dateDgr]  
+                        ,[param1]  
+                        ,[param2]  
+                        ,[SORemarks]  
+                        )
+                 VALUES
+                       (
+                       @SORefCodeNo
+                       ,@BillTo
+                       ,@ShipTo
+                       ,@PaymentTerms
+                       ,@MobileNo
+                       ,@ShiperGLNNo
+                       ,@RPDocNo
+                       ,@SOStatus
+                       ,@SODateTimeCreated
+                       ,@SOSalesManIdNo
+                       ,@SOTotalAmountNoVat
+                       ,@SOTotalAmountWVat
+                     
+                       ,@SOTotalVatAmount
+                       ,@SOTotalItemFreeQty
+                       ,@SOTotalItemFreeAmount
+
+                       ,@creditPeriodDays
+                       ,@grpID
+                       ,@dateDgr
+                       ,@param1
+                       ,@param2
+                       
+                      ,@SORemarks
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -8398,6 +8493,71 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesOrderMPosted_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .input("SORefCodeNo", sql.VarChar, req.body.SORefCodeNo)
+        .input("BillTo", sql.NVarChar, req.body.BillTo)
+        .input("ShipTo", sql.NVarChar, req.body.ShipTo)
+        .input("PaymentTerms", sql.NVarChar, req.body.PaymentTerms)
+        .input("MobileNo", sql.VarChar, req.body.MobileNo)
+        .input("ShiperGLNNo", sql.VarChar, req.body.ShiperGLNNo)
+        .input("RPDocNo", sql.VarChar, req.body.RPDocNo)
+        .input("SOStatus", sql.TinyInt, req.body.SOStatus)
+        .input("SODateTimeCreated", sql.DateTime, req.body.SODateTimeCreated)
+        .input("SOSalesManIdNo", sql.VarChar, req.body.SOSalesManIdNo)
+        .input("SOTotalAmountNoVat", sql.Real, req.body.SOTotalAmountNoVat)
+        .input("SOTotalAmountWVat", sql.Real, req.body.SOTotalAmountWVat)
+        .input("SOTotalVatAmount", sql.Real, req.body.SOTotalVatAmount)
+        .input("SOTotalItemFreeQty", sql.Numeric, req.body.SOTotalItemFreeQty)
+        .input("SOTotalItemFreeAmount", sql.Real, req.body.SOTotalItemFreeAmount)
+
+        .input("creditPeriodDays", sql.Numeric, req.body.creditPeriodDays)
+        .input("grpID", sql.VarChar, req.body.grpID)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("param1", sql.VarChar, req.body.param1)
+        .input("param2", sql.VarChar, req.body.param2)
+       .input("SORemarks", sql.VarChar, req.body.SORemarks)
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesOrderMPosted]
+SET
+
+[SORefCodeNo] =@SORefCodeNo
+,[BillTo] =@BillTo
+,[ShipTo] =@ShipTo
+,[PaymentTerms] =@PaymentTerms
+,[MobileNo] =@MobileNo
+,[ShiperGLNNo] =@ShiperGLNNo
+,[RPDocNo] =@RPDocNo
+,[SOStatus] =@SOStatus
+,[SODateTimeCreated] =@SODateTimeCreated
+,[SOSalesManIdNo] =@SOSalesManIdNo
+,[SOTotalAmountNoVat] =@SOTotalAmountNoVat
+,[SOTotalAmountWVat] =@SOTotalAmountWVat
+,[SOTotalVatAmount] =@SOTotalVatAmount
+,[SOTotalItemFreeQty] =@SOTotalItemFreeQty
+,[SOTotalItemFreeAmount] =@SOTotalItemFreeAmount
+
+,[creditPeriodDays] =@creditPeriodDays
+,[grpID] =@grpID
+,[dateDgr] =@dateDgr
+,[param1] =@param1
+,[param2] =@param2
+,[SORemarks] =@SORemarks
+WHERE tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10014,6 +10174,32 @@ WHERE tblSalesOrderID='${tblSalesOrderID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesOrderMPosted_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesOrderMPosted`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesOrderMPosted_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesOrderMPosted where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -11063,6 +11249,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesOrderM where tblSalesOrderID='${tblSalesOrderID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesOrderMPosted_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesOrderID = req.params.tblSalesOrderID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesOrderMPosted where tblSalesOrderID='${tblSalesOrderID}'`
         );
       console.log(data);
       res.status(200).json(data);
