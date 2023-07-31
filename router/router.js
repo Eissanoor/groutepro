@@ -353,5 +353,5 @@ router.delete("/SalesOrderDetsViewInvoiceLine_DELETE_BYID/:tblRouteMasterID",FAT
 router.delete("/SalesOrderDetsViewInvoiceLine1_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsViewInvoiceLine1_DELETE_BYID)
 router.delete("/SalesOrderfromERPM_DELETE_BYID/:tblSalesInvoiceMID", FATSDB.SalesOrderfromERPM_DELETE_BYID)
 router.delete("/SalesOrderM_DELETE_BYID/:tblSalesOrderID",FATSDB.SalesOrderM_DELETE_BYID)
-//----------------------------------------------------------------------------////
+//--------------------------------------------------------------------------------------------------------////
 export default router;
