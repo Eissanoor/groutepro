@@ -4614,7 +4614,168 @@ async UserLoginAuth(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+async SalesOrderfromERPM_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
 
+      let data = await pool
+        .request()
+      
+        
+        .input("id", sql.VarChar, req.body.id)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("melId", sql.VarChar, req.body.melId)
+        .input("floId", sql.VarChar, req.body.floId)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("refCode", sql.VarChar, req.body.refCode)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("dateDhi", sql.VarChar, req.body.dateDhi)
+        .input("globalStatus", sql.VarChar, req.body.globalStatus)
+        .input("type", sql.VarChar, req.body.type)
+        .input("header", sql.NVarChar, req.body.header)
+        .input("targetMelId", sql.VarChar, req.body.targetMelId)
+        .input("targetTrxHeaderId", sql.VarChar, req.body.targetTrxHeaderId)
+        .input("targetTrxCode", sql.VarChar, req.body.targetTrxCode)
+        .input("maeId", sql.VarChar, req.body.maeId)
+        .input("mcaId", sql.VarChar, req.body.mcaId)
+        .input("partType", sql.VarChar, req.body.partType)
+
+        .input("gprId", sql.VarChar, req.body.gprId)
+        .input("siteId", sql.VarChar, req.body.siteId)
+        .input("contactId", sql.VarChar, req.body.contactId)
+        .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
+        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
+        .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
+        .input("crrId", sql.VarChar, req.body.crrId)
+        .input("fcuId", sql.VarChar, req.body.fcuId)
+        .input("exchngRate", sql.VarChar, req.body.exchngRate)
+        .input("itemsTotalAlc", sql.VarChar, req.body.itemsTotalAlc)
+        .input("addonsTotalAlc", sql.VarChar, req.body.addonsTotalAlc)
+        .input("addonsTotalAfc", sql.VarChar, req.body.addonsTotalAfc)
+        .input("totalDiscountsAlc", sql.VarChar, req.body.totalDiscountsAlc)
+        .input("totalDiscountsAfc", sql.VarChar, req.body.totalDiscountsAfc)
+        .input("netPriceAlc", sql.VarChar, req.body.netPriceAlc)
+        .input("netPriceAfc", sql.VarChar, req.body.netPriceAfc)
+        .input("currApproxAlc", sql.VarChar, req.body.currApproxAlc)
+
+        .input("proposedAmountAlc", sql.VarChar, req.body.proposedAmountAlc)
+        .input("proposedamountAfc", sql.VarChar, req.body.proposedamountAfc)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("ertId", sql.VarChar, req.body.ertId)
+        .input("shipToFreeText", sql.VarChar, req.body.shipToFreeText)
+        .input("isOnAccount", sql.VarChar, req.body.isOnAccount)
+        .input("taxExemptionPerc", sql.VarChar, req.body.taxExemptionPerc)
+        .input("lines", sql.VarChar, req.body.lines)
+       
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblSalesOrderfromERPM]
+                      
+                      ( 
+                         [id]
+                        ,[fogId]
+                         ,[melId]
+                         ,[floId]
+                        ,[code]
+                         ,[refCode]
+                        ,[dateDgr]
+                        ,[dateDhi]
+                        ,[globalStatus]
+                        ,[type]
+                        ,[header]
+                        ,[targetMelId]
+                        ,[targetTrxHeaderId]
+                        ,[targetTrxCode]
+                        ,[maeId]
+                        ,[mcaId]
+                         ,[partType]
+
+                         ,[gprId]
+                        ,[siteId]
+                         ,[contactId]
+                         ,[billToFreeText]
+                        ,[PaymentTerms]
+                         ,[creditPeriodDays]
+                        ,[crrId]
+                        ,[fcuId]
+                        ,[exchngRate]
+                        ,[itemsTotalAlc]
+                        ,[addonsTotalAlc]
+                        ,[addonsTotalAfc]
+                        ,[totalDiscountsAlc]
+                        ,[totalDiscountsAfc]
+                        ,[netPriceAlc]
+                        ,[netPriceAfc]
+                         ,[currApproxAlc]
+
+                         ,[proposedAmountAlc]
+                        ,[proposedamountAfc]
+                         ,[rem]
+                         ,[ertId]
+                        ,[shipToFreeText]
+                         ,[isOnAccount]
+                        ,[taxExemptionPerc]
+                        ,[lines]
+                        
+                        )
+                 VALUES
+                       (
+                       @id
+                       ,@fogId
+                       ,@melId
+                       ,@floId
+                       ,@code
+                       ,@refCode
+                       ,@dateDgr
+                       ,@dateDhi
+                       ,@globalStatus
+                       ,@type
+                       ,@header
+                       ,@targetMelId
+                       ,@targetTrxHeaderId
+                       ,@targetTrxCode
+                       ,@maeId
+                       ,@mcaId
+                       ,@partType
+
+                       ,@gprId
+                       ,@siteId
+                       ,@contactId
+                       ,@billToFreeText
+                       ,@PaymentTerms
+                       ,@creditPeriodDays
+                       ,@crrId
+                       ,@fcuId
+                       ,@exchngRate
+                       ,@itemsTotalAlc
+                       ,@addonsTotalAlc
+                       ,@addonsTotalAfc
+                       ,@totalDiscountsAlc
+                       ,@totalDiscountsAfc
+                       ,@netPriceAlc
+                       ,@netPriceAfc
+                       ,@currApproxAlc
+
+                       ,@proposedAmountAlc
+                       ,@proposedamountAfc
+                       ,@rem
+                       ,@ertId
+                       ,@shipToFreeText
+                       ,@isOnAccount
+                       ,@taxExemptionPerc
+                       ,@lines
+                      
+
+                  
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -7964,6 +8125,121 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SalesOrderfromERPM_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .input("id", sql.VarChar, req.body.id)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("melId", sql.VarChar, req.body.melId)
+        .input("floId", sql.VarChar, req.body.floId)
+        .input("code", sql.NVarChar, req.body.code)
+        .input("refCode", sql.VarChar, req.body.refCode)
+        .input("dateDgr", sql.VarChar, req.body.dateDgr)
+        .input("dateDhi", sql.VarChar, req.body.dateDhi)
+        .input("globalStatus", sql.VarChar, req.body.globalStatus)
+        .input("type", sql.VarChar, req.body.type)
+        .input("header", sql.NVarChar, req.body.header)
+        .input("targetMelId", sql.VarChar, req.body.targetMelId)
+        .input("targetTrxHeaderId", sql.VarChar, req.body.targetTrxHeaderId)
+        .input("targetTrxCode", sql.VarChar, req.body.targetTrxCode)
+        .input("maeId", sql.VarChar, req.body.maeId)
+        .input("mcaId", sql.VarChar, req.body.mcaId)
+        .input("partType", sql.VarChar, req.body.partType)
+
+        .input("gprId", sql.VarChar, req.body.gprId)
+        .input("siteId", sql.VarChar, req.body.siteId)
+        .input("contactId", sql.VarChar, req.body.contactId)
+        .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
+        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
+        .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
+        .input("crrId", sql.VarChar, req.body.crrId)
+        .input("fcuId", sql.VarChar, req.body.fcuId)
+        .input("exchngRate", sql.VarChar, req.body.exchngRate)
+        .input("itemsTotalAlc", sql.VarChar, req.body.itemsTotalAlc)
+        .input("addonsTotalAlc", sql.VarChar, req.body.addonsTotalAlc)
+        .input("addonsTotalAfc", sql.VarChar, req.body.addonsTotalAfc)
+        .input("totalDiscountsAlc", sql.VarChar, req.body.totalDiscountsAlc)
+        .input("totalDiscountsAfc", sql.VarChar, req.body.totalDiscountsAfc)
+        .input("netPriceAlc", sql.VarChar, req.body.netPriceAlc)
+        .input("netPriceAfc", sql.VarChar, req.body.netPriceAfc)
+        .input("currApproxAlc", sql.VarChar, req.body.currApproxAlc)
+
+        .input("proposedAmountAlc", sql.VarChar, req.body.proposedAmountAlc)
+        .input("proposedamountAfc", sql.VarChar, req.body.proposedamountAfc)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("ertId", sql.VarChar, req.body.ertId)
+        .input("shipToFreeText", sql.VarChar, req.body.shipToFreeText)
+        .input("isOnAccount", sql.VarChar, req.body.isOnAccount)
+        .input("taxExemptionPerc", sql.VarChar, req.body.taxExemptionPerc)
+        .input("lines", sql.VarChar, req.body.lines)
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblSalesOrderfromERPM]
+SET
+
+
+[id] =@id
+,[fogId] =@fogId
+,[melId] =@melId
+,[floId] =@floId
+,[code] =@code
+,[refCode] =@refCode
+,[dateDgr] =@dateDgr
+,[dateDhi] =@dateDhi
+,[globalStatus] =@globalStatus
+,[type] =@type
+,[header] =@header
+,[targetMelId] =@targetMelId
+,[targetTrxHeaderId] =@targetTrxHeaderId
+,[targetTrxCode] =@targetTrxCode
+,[maeId] =@maeId
+,[mcaId] =@mcaId
+,[partType] =@partType
+
+,[gprId] =@gprId
+,[siteId] =@siteId
+,[contactId] =@contactId
+,[billToFreeText] =@billToFreeText
+,[PaymentTerms] =@PaymentTerms
+,[creditPeriodDays] =@creditPeriodDays
+,[crrId] =@crrId
+,[fcuId] =@fcuId
+,[exchngRate] =@exchngRate
+,[itemsTotalAlc] =@itemsTotalAlc
+,[addonsTotalAlc] =@addonsTotalAlc
+,[addonsTotalAfc] =@addonsTotalAfc
+,[totalDiscountsAlc] =@totalDiscountsAlc
+,[totalDiscountsAfc] =@totalDiscountsAfc
+,[netPriceAlc] =@netPriceAlc
+,[netPriceAfc] =@netPriceAfc
+,[currApproxAlc] =@currApproxAlc
+
+,[proposedAmountAlc] =@proposedAmountAlc
+,[proposedamountAfc] =@proposedamountAfc
+,[rem] =@rem
+,[ertId] =@ertId
+,[shipToFreeText] =@shipToFreeText
+,[isOnAccount] =@isOnAccount
+,[taxExemptionPerc] =@taxExemptionPerc
+,[lines] =@lines
+
+
+
+
+WHERE tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -9528,6 +9804,32 @@ WHERE tblRouteMasterID='${tblRouteMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesOrderfromERPM_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblSalesOrderfromERPM`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SalesOrderfromERPM_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesOrderfromERPM where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -10543,6 +10845,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblSalesOrderDetsViewInvoiceLine1 where tblRouteMasterID='${tblRouteMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SalesOrderfromERPM_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblSalesInvoiceMID = req.params.tblSalesInvoiceMID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblSalesOrderfromERPM where tblSalesInvoiceMID='${tblSalesInvoiceMID}'`
         );
       console.log(data);
       res.status(200).json(data);

@@ -94,7 +94,8 @@ router.post("/SalesOrderDetsMPrintR_post", FATSDB.SalesOrderDetsMPrintR_post)
 router.post("/SalesOrderDetsMPrintRSReturn_post", FATSDB.SalesOrderDetsMPrintRSReturn_post)
 router.post("/SalesOrderDetsMPrintRSReturnInvoice_post", FATSDB.SalesOrderDetsMPrintRSReturnInvoice_post)
 router.post("/SalesOrderDetsViewInvoiceLine_post", FATSDB.SalesOrderDetsViewInvoiceLine_post)
-router.post("/SalesOrderDetsViewInvoiceLine1_post",FATSDB.SalesOrderDetsViewInvoiceLine1_post)
+router.post("/SalesOrderDetsViewInvoiceLine1_post", FATSDB.SalesOrderDetsViewInvoiceLine1_post)
+router.post("/SalesOrderfromERPM_post",FATSDB.SalesOrderfromERPM_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -217,7 +218,9 @@ router.get("/SalesOrderDetsMPrintRSReturnInvoice_GET_LIST", FATSDB.SalesOrderDet
 router.get("/SalesOrderDetsViewInvoiceLine_GET_LIST", FATSDB.SalesOrderDetsViewInvoiceLine_GET_LIST)
 router.get("/SalesOrderDetsViewInvoiceLine_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsViewInvoiceLine_GET_BYID)
 router.get("/SalesOrderDetsViewInvoiceLine1_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDetsViewInvoiceLine1_GET_BYID)
-router.get("/SalesOrderDetsViewInvoiceLine1_GET_LIST",FATSDB.SalesOrderDetsViewInvoiceLine1_GET_LIST)
+router.get("/SalesOrderDetsViewInvoiceLine1_GET_LIST", FATSDB.SalesOrderDetsViewInvoiceLine1_GET_LIST)
+router.get("/SalesOrderfromERPM_GET_LIST", FATSDB.SalesOrderfromERPM_GET_LIST)
+router.get("/SalesOrderfromERPM_GET_BYID/:tblSalesInvoiceMID",FATSDB.SalesOrderfromERPM_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -279,7 +282,8 @@ router.put("/SalesOrderDetsMPrintR_Put/:tblRouteMasterID", FATSDB.SalesOrderDets
 router.put("/SalesOrderDetsMPrintRSReturn_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintRSReturn_Put)
 router.put("/SalesOrderDetsMPrintRSReturnInvoice_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsMPrintRSReturnInvoice_Put)
 router.put("/SalesOrderDetsViewInvoiceLine_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsViewInvoiceLine_Put)
-router.put("/SalesOrderDetsViewInvoiceLine1_Put/:tblRouteMasterID",FATSDB.SalesOrderDetsViewInvoiceLine1_Put)
+router.put("/SalesOrderDetsViewInvoiceLine1_Put/:tblRouteMasterID", FATSDB.SalesOrderDetsViewInvoiceLine1_Put)
+router.put("/SalesOrderfromERPM_Put/:tblSalesInvoiceMID",FATSDB.SalesOrderfromERPM_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -343,5 +347,6 @@ router.delete("/SalesOrderDetsMPrintRSReturn_DELETE_BYID/:tblRouteMasterID",FATS
 router.delete("/SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsMPrintRSReturnInvoice_DELETE_BYID)
 router.delete("/SalesOrderDetsViewInvoiceLine_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsViewInvoiceLine_DELETE_BYID)
 router.delete("/SalesOrderDetsViewInvoiceLine1_DELETE_BYID/:tblRouteMasterID",FATSDB.SalesOrderDetsViewInvoiceLine1_DELETE_BYID)
+router.delete("/SalesOrderfromERPM_DELETE_BYID/:tblSalesInvoiceMID",FATSDB.SalesOrderfromERPM_DELETE_BYID)
 //----------------------------------------------------------------------------////
 export default router;
