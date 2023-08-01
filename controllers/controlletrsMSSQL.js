@@ -5313,8 +5313,8 @@ async SalesOrderfromERPM_post(req, res, next) {
                          ,[username]
                          ,[loName]
                         ,[foName]
-                        [fogId]
-                        [SignINStatus]
+                        ,[fogId]
+                        ,[SignINStatus]
                        
                         )
                  VALUES
