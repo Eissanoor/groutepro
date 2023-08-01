@@ -5240,6 +5240,52 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async SysNoCounter_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("SalesOrderNo", sql.Numeric, req.body.SalesOrderNo)
+        .input("SalesInvoiceNo", sql.Numeric, req.body.SalesInvoiceNo)
+        .input("VanAutoNumber", sql.Numeric, req.body.VanAutoNumber)
+        .input("trxCtr", sql.Numeric, req.body.trxCtr)
+        .input("SalesReturnNo", sql.Numeric, req.body.SalesReturnNo)
+       
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[TblSysNoCounter]
+                      
+                      ( 
+                         [SalesOrderNo]
+                        ,[SalesInvoiceNo]
+                         ,[VanAutoNumber]
+                         ,[trxCtr]
+                        ,[SalesReturnNo]
+                        
+                       
+                        )
+                 VALUES
+                       (
+                       @SalesOrderNo
+                       ,@SalesInvoiceNo
+                       ,@VanAutoNumber
+                       ,@trxCtr
+                       ,@SalesReturnNo
+                      
+              
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9035,6 +9081,40 @@ WHERE TblSysNoID='${TblSysNoID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SysNoCounter_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+         .input("SalesOrderNo", sql.Numeric, req.body.SalesOrderNo)
+        .input("SalesInvoiceNo", sql.Numeric, req.body.SalesInvoiceNo)
+        .input("VanAutoNumber", sql.Numeric, req.body.VanAutoNumber)
+        .input("trxCtr", sql.Numeric, req.body.trxCtr)
+        .input("SalesReturnNo", sql.Numeric, req.body.SalesReturnNo)
+        .query(
+          ` 
+          UPDATE [dbo].[TblSysNoCounter]
+SET
+
+[trxCtr] =@trxCtr
+,[RoutePlanNo] =@RoutePlanNo
+,[SalesOrderNo] =@SalesOrderNo
+,[VanAutoNumber] =@VanAutoNumber
+,[SalesReturnNo] =@SalesReturnNo
+
+
+
+WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10801,6 +10881,32 @@ WHERE TblSysNoID='${TblSysNoID}'`
     try {
       let pool = await sql.connect(config);
       let data = await pool.request().query(`select * from TblSysNo`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SysNoCounter_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from TblSysNoCounter`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SysNoCounter_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from TblSysNoCounter where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
       res.status(200).json(data);
     } catch (error) {
       console.log(error);

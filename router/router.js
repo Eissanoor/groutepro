@@ -102,7 +102,8 @@ router.post("/ShipmentGLNTracking_post", FATSDB.ShipmentGLNTracking_post)
 router.post("/StockRequestVan_post", FATSDB.StockRequestVan_post)
 router.post("/StocksOnVan_post", FATSDB.StocksOnVan_post)
 router.post("/StocksOnVanPrint_post", FATSDB.StocksOnVanPrint_post)
-router.post("/SysNo_post",FATSDB.SysNo_post)
+router.post("/SysNo_post", FATSDB.SysNo_post)
+router.post("/SysNoCounter_post",FATSDB.SysNoCounter_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -241,7 +242,9 @@ router.get("/StocksOnVan_GET_LIST", FATSDB.StocksOnVan_GET_LIST)
 router.get("/StocksOnVanPrint_GET_LIST", FATSDB.StocksOnVanPrint_GET_LIST)
 router.get("/StocksOnVanPrint_GET_BYID/:tblItemMasterID", FATSDB.StocksOnVanPrint_GET_BYID)
 router.get("/SysNo_GET_BYID/:TblSysNoID", FATSDB.SysNo_GET_BYID)
-router.get("/SysNo_GET_LIST",FATSDB.SysNo_GET_LIST)
+router.get("/SysNo_GET_LIST", FATSDB.SysNo_GET_LIST)
+router.get("/SysNoCounter_GET_LIST", FATSDB.SysNoCounter_GET_LIST)
+router.get("/SysNoCounter_GET_BYID/:TblSysNoCounterID",FATSDB.SysNoCounter_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -311,7 +314,8 @@ router.put("/ShipmentGLNTracking_Put/:tblRequestMasterID", FATSDB.ShipmentGLNTra
 router.put("/StockRequestVan_Put/:tblItemMasterID", FATSDB.StockRequestVan_Put)
 router.put("/StocksOnVan_Put/:tblItemMasterID", FATSDB.StocksOnVan_Put)
 router.put("/StocksOnVanPrint_Put/:tblItemMasterID", FATSDB.StocksOnVanPrint_Put)
-router.put("/SysNo_Put/:TblSysNoID",FATSDB.SysNo_Put)
+router.put("/SysNo_Put/:TblSysNoID", FATSDB.SysNo_Put)
+router.put("/SysNoCounter_Put/:TblSysNoCounterID",FATSDB.SysNoCounter_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
