@@ -9100,7 +9100,7 @@ WHERE TblSysNoID='${TblSysNoID}'`
 SET
 
 [trxCtr] =@trxCtr
-,[RoutePlanNo] =@RoutePlanNo
+,[SalesInvoiceNo] =@SalesInvoiceNo
 ,[SalesOrderNo] =@SalesOrderNo
 ,[VanAutoNumber] =@VanAutoNumber
 ,[SalesReturnNo] =@SalesReturnNo
