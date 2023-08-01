@@ -12072,6 +12072,23 @@ async apt_DELETE_BYID(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+   async SysNoCounter_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoCounterID = req.params.TblSysNoCounterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from TblSysNoCounter where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
 };
 export default FATSDB;
 //

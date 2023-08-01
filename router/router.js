@@ -387,5 +387,6 @@ router.delete("/StockRequestVan_DELETE_BYID/:tblItemMasterID", FATSDB.StockReque
 router.delete("/StocksOnVan_DELETE_BYID/:tblItemMasterID", FATSDB.StocksOnVan_DELETE_BYID)
 router.delete("/StocksOnVanPrint_DELETE_BYID/:tblItemMasterID", FATSDB.StocksOnVanPrint_DELETE_BYID)
 router.delete("/SysNo_DELETE_BYID/:TblSysNoID", FATSDB.SysNo_DELETE_BYID)
+router.delete("/SysNoCounter_DELETE_BYID/:TblSysNoCounterID",FATSDB.SysNoCounter_DELETE_BYID)
 //--------------------------------------------------------------------------------------------------------////
 export default router;
