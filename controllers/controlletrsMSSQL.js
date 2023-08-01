@@ -5141,6 +5141,60 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async StocksOnVanPrint_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("ItemCode", sql.VarChar, req.body.ItemCode)
+        .input("ItemDescription", sql.VarChar, req.body.ItemDescription)
+        .input("ItemUnit", sql.VarChar, req.body.ItemUnit)
+        .input("AvailableQty", sql.Numeric, req.body.AvailableQty)
+        .input("BinNoLocation", sql.VarChar, req.body.BinNoLocation)
+        .input("ItemPrice", sql.Real, req.body.ItemPrice)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("RequestStatusCode", sql.VarChar, req.body.RequestStatusCode)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblStocksOnVanPrint]
+                      
+                      ( 
+                         [ItemCode]
+                        ,[ItemDescription]
+                         ,[ItemUnit]
+                         ,[AvailableQty]
+                        ,[BinNoLocation]
+                         ,[ItemPrice]
+                        ,[RequestStatus]
+                        ,[RequestStatusCode]
+                        
+                       
+                        )
+                 VALUES
+                       (
+                       @ItemCode
+                       ,@ItemDescription
+                       ,@ItemUnit
+                       ,@AvailableQty
+                       ,@BinNoLocation
+                       ,@ItemPrice
+                       ,@RequestStatus
+                       ,@RequestStatusCode
+                      
+              
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -8863,6 +8917,46 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async StocksOnVanPrint_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+        .input("ItemCode", sql.VarChar, req.body.ItemCode)
+        .input("ItemDescription", sql.VarChar, req.body.ItemDescription)
+        .input("ItemUnit", sql.VarChar, req.body.ItemUnit)
+        .input("AvailableQty", sql.Numeric, req.body.AvailableQty)
+        .input("BinNoLocation", sql.VarChar, req.body.BinNoLocation)
+        .input("ItemPrice", sql.Real, req.body.ItemPrice)
+        .input("RequestStatus", sql.VarChar, req.body.RequestStatus)
+        .input("RequestStatusCode", sql.VarChar, req.body.RequestStatusCode)
+        .query(
+          ` 
+          UPDATE [dbo].[tblStocksOnVanPrint]
+SET
+
+[ItemCode] =@ItemCode
+,[ItemDescription] =@ItemDescription
+,[ItemUnit] =@ItemUnit
+,[AvailableQty] =@AvailableQty
+,[BinNoLocation] =@BinNoLocation
+,[ItemPrice] =@ItemPrice
+,[RequestStatus] =@RequestStatus
+,[RequestStatusCode] =@RequestStatusCode
+
+
+
+WHERE tblItemMasterID='${tblItemMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10583,6 +10677,32 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async StocksOnVanPrint_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblStocksOnVanPrint`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async StocksOnVanPrint_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblStocksOnVanPrint where tblItemMasterID='${tblItemMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -11700,6 +11820,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblStocksOnVan where tblItemMasterID='${tblItemMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async StocksOnVanPrint_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblItemMasterID = req.params.tblItemMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblStocksOnVanPrint where tblItemMasterID='${tblItemMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
