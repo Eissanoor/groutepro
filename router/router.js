@@ -232,7 +232,7 @@ router.get("/SalesOrderMPosted_GET_BYID/:tblSalesOrderID", FATSDB.SalesOrderMPos
 router.get("/ShipmentGLNTracking_GET_BYID/:tblRequestMasterID", FATSDB.ShipmentGLNTracking_GET_BYID)
 router.get("/ShipmentGLNTracking_GET_LIST", FATSDB.ShipmentGLNTracking_GET_LIST)
 router.get("/StockRequestVan_GET_LIST", FATSDB.StockRequestVan_GET_LIST)
-router.get("/StockRequestVan_GET_BYID/:tblItemMasterID",FATSDB.StockRequestVan_GET_BYID)
+router.get("/StockRequestVan_GET_BYID/:tblItemMasterID", FATSDB.StockRequestVan_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
