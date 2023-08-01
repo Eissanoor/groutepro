@@ -5195,6 +5195,51 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async SysNo_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("trxCtr", sql.Numeric, req.body.trxCtr)
+        .input("RoutePlanNo", sql.Numeric, req.body.RoutePlanNo)
+        .input("SalesOrderNo", sql.Numeric, req.body.SalesOrderNo)
+        .input("VanAutoNumber", sql.Numeric, req.body.VanAutoNumber)
+       
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[TblSysNo]
+                      
+                      ( 
+                         [trxCtr]
+                        ,[RoutePlanNo]
+                         ,[SalesOrderNo]
+                         ,[VanAutoNumber]
+                        
+                        
+                       
+                        )
+                 VALUES
+                       (
+                       @trxCtr
+                       ,@RoutePlanNo
+                       ,@SalesOrderNo
+                       ,@VanAutoNumber
+                      
+                      
+              
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -8957,6 +9002,39 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async SysNo_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const TblSysNoID = req.params.TblSysNoID;
+      let data = await pool
+        .request()
+
+        .input("trxCtr", sql.Numeric, req.body.trxCtr)
+        .input("RoutePlanNo", sql.Numeric, req.body.RoutePlanNo)
+        .input("SalesOrderNo", sql.Numeric, req.body.SalesOrderNo)
+        .input("VanAutoNumber", sql.Numeric, req.body.VanAutoNumber)
+        .query(
+          ` 
+          UPDATE [dbo].[TblSysNo]
+SET
+
+[trxCtr] =@trxCtr
+,[RoutePlanNo] =@RoutePlanNo
+,[SalesOrderNo] =@SalesOrderNo
+,[VanAutoNumber] =@VanAutoNumber
+
+
+
+
+WHERE TblSysNoID='${TblSysNoID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10703,6 +10781,32 @@ WHERE tblItemMasterID='${tblItemMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SysNo_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoID = req.params.TblSysNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from TblSysNo where TblSysNoID='${TblSysNoID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async SysNo_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from TblSysNo`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -11837,6 +11941,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblStocksOnVanPrint where tblItemMasterID='${tblItemMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async SysNo_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const TblSysNoID = req.params.TblSysNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from TblSysNo where TblSysNoID='${TblSysNoID}'`
         );
       console.log(data);
       res.status(200).json(data);
