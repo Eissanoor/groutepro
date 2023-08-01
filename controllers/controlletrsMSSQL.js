@@ -5286,6 +5286,55 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async UsersLoggedIn_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("jwtToken", sql.VarChar, req.body.jwtToken)
+        .input("UserID", sql.VarChar, req.body.UserID)
+        .input("username", sql.NVarChar, req.body.username)
+        .input("loName", sql.VarChar, req.body.loName)
+        .input("foName", sql.VarChar, req.body.foName)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("SignINStatus", sql.TinyInt, req.body.SignINStatus)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblUsersLoggedIn]
+                      
+                      ( 
+                         [jwtToken]
+                        ,[UserID]
+                         ,[username]
+                         ,[loName]
+                        ,[foName]
+                        [fogId]
+                        [SignINStatus]
+                       
+                        )
+                 VALUES
+                       (
+                       @jwtToken
+                       ,@UserID
+                       ,@username
+                       ,@loName
+                       ,@foName
+                       ,@fogId
+                        ,@SignINStatus
+              
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9115,6 +9164,42 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async UsersLoggedIn_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+         .input("jwtToken", sql.VarChar, req.body.jwtToken)
+        .input("UserID", sql.VarChar, req.body.UserID)
+        .input("username", sql.NVarChar, req.body.username)
+        .input("loName", sql.VarChar, req.body.loName)
+        .input("foName", sql.VarChar, req.body.foName)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("SignINStatus", sql.TinyInt, req.body.SignINStatus)
+        .query(
+          ` 
+          UPDATE [dbo].[tblUsersLoggedIn]
+SET
+
+[jwtToken] =@jwtToken
+,[UserID] =@UserID
+,[username] =@username
+,[loName] =@loName
+,[foName] =@foName
+,[fogId] =@fogId
+,[SignINStatus] =@SignINStatus
+
+WHERE tblVersionNoID='${tblVersionNoID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -10913,6 +10998,32 @@ WHERE TblSysNoCounterID='${TblSysNoCounterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async UsersLoggedIn_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblUsersLoggedIn where tblVersionNoID='${tblVersionNoID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async UsersLoggedIn_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblUsersLoggedIn`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12081,6 +12192,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from TblSysNoCounter where TblSysNoCounterID='${TblSysNoCounterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async UsersLoggedIn_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblUsersLoggedIn where tblVersionNoID='${tblVersionNoID}'`
         );
       console.log(data);
       res.status(200).json(data);
