@@ -99,7 +99,8 @@ router.post("/SalesOrderfromERPM_post", FATSDB.SalesOrderfromERPM_post)
 router.post("/SalesOrderM_post", FATSDB.SalesOrderM_post)
 router.post("/SalesOrderMPosted_post", FATSDB.SalesOrderMPosted_post)
 router.post("/ShipmentGLNTracking_post", FATSDB.ShipmentGLNTracking_post)
-router.post("/StockRequestVan_post",FATSDB.StockRequestVan_post)
+router.post("/StockRequestVan_post", FATSDB.StockRequestVan_post)
+router.post("/StocksOnVan_post",FATSDB.StocksOnVan_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -233,6 +234,8 @@ router.get("/ShipmentGLNTracking_GET_BYID/:tblRequestMasterID", FATSDB.ShipmentG
 router.get("/ShipmentGLNTracking_GET_LIST", FATSDB.ShipmentGLNTracking_GET_LIST)
 router.get("/StockRequestVan_GET_LIST", FATSDB.StockRequestVan_GET_LIST)
 router.get("/StockRequestVan_GET_BYID/:tblItemMasterID", FATSDB.StockRequestVan_GET_BYID)
+router.get("/StocksOnVan_GET_BYID/:tblItemMasterID", FATSDB.StocksOnVan_GET_BYID)
+router.get("/StocksOnVan_GET_LIST",FATSDB.StocksOnVan_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -299,7 +302,8 @@ router.put("/SalesOrderfromERPM_Put/:tblSalesInvoiceMID", FATSDB.SalesOrderfromE
 router.put("/SalesOrderM_Put/:tblSalesOrderID", FATSDB.SalesOrderM_Put)
 router.put("/SalesOrderMPosted_Put/:tblSalesOrderID", FATSDB.SalesOrderMPosted_Put)
 router.put("/ShipmentGLNTracking_Put/:tblRequestMasterID", FATSDB.ShipmentGLNTracking_Put)
-router.put("/StockRequestVan_Put/:tblItemMasterID",FATSDB.StockRequestVan_Put)
+router.put("/StockRequestVan_Put/:tblItemMasterID", FATSDB.StockRequestVan_Put)
+router.put("/StocksOnVan_Put/:tblItemMasterID", FATSDB.StocksOnVan_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -368,5 +372,6 @@ router.delete("/SalesOrderM_DELETE_BYID/:tblSalesOrderID", FATSDB.SalesOrderM_DE
 router.delete("/SalesOrderMPosted_DELETE_BYID/:tblSalesOrderID", FATSDB.SalesOrderMPosted_DELETE_BYID)
 router.delete("/ShipmentGLNTracking_DELETE_BYID/:tblRequestMasterID", FATSDB.ShipmentGLNTracking_DELETE_BYID)
 router.delete("/StockRequestVan_DELETE_BYID/:tblItemMasterID", FATSDB.StockRequestVan_DELETE_BYID)
+router.delete("/StocksOnVan_DELETE_BYID/:tblItemMasterID",FATSDB.StocksOnVan_DELETE_BYID)
 //--------------------------------------------------------------------------------------------------------////
 export default router;
