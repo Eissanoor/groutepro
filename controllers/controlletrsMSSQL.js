@@ -5464,7 +5464,9 @@ async SalesOrderfromERPM_post(req, res, next) {
   },
   async VanMaster_post(req, res, next) {
     try {
-  
+  const file = req.files["Photo"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
       let pool = await sql.connect(config);
 
       let data = await pool
@@ -5476,7 +5478,7 @@ async SalesOrderfromERPM_post(req, res, next) {
         .input("VanMake", sql.VarChar, req.body.VanMake)
         .input("VanColor", sql.VarChar, req.body.VanColor)
         .input("PlateNo", sql.VarChar, req.body.PlateNo)
-        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("Photo", sql.VarChar, url)
         .input("VanInUsed", sql.TinyInt, req.body.VanInUsed)
         .input("VanSelected", sql.TinyInt, req.body.VanSelected)
         .input("VehCategory", sql.VarChar, req.body.VehCategory)
@@ -9482,7 +9484,9 @@ WHERE tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
   },
     async VanMaster_Put(req, res, next) {
     try {
-    
+    const file = req.files["Photo"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
       let pool = await sql.connect(config);
       const tblVanMasterID = req.params.tblVanMasterID;
       let data = await pool
@@ -9493,7 +9497,7 @@ WHERE tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
         .input("VanMake", sql.VarChar, req.body.VanMake)
         .input("VanColor", sql.VarChar, req.body.VanColor)
         .input("PlateNo", sql.VarChar, req.body.PlateNo)
-        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("Photo", sql.VarChar, url)
         .input("VanInUsed", sql.TinyInt, req.body.VanInUsed)
         .input("VanSelected", sql.TinyInt, req.body.VanSelected)
         .input("VehCategory", sql.VarChar, req.body.VehCategory)

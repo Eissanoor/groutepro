@@ -106,7 +106,7 @@ router.post("/SysNo_post", FATSDB.SysNo_post)
 router.post("/SysNoCounter_post", FATSDB.SysNoCounter_post)
 router.post("/UsersLoggedIn_post", FATSDB.UsersLoggedIn_post)
 router.post("/UsersLoginSalesMan_post", FATSDB.UsersLoginSalesMan_post)
-router.post("/VanMaster_post",FATSDB.VanMaster_post)
+router.post("/VanMaster_post", cpUpload, FATSDB.VanMaster_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -327,7 +327,7 @@ router.put("/SysNo_Put/:TblSysNoID", FATSDB.SysNo_Put)
 router.put("/SysNoCounter_Put/:TblSysNoCounterID", FATSDB.SysNoCounter_Put)
 router.put("/UsersLoggedIn_Put/:tblVersionNoID", FATSDB.UsersLoggedIn_Put)
 router.put("/UsersLoginSalesMan_Put/:tblUsersLoginSalesManID", FATSDB.UsersLoginSalesMan_Put)
-router.put("/VanMaster_Put/:tblVanMasterID",FATSDB.VanMaster_Put)
+router.put("/VanMaster_Put/:tblVanMasterID",cpUpload, FATSDB.VanMaster_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
