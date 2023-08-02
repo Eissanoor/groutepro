@@ -5400,7 +5400,7 @@ async SalesOrderfromERPM_post(req, res, next) {
                         ,[shDescLo]
                         ,[shDescFo]       
                         
-                        [type]
+                        ,[type]
                         ,[issuePolicyId]
                          ,[isVanSale]
                          ,[flold]
