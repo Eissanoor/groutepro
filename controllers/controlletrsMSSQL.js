@@ -5526,6 +5526,56 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async VehicleConditions_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+       .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("PlateNo", sql.VarChar, req.body.PlateNo)
+        .input("TiresCondition", sql.NVarChar, req.body.TiresCondition)
+        .input("ACCondition", sql.VarChar, req.body.ACCondition)
+        .input("PetrolLevel", sql.VarChar, req.body.PetrolLevel)
+        .input("Odometer", sql.Numeric, req.body.Odometer)
+        .input("UserLoginID", sql.VarChar, req.body.UserLoginID)
+        .input("VanIDNo", sql.VarChar, req.body.VanIDNo)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblVehicleConditions]
+                      
+                      ( 
+                         [DateTimeCreated]
+                        ,[PlateNo]
+                         ,[TiresCondition]
+                         ,[ACCondition]
+                        ,[PetrolLevel]
+                        ,[Odometer]
+                        ,[UserLoginID]
+                        ,[VanIDNo]
+                        )
+                 VALUES
+                       (
+                       @DateTimeCreated
+                       ,@PlateNo
+                       ,@TiresCondition
+                       ,@ACCondition
+                       ,@PetrolLevel
+                       ,@Odometer
+                        ,@UserLoginID
+                       ,@VanIDNo
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9531,6 +9581,43 @@ WHERE tblVanMasterID='${tblVanMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async VehiclePhotosID_put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+         .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
+        .input("PlateNo", sql.VarChar, req.body.PlateNo)
+        .input("TiresCondition", sql.NVarChar, req.body.TiresCondition)
+        .input("ACCondition", sql.VarChar, req.body.ACCondition)
+        .input("PetrolLevel", sql.VarChar, req.body.PetrolLevel)
+        .input("Odometer", sql.Numeric, req.body.Odometer)
+        .input("UserLoginID", sql.VarChar, req.body.UserLoginID)
+        .input("VanIDNo", sql.VarChar, req.body.VanIDNo)
+        .query(
+          ` 
+          UPDATE [dbo].[tblVehicleConditions]
+SET
+
+[DateTimeCreated] =@DateTimeCreated
+,[PlateNo] =@PlateNo
+,[TiresCondition] =@TiresCondition
+,[ACCondition] =@ACCondition
+,[PetrolLevel] =@PetrolLevel
+,[Odometer] =@Odometer
+,[UserLoginID] =@UserLoginID
+,[VanIDNo] =@VanIDNo
+WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -11407,6 +11494,32 @@ WHERE tblVanMasterID='${tblVanMasterID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async VehicleConditions_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblVehicleConditions`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async VehicleConditions_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblVehicleConditions where tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12626,6 +12739,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblVanMaster where tblVanMasterID='${tblVanMasterID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async VehicleConditions_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblVehicleConditions where tblVehiclePhotosID='${tblVehiclePhotosID}'`
         );
       console.log(data);
       res.status(200).json(data);
