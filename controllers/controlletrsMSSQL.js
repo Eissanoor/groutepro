@@ -1999,7 +1999,7 @@ async UserLoginAuth(req, res, next) {
         .input("SOAreaAssigned", sql.VarChar, req.body.SOAreaAssigned)
         .input("SORouteNo", sql.VarChar, req.body.SORouteNo)
         .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
-        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
+        .input("SOusername", sql.VarChar, req.body.SOBillTo)
         .input("SOStage", sql.VarChar, req.body.SOStage)
         .input("SOAssignedVanIDNo", sql.VarChar, req.body.SOAssignedVanIDNo)
         .input("SOAssignedDriverIDNo", sql.VarChar, req.body.SOAssignedDriverIDNo)
@@ -2357,7 +2357,7 @@ async UserLoginAuth(req, res, next) {
         .input("siteId", sql.VarChar, req.body.siteId)
         .input("contactId", sql.VarChar, req.body.contactId)
         .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
-        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
+        .input("nameFo", sql.VarChar, req.body.PaymentTerms)
         .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
         .input("crrId", sql.VarChar, req.body.crrId)
         .input("fcuId", sql.VarChar, req.body.fcuId)
@@ -5327,6 +5327,133 @@ async SalesOrderfromERPM_post(req, res, next) {
                        ,@fogId
                         ,@SignINStatus
               
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+  async UsersLoginSalesMan_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("id_one", sql.VarChar, req.body.id_one)
+        .input("username", sql.NVarChar, req.body.username)
+        .input("nameLo", sql.NVarChar, req.body.nameLo)
+        .input("nameFo", sql.NVarChar, req.body.nameFo)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("salesman", sql.NVarChar, req.body.salesman)
+        .input("id_two", sql.VarChar, req.body.id_two)
+        .input("code", sql.VarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("role", sql.NVarChar, req.body.role)
+        .input("eepId", sql.VarChar, req.body.eepId)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("categoryId", sql.VarChar, req.body.categoryId)
+        
+        .input("type", sql.VarChar, req.body.type)
+        .input("issuePolicyId", sql.VarChar, req.body.issuePolicyId)
+        .input("isVanSale", sql.VarChar, req.body.isVanSale)
+        .input("flold", sql.VarChar, req.body.flold)
+        .input("priceListId", sql.VarChar, req.body.priceListId)
+        .input("salesPolicyId", sql.VarChar, req.body.salesPolicyId)
+        .input("collectionPolicyId", sql.VarChar, req.body.collectionPolicyId)
+        .input("vouchSetupId", sql.VarChar, req.body.vouchSetupId)
+        .input("collectionMethodId", sql.VarChar, req.body.collectionMethodId)
+        .input("targetBcdId", sql.VarChar, req.body.targetBcdId)
+        .input("checkCreditLimit", sql.Real, req.body.checkCreditLimit)
+        .input("openingBalanceAlc", sql.VarChar, req.body.openingBalanceAlc)
+        .input("regionID", sql.VarChar, req.body.regionID)
+        .input("branchFlold", sql.VarChar, req.body.branchFlold)
+        .input("maxDiscountPerc", sql.VarChar, req.body.maxDiscountPerc)
+        .input("en", sql.VarChar, req.body.en)
+        .input("token", sql.VarChar, req.body.token)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblUsersLoginSalesMan]
+                      
+                      ( 
+                         [id_one]
+                        ,[username]
+                         ,[nameLo]
+                         ,[nameFo]
+                        ,[fogId]
+                         ,[salesman]
+                        ,[id_two]
+                        ,[code]
+                        ,[descLo]
+                        ,[descFo]
+                        ,[role]
+                        ,[eepId]
+                        ,[rem]
+                        ,[categoryId]
+                        ,[shDescLo]
+                        ,[shDescFo]       
+                        
+                        [type]
+                        ,[issuePolicyId]
+                         ,[isVanSale]
+                         ,[flold]
+                        ,[priceListId]
+                         ,[salesPolicyId]
+                        ,[collectionPolicyId]
+                        ,[vouchSetupId]
+                        ,[collectionMethodId]
+                        ,[targetBcdId]
+                        ,[checkCreditLimit]
+                        ,[openingBalanceAlc]
+                        ,[regionID]
+                        ,[branchFlold]
+                        ,[maxDiscountPerc]
+                        ,[en]
+                        ,[token]
+                        )
+                 VALUES
+                       (
+                       @id_one
+                       ,@username
+                       ,@nameLo
+                       ,@nameFo
+                       ,@fogId
+                       ,@salesman
+                       ,@id_two
+                       ,@code
+                       ,@descLo
+                       ,@descFo
+                       ,@role
+                       ,@eepId
+                       ,@rem
+                       ,@categoryId
+                       ,@shDescLo
+                       ,@shDescFo
+                      
+                        @type
+                       ,@issuePolicyId
+                       ,@isVanSale
+                       ,@flold
+                       ,@priceListId
+                       ,@salesPolicyId
+                       ,@collectionPolicyId
+                       ,@vouchSetupId
+                       ,@collectionMethodId
+                       ,@targetBcdId
+                       ,@checkCreditLimit
+                       ,@openingBalanceAlc
+                       ,@regionID
+                       ,@branchFlold
+                       ,@maxDiscountPerc
+                       ,@en
+                       ,@token
                        )`
         );
       res.status(201).json(data);
@@ -9200,6 +9327,97 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async UsersLoginSalesMan_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblUsersLoginSalesManID = req.params.tblUsersLoginSalesManID;
+      let data = await pool
+        .request()
+
+        .input("id_one", sql.VarChar, req.body.id_one)
+        .input("username", sql.NVarChar, req.body.username)
+        .input("nameLo", sql.NVarChar, req.body.nameLo)
+        .input("nameFo", sql.NVarChar, req.body.nameFo)
+        .input("fogId", sql.VarChar, req.body.fogId)
+        .input("salesman", sql.NVarChar, req.body.salesman)
+        .input("id_two", sql.VarChar, req.body.id_two)
+        .input("code", sql.VarChar, req.body.code)
+        .input("descLo", sql.NVarChar, req.body.descLo)
+        .input("descFo", sql.NVarChar, req.body.descFo)
+        .input("shDescLo", sql.NVarChar, req.body.shDescLo)
+        .input("shDescFo", sql.NVarChar, req.body.shDescFo)
+        .input("role", sql.NVarChar, req.body.role)
+        .input("eepId", sql.VarChar, req.body.eepId)
+        .input("rem", sql.VarChar, req.body.rem)
+        .input("categoryId", sql.VarChar, req.body.categoryId)
+        
+        .input("type", sql.VarChar, req.body.type)
+        .input("issuePolicyId", sql.VarChar, req.body.issuePolicyId)
+        .input("isVanSale", sql.VarChar, req.body.isVanSale)
+        .input("flold", sql.VarChar, req.body.flold)
+        .input("priceListId", sql.VarChar, req.body.priceListId)
+        .input("salesPolicyId", sql.VarChar, req.body.salesPolicyId)
+        .input("collectionPolicyId", sql.VarChar, req.body.collectionPolicyId)
+        .input("vouchSetupId", sql.VarChar, req.body.vouchSetupId)
+        .input("collectionMethodId", sql.VarChar, req.body.collectionMethodId)
+        .input("targetBcdId", sql.VarChar, req.body.targetBcdId)
+        .input("checkCreditLimit", sql.Real, req.body.checkCreditLimit)
+        .input("openingBalanceAlc", sql.VarChar, req.body.openingBalanceAlc)
+        .input("regionID", sql.VarChar, req.body.regionID)
+        .input("branchFlold", sql.VarChar, req.body.branchFlold)
+        .input("maxDiscountPerc", sql.VarChar, req.body.maxDiscountPerc)
+        .input("en", sql.VarChar, req.body.en)
+        .input("token", sql.VarChar, req.body.token)
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblUsersLoginSalesMan]
+SET
+
+[id_one] =@id_one
+,[username] =@username
+,[nameLo] =@nameLo
+,[nameFo] =@nameFo
+,[fogId] =@fogId
+,[salesman] =@salesman
+,[id_two] =@id_two
+,[code] =@code
+,[descLo] =@descLo
+,[descFo] =@descFo
+,[shDescLo] =@shDescLo
+,[shDescFo] =@shDescFo
+,[role] =@role
+,[eepId] =@eepId
+,[rem] =@rem
+,[categoryId] =@categoryId
+
+,[type] =@type
+,[issuePolicyId] =@issuePolicyId
+,[isVanSale] =@isVanSale
+,[flold] =@flold
+,[priceListId] =@priceListId
+,[salesPolicyId] =@salesPolicyId
+,[collectionPolicyId] =@collectionPolicyId
+,[vouchSetupId] =@vouchSetupId
+,[collectionMethodId] =@collectionMethodId
+,[targetBcdId] =@targetBcdId
+,[checkCreditLimit] =@checkCreditLimit
+,[openingBalanceAlc] =@openingBalanceAlc
+,[regionID] =@regionID
+,[branchFlold] =@branchFlold
+,[maxDiscountPerc] =@maxDiscountPerc
+,[en] =@en
+,[token] =@token
+
+WHERE tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -11024,6 +11242,32 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async UsersLoginSalesMan_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblUsersLoginSalesMan`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async UsersLoginSalesMan_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblUsersLoginSalesManID = req.params.tblUsersLoginSalesManID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblUsersLoginSalesMan where tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12209,6 +12453,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblUsersLoggedIn where tblVersionNoID='${tblVersionNoID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async UsersLoginSalesMan_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblUsersLoginSalesManID = req.params.tblUsersLoginSalesManID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblUsersLoginSalesMan where tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
         );
       console.log(data);
       res.status(200).json(data);

@@ -104,7 +104,8 @@ router.post("/StocksOnVan_post", FATSDB.StocksOnVan_post)
 router.post("/StocksOnVanPrint_post", FATSDB.StocksOnVanPrint_post)
 router.post("/SysNo_post", FATSDB.SysNo_post)
 router.post("/SysNoCounter_post", FATSDB.SysNoCounter_post)
-router.post("/UsersLoggedIn_post",FATSDB.UsersLoggedIn_post)
+router.post("/UsersLoggedIn_post", FATSDB.UsersLoggedIn_post)
+router.post("/UsersLoginSalesMan_post",FATSDB.UsersLoginSalesMan_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -247,7 +248,9 @@ router.get("/SysNo_GET_LIST", FATSDB.SysNo_GET_LIST)
 router.get("/SysNoCounter_GET_LIST", FATSDB.SysNoCounter_GET_LIST)
 router.get("/SysNoCounter_GET_BYID/:TblSysNoCounterID", FATSDB.SysNoCounter_GET_BYID)
 router.get("/UsersLoggedIn_GET_BYID/:tblVersionNoID", FATSDB.UsersLoggedIn_GET_BYID)
-router.get("/UsersLoggedIn_GET_LIST",FATSDB.UsersLoggedIn_GET_LIST)
+router.get("/UsersLoggedIn_GET_LIST", FATSDB.UsersLoggedIn_GET_LIST)
+router.get("/UsersLoginSalesMan_GET_LIST", FATSDB.UsersLoginSalesMan_GET_LIST)
+router.get("/UsersLoginSalesMan_GET_BYID/:tblUsersLoginSalesManID",FATSDB.UsersLoginSalesMan_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -319,7 +322,8 @@ router.put("/StocksOnVan_Put/:tblItemMasterID", FATSDB.StocksOnVan_Put)
 router.put("/StocksOnVanPrint_Put/:tblItemMasterID", FATSDB.StocksOnVanPrint_Put)
 router.put("/SysNo_Put/:TblSysNoID", FATSDB.SysNo_Put)
 router.put("/SysNoCounter_Put/:TblSysNoCounterID", FATSDB.SysNoCounter_Put)
-router.put("/UsersLoggedIn_Put/:tblVersionNoID",FATSDB.UsersLoggedIn_Put)
+router.put("/UsersLoggedIn_Put/:tblVersionNoID", FATSDB.UsersLoggedIn_Put)
+router.put("/UsersLoginSalesMan_Put/:tblUsersLoginSalesManID",FATSDB.UsersLoginSalesMan_Put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -392,6 +396,7 @@ router.delete("/StocksOnVan_DELETE_BYID/:tblItemMasterID", FATSDB.StocksOnVan_DE
 router.delete("/StocksOnVanPrint_DELETE_BYID/:tblItemMasterID", FATSDB.StocksOnVanPrint_DELETE_BYID)
 router.delete("/SysNo_DELETE_BYID/:TblSysNoID", FATSDB.SysNo_DELETE_BYID)
 router.delete("/SysNoCounter_DELETE_BYID/:TblSysNoCounterID", FATSDB.SysNoCounter_DELETE_BYID)
-router.delete("/UsersLoggedIn_DELETE_BYID/:tblVersionNoID",FATSDB.UsersLoggedIn_DELETE_BYID)
+router.delete("/UsersLoggedIn_DELETE_BYID/:tblVersionNoID", FATSDB.UsersLoggedIn_DELETE_BYID)
+router.delete("/UsersLoginSalesMan_DELETE_BYID/:tblUsersLoginSalesManID",FATSDB.UsersLoginSalesMan_DELETE_BYID)
 //--------------------------------------------------------------------------------------------------------////
 export default router;
