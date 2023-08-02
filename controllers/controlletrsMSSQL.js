@@ -5615,6 +5615,41 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async VersionNo_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+       .input("TableName", sql.VarChar, req.body.TableName)
+        .input("VersionNum", sql.Numeric, req.body.VersionNum)
+       
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblVersionNo]
+                      
+                      ( 
+                         [TableName]
+                        ,[VersionNum]
+                        
+                        )
+                 VALUES
+                       (
+                       @TableName
+                       ,@VersionNum
+                       
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9691,6 +9726,32 @@ WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+     async VersionNo_put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+         .input("TableName", sql.VarChar, req.body.TableName)
+        .input("VersionNum", sql.Numeric, req.body.VersionNum)
+        .query(
+          ` 
+          UPDATE [dbo].[tblVersionNo]
+SET
+
+[TableName] =@TableName
+,[VersionNum] =@VersionNum
+
+WHERE tblVersionNoID='${tblVersionNoID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -11619,6 +11680,32 @@ WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async VersionNo_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblVersionNo`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async VersionNo_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblVersionNo where tblVersionNoID='${tblVersionNoID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12872,6 +12959,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblVehiclePhotos where tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async VersionNo_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVersionNoID = req.params.tblVersionNoID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblVersionNo where tblVersionNoID='${tblVersionNoID}'`
         );
       console.log(data);
       res.status(200).json(data);

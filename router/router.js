@@ -109,7 +109,8 @@ router.post("/UsersLoggedIn_post", FATSDB.UsersLoggedIn_post)
 router.post("/UsersLoginSalesMan_post", FATSDB.UsersLoginSalesMan_post)
 router.post("/VanMaster_post", cpUpload, FATSDB.VanMaster_post)
 router.post("/VehicleConditions_post", FATSDB.VehicleConditions_post)
-router.post("/VehiclePhotos_post",cpUpload,FATSDB.VehiclePhotos_post)
+router.post("/VehiclePhotos_post", cpUpload, FATSDB.VehiclePhotos_post)
+router.post("/VersionNo_post",FATSDB.VersionNo_post)
 //--------------------------------------------------------------------------
 
 //-------------------------------GET_API---------------------------------------------
@@ -260,7 +261,9 @@ router.get("/VanMaster_GET_LIST", FATSDB.VanMaster_GET_LIST)
 router.get("/VehicleConditions_GET_LIST", FATSDB.VehicleConditions_GET_LIST)
 router.get("/VehicleConditions_GET_BYID/:tblVehiclePhotosID", FATSDB.VehicleConditions_GET_BYID)
 router.get("/VehiclePhotos_GET_BYID/:tblVehiclePhotosID", FATSDB.VehiclePhotos_GET_BYID)
-router.get("/VehiclePhotos_GET_LIST",FATSDB.VehiclePhotos_GET_LIST)
+router.get("/VehiclePhotos_GET_LIST", FATSDB.VehiclePhotos_GET_LIST)
+router.get("/VersionNo_GET_LIST", FATSDB.VersionNo_GET_LIST)
+router.get("/VersionNo_GET_BYID/:tblVersionNoID",FATSDB.VersionNo_GET_BYID)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
@@ -336,7 +339,8 @@ router.put("/UsersLoggedIn_Put/:tblVersionNoID", FATSDB.UsersLoggedIn_Put)
 router.put("/UsersLoginSalesMan_Put/:tblUsersLoginSalesManID", FATSDB.UsersLoginSalesMan_Put)
 router.put("/VanMaster_Put/:tblVanMasterID", cpUpload, FATSDB.VanMaster_Put)
 router.put("/VehiclePhotosID_put/:tblVehiclePhotosID", FATSDB.VehiclePhotosID_put)
-router.put("/VehiclePhotos_Put/:tblVehiclePhotosID",cpUpload, FATSDB.VehiclePhotos_Put)
+router.put("/VehiclePhotos_Put/:tblVehiclePhotosID", cpUpload, FATSDB.VehiclePhotos_Put)
+router.put("/VersionNo_put/:tblVersionNoID",FATSDB.VersionNo_put)
 //---------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------DELETE_API------------------------------------------------------------------
@@ -413,6 +417,7 @@ router.delete("/UsersLoggedIn_DELETE_BYID/:tblVersionNoID", FATSDB.UsersLoggedIn
 router.delete("/UsersLoginSalesMan_DELETE_BYID/:tblUsersLoginSalesManID", FATSDB.UsersLoginSalesMan_DELETE_BYID)
 router.delete("/VanMaster_DELETE_BYID/:tblVanMasterID", FATSDB.VanMaster_DELETE_BYID)
 router.delete("/VehicleConditions_DELETE_BYID/:tblVehiclePhotosID", FATSDB.VehicleConditions_DELETE_BYID)
-router.delete("/VehiclePhotos_DELETE_BYID/:tblVehiclePhotosID",FATSDB.VehiclePhotos_DELETE_BYID)
+router.delete("/VehiclePhotos_DELETE_BYID/:tblVehiclePhotosID", FATSDB.VehiclePhotos_DELETE_BYID)
+router.delete("/VersionNo_DELETE_BYID/:tblVersionNoID",FATSDB.VersionNo_DELETE_BYID)
 //--------------------------------------------------------------------------------------------------------////
 export default router;
