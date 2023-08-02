@@ -5587,7 +5587,7 @@ async SalesOrderfromERPM_post(req, res, next) {
         .request()
       
         
-        .input("DateTimeCreated", sql.VarChar, req.body.DateTimeCreated)
+        .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
         .input("VPhoto", sql.VarChar, url)
         .input("VIDNo", sql.VarChar, req.body.VIDNo)
         
@@ -9667,7 +9667,7 @@ WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
       let data = await pool
         .request()
 
-         .input("DateTimeCreated", sql.VarChar, req.body.DateTimeCreated)
+         .input("DateTimeCreated", sql.DateTime, req.body.DateTimeCreated)
         .input("VPhoto", sql.VarChar, url)
         .input("VIDNo", sql.VarChar, req.body.VIDNo)
        
