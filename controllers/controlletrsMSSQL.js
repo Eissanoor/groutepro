@@ -5576,6 +5576,45 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async VehiclePhotos_post(req, res, next) {
+    try {
+  const file = req.files["VPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("DateTimeCreated", sql.VarChar, req.body.DateTimeCreated)
+        .input("VPhoto", sql.VarChar, url)
+        .input("VIDNo", sql.VarChar, req.body.VIDNo)
+        
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblVehiclePhotos]
+                      
+                      ( 
+                         [DateTimeCreated]
+                        ,[VPhoto]
+                         ,[VIDNo]
+                     
+                        )
+                 VALUES
+                       (
+                       @DateTimeCreated
+                       ,@VPhoto
+                       ,@VIDNo
+        
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9618,6 +9657,40 @@ WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+     async VehiclePhotos_Put(req, res, next) {
+    try {
+   const file = req.files["VPhoto"];
+
+      const url = `http://gs1ksa.org:3090/api/profile/${file[0].filename}`;
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+         .input("DateTimeCreated", sql.VarChar, req.body.DateTimeCreated)
+        .input("VPhoto", sql.VarChar, url)
+        .input("VIDNo", sql.VarChar, req.body.VIDNo)
+       
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblVehiclePhotos]
+SET
+
+[DateTimeCreated] =@DateTimeCreated
+,[VPhoto] =@VPhoto
+,[VIDNo] =@VIDNo
+
+
+
+WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -11520,6 +11593,32 @@ WHERE tblVehiclePhotosID='${tblVehiclePhotosID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async VehiclePhotos_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblVehiclePhotos where tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async VehiclePhotos_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblVehiclePhotos`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12756,6 +12855,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblVehicleConditions where tblVehiclePhotosID='${tblVehiclePhotosID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async VehiclePhotos_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVehiclePhotosID = req.params.tblVehiclePhotosID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblVehiclePhotos where tblVehiclePhotosID='${tblVehiclePhotosID}'`
         );
       console.log(data);
       res.status(200).json(data);
