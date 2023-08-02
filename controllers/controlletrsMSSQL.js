@@ -5462,6 +5462,68 @@ async SalesOrderfromERPM_post(req, res, next) {
       res.status(500).json({ error: `${error}` });
     }
   },
+  async VanMaster_post(req, res, next) {
+    try {
+  
+      let pool = await sql.connect(config);
+
+      let data = await pool
+        .request()
+      
+        
+        .input("VanIDNo", sql.VarChar, req.body.VanIDNo)
+        .input("ModelNo", sql.VarChar, req.body.ModelNo)
+        .input("VanMake", sql.VarChar, req.body.VanMake)
+        .input("VanColor", sql.VarChar, req.body.VanColor)
+        .input("PlateNo", sql.VarChar, req.body.PlateNo)
+        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("VanInUsed", sql.TinyInt, req.body.VanInUsed)
+        .input("VanSelected", sql.TinyInt, req.body.VanSelected)
+        .input("VehCategory", sql.VarChar, req.body.VehCategory)
+        .input("VehSize", sql.VarChar, req.body.VehSize)
+        .input("VehWeight", sql.Real, req.body.VehWeight)
+        .query(
+          ` 
+            INSERT INTO [dbo].[tblVanMaster]
+                      
+                      ( 
+                         [VanIDNo]
+                        ,[ModelNo]
+                         ,[VanMake]
+                         ,[VanColor]
+                        ,[PlateNo]
+                         ,[Photo]
+                        ,[VanInUsed]
+                        ,[VanSelected]
+                        ,[VehCategory]
+                        ,[VehSize]
+                        ,[VehWeight]
+                       
+                        
+                        )
+                 VALUES
+                       (
+                       @VanIDNo
+                       ,@ModelNo
+                       ,@VanMake
+                       ,@VanColor
+                       ,@PlateNo
+                       ,@Photo
+                       ,@VanInUsed
+                       ,@VanSelected
+                       ,@VehCategory
+                       ,@VehSize
+                       ,@VehWeight
+                      
+                      
+                       )`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------PUT--------------------------------------------------------
@@ -9418,6 +9480,53 @@ WHERE tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+    async VanMaster_Put(req, res, next) {
+    try {
+    
+      let pool = await sql.connect(config);
+      const tblVanMasterID = req.params.tblVanMasterID;
+      let data = await pool
+        .request()
+
+         .input("VanIDNo", sql.VarChar, req.body.VanIDNo)
+        .input("ModelNo", sql.VarChar, req.body.ModelNo)
+        .input("VanMake", sql.VarChar, req.body.VanMake)
+        .input("VanColor", sql.VarChar, req.body.VanColor)
+        .input("PlateNo", sql.VarChar, req.body.PlateNo)
+        .input("Photo", sql.VarChar, req.body.Photo)
+        .input("VanInUsed", sql.TinyInt, req.body.VanInUsed)
+        .input("VanSelected", sql.TinyInt, req.body.VanSelected)
+        .input("VehCategory", sql.VarChar, req.body.VehCategory)
+        .input("VehSize", sql.VarChar, req.body.VehSize)
+        .input("VehWeight", sql.Real, req.body.VehWeight)
+       
+       
+        .query(
+          ` 
+          UPDATE [dbo].[tblVanMaster]
+SET
+
+[VanIDNo] =@VanIDNo
+,[ModelNo] =@ModelNo
+,[VanMake] =@VanMake
+,[VanColor] =@VanColor
+,[PlateNo] =@PlateNo
+,[Photo] =@Photo
+,[VanInUsed] =@VanInUsed
+,[VanSelected] =@VanSelected
+,[VehCategory] =@VehCategory
+,[VehSize] =@VehSize
+,[VehWeight] =@VehWeight
+
+
+WHERE tblVanMasterID='${tblVanMasterID}'`
+        );
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //----------------------------------------------------------------------------------------------------------
 
   //---------------------------GET----------------------------------------------------------------------------
@@ -11268,6 +11377,32 @@ WHERE tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async VanMaster_GET_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVanMasterID = req.params.tblVanMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblVanMaster where tblVanMasterID='${tblVanMasterID}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+ async VanMaster_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`select * from tblVanMaster`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------
@@ -12470,6 +12605,23 @@ async apt_DELETE_BYID(req, res, next) {
 
         .query(
           `delete from tblUsersLoginSalesMan where tblUsersLoginSalesManID='${tblUsersLoginSalesManID}'`
+        );
+      console.log(data);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
+   async VanMaster_DELETE_BYID(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const tblVanMasterID = req.params.tblVanMasterID;
+      let data = await pool
+        .request()
+
+        .query(
+          `delete from tblVanMaster where tblVanMasterID='${tblVanMasterID}'`
         );
       console.log(data);
       res.status(200).json(data);
