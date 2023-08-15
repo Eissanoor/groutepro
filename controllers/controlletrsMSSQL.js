@@ -10998,7 +10998,7 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
     try {
       let pool = await sql.connect(config);
       let data = await pool.request().query(`select * from tblSalesOrder`);
-      res.status(200).json(data);
+      res.status(200).json(data.recordsets[0]);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
