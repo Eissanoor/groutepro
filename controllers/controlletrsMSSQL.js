@@ -2358,7 +2358,7 @@ async UserLoginAuth(req, res, next) {
         .input("siteId", sql.VarChar, req.body.siteId)
         .input("contactId", sql.VarChar, req.body.contactId)
         .input("billToFreeText", sql.VarChar, req.body.billToFreeText)
-        .input("nameFo", sql.VarChar, req.body.PaymentTerms)
+        .input("PaymentTerms", sql.VarChar, req.body.PaymentTerms)
         .input("creditPeriodDays", sql.VarChar, req.body.creditPeriodDays)
         .input("crrId", sql.VarChar, req.body.crrId)
         .input("fcuId", sql.VarChar, req.body.fcuId)
