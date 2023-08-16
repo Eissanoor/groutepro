@@ -2001,6 +2001,7 @@ async UserLoginAuth(req, res, next) {
         .input("SOShipTo", sql.VarChar, req.body.SOShipTo)
         .input("SOusername", sql.VarChar, req.body.SOBillTo)
         .input("SOStage", sql.VarChar, req.body.SOStage)
+        .input("SOBillTo", sql.VarChar, req.body.SOBillTo)
         .input("SOAssignedVanIDNo", sql.VarChar, req.body.SOAssignedVanIDNo)
         .input("SOAssignedDriverIDNo", sql.VarChar, req.body.SOAssignedDriverIDNo)
         .input("SOAreaGPS", sql.VarChar, req.body.SOAreaGPS)
