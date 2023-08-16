@@ -10995,6 +10995,22 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async SalesOrder_GET_SOSalesManIdNo(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      const SOSalesManIdNo = req.params.SOSalesManIdNo;
+      let data = await pool
+        .request()
+
+        .query(
+          `select * from tblSalesOrder where SOSalesManIdNo='${SOSalesManIdNo}'`
+        );
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
  async SalesOrder_GET_LIST(req, res, next) {
     try {
       let pool = await sql.connect(config);
