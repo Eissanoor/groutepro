@@ -11005,7 +11005,7 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
         .query(
           `select * from tblSalesOrder where SOSalesManIdNo='${SOSalesManIdNo}'`
         );
-      res.status(200).json(data);
+      res.status(200).json(data.recordsets[0]);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
