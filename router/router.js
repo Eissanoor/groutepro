@@ -209,7 +209,7 @@ router.get("/SalesManConfirmedOrdersM_GET_LIST", FATSDB.SalesManConfirmedOrdersM
 router.get("/SalesManConfirmedOrdersMSelected_GET_LIST", FATSDB.SalesManConfirmedOrdersMSelected_GET_LIST)
 router.get("/SalesManConfirmedOrdersMSelected_GET_BYID/:tblSalesOrderID", FATSDB.SalesManConfirmedOrdersMSelected_GET_BYID)
 router.get("/SalesOrder_GET_BYID/:tblSalesOrderID", FATSDB.SalesOrder_GET_BYID)
-router.get("/SalesOrder_GET_SOSalesManIdNo/:SOSalesManIdNo", FATSDB.SalesOrder_GET_SOSalesManIdNo);
+router.get("/SalesOrder_GET_SOSalesManIdNo/:SOSalesManIdNo/:CustomerNo", FATSDB.SalesOrder_GET_SOSalesManIdNo);
 router.get("/SalesOrder_GET_LIST", FATSDB.SalesOrder_GET_LIST)
 router.get("/SalesOrderDets_GET_LIST", FATSDB.SalesOrderDets_GET_LIST)
 router.get("/SalesOrderDets_GET_BYID/:tblRouteMasterID", FATSDB.SalesOrderDets_GET_BYID)

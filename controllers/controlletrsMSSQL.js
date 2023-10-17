@@ -10999,7 +10999,7 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
     try {
       let pool = await sql.connect(config);
       const SOSalesManIdNo = req.params.SOSalesManIdNo;
-      const CustomerNo=SOSalesManIdNo
+      const CustomerNo=req.params.CustomerNo
       let data = await pool
         .request()
 
@@ -11008,7 +11008,7 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
 FROM tblSalesOrder
 INNER JOIN TblCustomers ON tblSalesOrder.'${SOSalesManIdNo}' = TblCustomers.'${CustomerNo}'`
         );
-      res.status(200).json(data.recordsets[0]);
+      res.status(200).json(data);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
@@ -11732,7 +11732,7 @@ INNER JOIN TblCustomers ON tblSalesOrder.'${SOSalesManIdNo}' = TblCustomers.'${C
       let data = await pool.request().query(`SELECT tblSalesOrder.*, TblCustomers.*
 FROM tblSalesOrder
 INNER JOIN TblCustomers ON tblSalesOrder.SOSalesManIdNo = TblCustomers.CustomerNo`);
-      res.status(200).json(data);
+      res.status(200).json({data:data.recordset[0]});
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
