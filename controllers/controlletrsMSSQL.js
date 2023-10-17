@@ -11732,7 +11732,7 @@ INNER JOIN TblCustomers ON tblSalesOrder.'${SOSalesManIdNo}' = TblCustomers.'${C
       let data = await pool.request().query(`SELECT tblSalesOrder.*, TblCustomers.*
 FROM tblSalesOrder
 INNER JOIN TblCustomers ON tblSalesOrder.SOSalesManIdNo = TblCustomers.CustomerNo`);
-      res.status(200).json({data:data.recordset[0]});
+      res.status(200).json({data:data.recordsets[0]});
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: `${error}` });
