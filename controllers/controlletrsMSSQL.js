@@ -11723,6 +11723,18 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
       res.status(500).json({ error: `${error}` });
     }
   },
+ async availible_sales_GET_LIST(req, res, next) {
+    try {
+      let pool = await sql.connect(config);
+      let data = await pool.request().query(`SELECT tblSalesOrder.*, TblCustomers.*
+FROM tblSalesOrder
+INNER JOIN TblCustomers ON tblSalesOrder.SOSalesManIdNo = TblCustomers.CustomerNo`);
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: `${error}` });
+    }
+  },
   //-----------------------------------------------------------------------------------
 
   //---------------------------DELETE--------------------------------------------------------

@@ -264,7 +264,8 @@ router.get("/VehicleConditions_GET_BYID/:tblVehiclePhotosID", FATSDB.VehicleCond
 router.get("/VehiclePhotos_GET_BYID/:tblVehiclePhotosID", FATSDB.VehiclePhotos_GET_BYID)
 router.get("/VehiclePhotos_GET_LIST", FATSDB.VehiclePhotos_GET_LIST)
 router.get("/VersionNo_GET_LIST", FATSDB.VersionNo_GET_LIST)
-router.get("/VersionNo_GET_BYID/:tblVersionNoID",FATSDB.VersionNo_GET_BYID)
+router.get("/VersionNo_GET_BYID/:tblVersionNoID", FATSDB.VersionNo_GET_BYID)
+router.get("/availible_sales_GET_LIST",FATSDB.availible_sales_GET_LIST)
 //------------------------------------------------------------------------------
 //-----------------------------------PUT_API-------------------------------------
 router.put("/apt_Put/:APTID", cpUpload, FATSDB.apt_Put)
