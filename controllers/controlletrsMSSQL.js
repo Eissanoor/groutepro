@@ -10996,24 +10996,29 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
     }
   },
  async SalesOrder_GET_SOSalesManIdNo(req, res, next) {
-    try {
-      let pool = await sql.connect(config);
-      const SOSalesManIdNo = req.params.SOSalesManIdNo;
-      const CustomerNo=req.params.CustomerNo
-      let data = await pool
-        .request()
+  try {
+    let pool = await sql.connect(config);
+    const SOSalesManIdNo = req.params.SOSalesManIdNo;
+    const CustomerNo = req.params.CustomerNo;
 
-        .query(
-          `SELECT tblSalesOrder.*, TblCustomers.*
-FROM tblSalesOrder
-INNER JOIN TblCustomers ON tblSalesOrder.'${SOSalesManIdNo}' = TblCustomers.'${CustomerNo}'`
-        );
-      res.status(200).json(data);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: `${error}` });
-    }
-  },
+    let data = await pool.request()
+      .input('SOSalesManIdNo', sql.Numeric, SOSalesManIdNo) // Replace YourSQLType with the actual data type
+      .input('CustomerNo', sql.Numeric, CustomerNo) // Replace YourSQLType with the actual data type
+      .query(`
+        SELECT tblSalesOrder.*, TblCustomers.*
+        FROM tblSalesOrder
+        INNER JOIN TblCustomers ON tblSalesOrder.SOSalesManIdNo = TblCustomers.CustomerNo
+        WHERE tblSalesOrder.SOSalesManIdNo = @SOSalesManIdNo
+        AND TblCustomers.CustomerNo = @CustomerNo
+      `);
+
+    res.status(200).json(data.recordset);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: `${error}` });
+  }
+},
+
  async SalesOrder_GET_LIST(req, res, next) {
     try {
       let pool = await sql.connect(config);
