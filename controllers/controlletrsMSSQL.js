@@ -10999,11 +10999,14 @@ WHERE tblVersionNoID='${tblVersionNoID}'`
     try {
       let pool = await sql.connect(config);
       const SOSalesManIdNo = req.params.SOSalesManIdNo;
+      const CustomerNo=SOSalesManIdNo
       let data = await pool
         .request()
 
         .query(
-          `select * from tblSalesOrder where SOSalesManIdNo='${SOSalesManIdNo}'`
+          `SELECT tblSalesOrder.*, TblCustomers.*
+FROM tblSalesOrder
+INNER JOIN TblCustomers ON tblSalesOrder.'${SOSalesManIdNo}' = TblCustomers.'${CustomerNo}'`
         );
       res.status(200).json(data.recordsets[0]);
     } catch (error) {
